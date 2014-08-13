@@ -1,0 +1,37 @@
+# Routing
+
+ASP.NET MVC used to define routing in a separate file, i.e. routing is defined in a single file. A lot of MVC routing is
+convention based, i.e. it is assumed that URLs correspond to _ControllerName/ActionName_.
+
+This is still possible in Web API. However, in the latest version of Web API, 
+[Attribute Routing](http://www.asp.net/web-api/overview/web-api-routing-and-actions/attribute-routing-in-web-api-2) 
+has been added. This means we can define routing "inplace", i.e. we can specify what routing rules should apply for 
+individual controllers and/or controller actions. Example:
+
+```c#
+[RoutePrefix("api/v1/my")]
+public class MyController : ApiController
+{
+    [Route("grades")]
+    public List<Grade> Grades()
+    {
+        ....
+    }
+    
+    [Route("schedule")]
+    public List<Event> Schedule()
+    {
+        ....
+    }
+}
+```
+
+In this case, there are two resources:
+
+* /api/v1/my/grades
+* /api/v1/my/schedule
+
+The RoutePrefix attribute takes care of defining a common prefix for the routes, which are then defined explicitly for
+each action which should be exposed as public APIs.
+
+Note that in this case, the names of the functions match the name in the route, but this is not required.
