@@ -11,17 +11,18 @@ In this first assignment, you should do the following:
 
 ## Install Visual Studio
 
-Using Visual Studio 2013 is preferred, although 2012 should work as well. Ensure you install the latest update as well.
+Using Visual Studio 2013 is preferred, although 2012 should work as well. Ensure you install the latest update as well ([Visual Studio 2013.3](http://www.visualstudio.com/en-us/downloads/download-visual-studio-vs#d-visual-studio-2013-update) is apparently the latest).
 
 ## Create a simple Web API
 
 Go through the tutorial found [here](http://www.asp.net/web-api/overview/web-api-routing-and-actions/create-a-rest-api-with-attribute-routing) to create your first Web API project.
 
 Test the API using [CURL](http://curl.haxx.se/), which you should install if it isn't already available on your machine.
+You could also use browser plugins such as [Advanced REST Client](https://chrome.google.com/webstore/detail/advanced-rest-client/hgmloofddffdnphfgcellkdfbfbjeloo) for Chrome.
 
 ## Install ASP.NET vNext
 
-Go through the tutorial found at [https://github.com/aspnet/Home](https://github.com/aspnet/Home) to install ASP.NET vNext.
+Go through the tutorial found at [https://github.com/aspnet/Home](https://github.com/aspnet/Home) to install ASP.NET vNext, and create a simple Hello World web, without using Visual Studio.
 Note that this project is still at early stages in development, and doesn't have feature parity with the current version
 of ASP.NET Web API.
 
