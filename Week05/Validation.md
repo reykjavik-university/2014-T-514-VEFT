@@ -125,12 +125,50 @@ namespace WebAPILocalization
 The next step is to add the translations to Resource files in the application. 
 This can be done in various ways. The code above supports fr-FR, es-CL and the default language en-GB. **Resource files don’t have to be used, translations could be in a database.**
 
-Because we need to perform data validation on our model using Data Annotations, we will have to add translated resource strings for every culture our site will support. In this case, French, Spanish, and English.
-We will store resource files in a separate assembly, so we can reference them in other project types in the future.
-Right click on the Solution and then choose the "Add->New Project" context menu command. Choose "Class Library" project type and name it "Resources".
-Now right click on "Resources" project and then choose "Add->New Item" context menu command. Choose "Resource File" and name it "Resources.resx". This will be our default culture (en-GB) since it has no special endings. Add the curresponding names and values to the file.
-Remember to mark the resource's access modifier property to "public", so it will be accessible from other projects.
-Next create a new resource file and name it "Resources.es.resx" and add the curresponding names and values. Finally, do the same for French.
+
+The Model class LanguageViewModel used the translations for its validation. If a required validation exception occurs, the validation message will be displayed in the localized culture.
+
+```c#
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace CoursesAPI.Models
+{
+    public class LanguageViewModel
+    {
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources), AllowEmptyStrings = false, ErrorMessageResourceName = "NameRequired")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources), AllowEmptyStrings = false, ErrorMessageResourceName = "DescriptionRequired")]
+        public string Description { get; set; }
+
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources), AllowEmptyStrings = false, ErrorMessageResourceName = "TimestampRequired")]
+        public DateTime Timestamp { get; set; }
+    }
+}
+```
+
+To test the implemented cultures we could write the following method in our Web API.
+
+```c#
+[HttpGet]
+[Route("")]
+public IEnumerable<LanguageViewModel> Get()
+{
+    var languageViewModel = new LanguageViewModel
+    {
+        Description = Resources.Resources.Description,
+        Timestamp = DateTime.UtcNow,
+        Name = Resources.Resources.Name
+    };
+    return new[] { languageViewModel };
+}
+```
+The action controller does not required any specific language methods. The get works for all cultures and the test result of a Get should return the correct string for a given localization.
+For example, if you set the prefered language of your browser to fr-FR of french-France, a Get test response in JSON should look like this: 
+[{"Name":"Name fr-FR","Description":"Description fr-FR","Timestamp":"2014-09-15T14:06:38.3202911Z"}]
 
 
 ## Validation
