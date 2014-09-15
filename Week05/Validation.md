@@ -42,12 +42,11 @@ namespace CoursesAPI
 {
     public class LanguageMessageHandler : DelegatingHandler
     {
-        private const string LangdeCH = "de-CH";
         private const string LangfrFR = "fr-FR";
         private const string LangesCL = "es-CL";
         private const string LangenGB = "en-GB";
 
-        private readonly List<string> _supportedLanguages = new List<string> { LangdeCH, LangfrFR, LangesCL, LangenGB };
+        private readonly List<string> _supportedLanguages = new List<string> { LangfrFR, LangesCL, LangenGB };
 
         private bool SetHeaderIfAcceptLanguageMatchesSupportedLanguage(HttpRequestMessage request)
         {
@@ -105,7 +104,7 @@ namespace CoursesAPI
 }
 ```
 
-The LanguageMessageHandler class is then added to the global config for the Web API.
+The LanguageMessageHandler class is then added to the global config for the Web API
 
 ```c#
 using System.Web.Http;
@@ -122,6 +121,17 @@ namespace WebAPILocalization
     }
 }
 ```
+
+The next step is to add the translations to Resource files in the application. 
+This can be done in various ways. The code above supports fr-FR, es-CL and the default language en-GB. **Resource files don’t have to be used, translations could be in a database.**
+
+Because we need to perform data validation on our model using Data Annotations, we will have to add translated resource strings for every culture our site will support. In this case, French, Spanish, and English.
+We will store resource files in a separate assembly, so we can reference them in other project types in the future.
+Right click on the Solution and then choose the "Add->New Project" context menu command. Choose "Class Library" project type and name it "Resources".
+Now right click on "Resources" project and then choose "Add->New Item" context menu command. Choose "Resource File" and name it "Resources.resx". This will be our default culture (en-GB) since it has no special endings. Add the curresponding names and values to the file.
+Remember to mark the resource's access modifier property to "public", so it will be accessible from other projects.
+Next create a new resource file and name it "Resources.es.resx" and add the curresponding names and values. Finally, do the same for French.
+
 
 ## Validation
 
