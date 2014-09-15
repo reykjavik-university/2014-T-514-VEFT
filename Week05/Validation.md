@@ -284,7 +284,7 @@ Model validation does not guarantee that client data is safe. Additional validat
 
 As we have seen so far it is common to do the validation in the controller action it self, but what if we wanted to separate this process and perform the validation in a service layer. 
 
-The first to do is to create a class with a function that validated a model of any type
+The first thing to do is to create a class with a function that validated a model of any type
 
 ```c#
 using CoursesAPI.Services.Exceptions;
@@ -353,7 +353,7 @@ and then our controller action will look like this, which be the way is a lot cl
 
 Web API does not automatically return an error to the client when validation fails. It is up to the controller action to check the model state and respond appropriately.
 
-You can also create an action filter to check the model state before the controller action is invoked. Or you could also create a filter which handels all exceptions, throw a validation specific exception and grap it on the filter.
+You can also create an action filter to check the model state before the controller action is invoked. Or you could also create a filter which handels all exceptions, throw a validation specific exception and grap it on the filter as the code above does.
 
 
 The following code shows an example:
@@ -438,6 +438,7 @@ public static class WebApiConfig
 }            
 ```
 
+The mein purpose of all this is to find a way to handle all types of messages in a standard and equal way. The code above always returns a response in a key,value format which should make it a lot easier for any client to work with
 
 
 **Related link and more material**
