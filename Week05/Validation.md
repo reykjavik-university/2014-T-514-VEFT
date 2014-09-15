@@ -171,5 +171,57 @@ For example, if you set the prefered language of your browser to fr-FR of french
 [{"Name":"Name fr-FR","Description":"Description fr-FR","Timestamp":"2014-09-15T14:06:38.3202911Z"}]
 
 
+To test translations for validation we could can create a action controller that uses the ModelState to validate the create object request in the Post method. If the Model is invalid, a HttpError object is created from the ModelState. The BadRequest(ModelState) provided by the framework cannot be used, because this method results in non-localized strings.
+
+```c#
+[HttpPost]
+[Route("")]
+public HttpResponseMessage Post(LanguageViewModel model)
+{
+    if (!ModelState.IsValid)
+    {
+        HttpError error = GetErrors(ModelState, true);
+        return Request.CreateResponse(HttpStatusCode.BadRequest, error);
+    }
+    return new HttpResponseMessage(HttpStatusCode.Created);
+}
+```
+
+Because the BadRequest cannot be used, the HttpError is created in a private method.
+
+```c#
+private HttpError GetErrors(IEnumerable<KeyValuePair<string, ModelState>> modelState, bool includeErrorDetail)
+{
+    var modelStateError = new HttpError();
+    foreach (KeyValuePair<string, ModelState> keyModelStatePair in modelState)
+    {
+        string key = keyModelStatePair.Key;
+        ModelErrorCollection errors = keyModelStatePair.Value.Errors;
+        if (errors != null && errors.Count > 0)
+        {
+            IEnumerable<string> errorMessages = errors.Select(error =>
+            {
+                if (includeErrorDetail && error.Exception != null)
+                {
+                    return error.Exception.Message;
+                }
+                return String.IsNullOrEmpty(error.ErrorMessage) ? "ErrorOccurred" : error.ErrorMessage;
+            }).ToArray();
+            modelStateError.Add(key, errorMessages);
+        }
+    }
+
+    return modelStateError;
+}
+```
+
+A Post test response in JSON for fr-FR should then look like this: 
+{"model.Name":["Name is required fr-FR"],"model.Description":["Description is required fr-FR"]}
+
+
+
+** Related link and material **
+* [Web Api Localization](http://damienbod.wordpress.com/2014/03/20/web-api-localization/)
+* [ASP.NET Internationalization](http://www.asp.net/mvc/overview/internationalization)
 ## Validation
 
