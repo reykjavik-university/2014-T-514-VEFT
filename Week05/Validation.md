@@ -216,12 +216,233 @@ private HttpError GetErrors(IEnumerable<KeyValuePair<string, ModelState>> modelS
 ```
 
 A Post test response in JSON for fr-FR should then look like this: 
-{"model.Name":["Name is required fr-FR"],"model.Description":["Description is required fr-FR"]}
+{"model.Timestamp":["A value is required."],"model.Name":["Name is required fr-FR"],"model.Description":["Description is required fr-FR"]}
 
 
 
-** Related link and material **
+**Related link and material**
 * [Web Api Localization](http://damienbod.wordpress.com/2014/03/20/web-api-localization/)
 * [ASP.NET Internationalization](http://www.asp.net/mvc/overview/internationalization)
-## Validation
+
+
+##Validation
+
+#Data Annotations
+
+As we have already demostrated above, our LanguageViewModel class uses data annotation for the validation of our model class.
+Data anonnatation method is a technique that is very much used in model validation in ASP.NET MVC
+
+In ASP.NET Web API, you can use attributes from the [System.ComponentModel.DataAnnotations](http://msdn.microsoft.com/en-us/library/system.componentmodel.dataannotations.aspx) namespace to set validation rules for properties on your model. Consider the LanguageViewModel model class we used before:
+
+```c#
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace CoursesAPI.Models
+{
+    public class LanguageViewModel
+    {
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources), AllowEmptyStrings = false, ErrorMessageResourceName = "NameRequired")]
+        [StringLength(5, ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "FirstNameLong")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources), AllowEmptyStrings = false, ErrorMessageResourceName = "DescriptionRequired")]
+        public string Description { get; set; }
+
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources), AllowEmptyStrings = false, ErrorMessageResourceName = "TimestampRequired")]
+        public DateTime Timestamp { get; set; }
+    }
+}
+```
+
+ The Required attribute says that the Name, Description & Timestamp properties must not be null. The StringLength attribute says that maximun lenght of a string can be 5.
+ 
+ As we saw earlier, if a client sends a POST request with empty values for each property we will get the following response:
+ {"model.Timestamp":["A value is required."],"model.Name":["Name is required fr-FR"],"model.Description":["Description is required fr-FR"]}
+ 
+ 
+ Suppose that a client sends a POST request with the following JSON representation:
+ { "Description":"Chilean", "Timestamp":"1.1.0001 00:00:00" }
+ 
+ You can see that the client did not include the Name property, which is marked as required. When Web API converts the JSON into a LanguageViewModel instance, it validates the LanguageViewModel against the validation attributes. In your controller action, you can check whether the model is valid as we saw earlier:
+ 
+```c#
+...
+    if (!ModelState.IsValid)
+    {
+        HttpError error = GetErrors(ModelState, true);
+        return Request.CreateResponse(HttpStatusCode.BadRequest, error);
+    }
+    //Do something with the LanguageViewModel
+    return new HttpResponseMessage(HttpStatusCode.Created);
+...
+```
+Model validation does not guarantee that client data is safe. Additional validation might be needed in other layers of the application. (For example, the data layer might enforce foreign key constraints.)
+
+
+#Moving validation to service layer
+
+As we have seen so far it is common to do the validation in the controller action it self, but what if we wanted to separate this process and perform the validation in a service layer. 
+
+The first to do is to create a class with a function that validated a model of any type
+
+```c#
+using CoursesAPI.Services.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CoursesAPI.Services.Helpers
+{
+    public class CourseAPIValidation
+    {
+        public static void Validate<T>(T model)
+        {            
+            var results = new List<ValidationResult>();
+            if (model == null)
+            {
+                //Add custom error code which is used to retrieve the error message in the correct lang in the filter at the API level
+                results.Add(new ValidationResult(ErrorCodes.IdDoesNotExistException));
+                throw new CoursesAPIValidationException(results);
+            }
+
+            var context = new ValidationContext(model, null, null);
+
+            if (!Validator.TryValidateObject(model, context, results))
+            {
+                //No need to inject results in exception. 
+                throw new CoursesAPIValidationException(results);
+            }
+        }
+    }
+}
+```
+
+This would then allow us to have a method in our service for creating a Lan model instance like this
+
+```c#
+...
+        public LanguageViewModel CreateLanguage(LanguageViewModel model)
+        {
+            //Validate here!
+            CourseAPIValidation.Validate(model);
+
+            //TODO: create the corresponding instance in DB or something
+
+            return model;
+        }
+...
+```
+and then our controller action will look like this, which be the way is a lot cleaner
+
+```c#
+        [HttpPost]
+        [Route("")]
+        public LanguageViewModel Post(LanguageViewModel model)
+        {
+            //Try to create instace of model
+            return _service.CreateLanguage(model);
+        }
+```
+
+
+#Handling Validation Errors
+
+Web API does not automatically return an error to the client when validation fails. It is up to the controller action to check the model state and respond appropriately.
+
+You can also create an action filter to check the model state before the controller action is invoked. Or you could also create a filter which handels all exceptions, throw a validation specific exception and grap it on the filter.
+
+
+The following code shows an example:
+
+```c#
+using CoursesAPI.Services.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Filters;
+using System.Web.Http.ModelBinding;
+
+namespace CoursesAPI.Filters
+{
+    public class AppExceptionFilter : ExceptionFilterAttribute
+    {
+        public override void OnException(HttpActionExecutedContext actionExecutedContext)
+        {
+            base.OnException(actionExecutedContext);
+            
+            if (actionExecutedContext.Exception is CoursesAPIValidationException)
+            {
+                var ex = actionExecutedContext.Exception as CoursesAPIValidationException;
+                HttpError error = new HttpError();
+
+                var validationResults = ex.GetValidationResults();
+
+                if (validationResults.Count > 0 && validationResults.Where(x => x.ErrorMessage == ErrorCodes.IdDoesNotExistException).FirstOrDefault() != null)
+                {
+                    error.Add("CoursesAPIValidationException", Resources.Resources.IdDoesNotExistException);
+                }
+                else
+                { 
+                    ModelStateDictionary modelState = actionExecutedContext.ActionContext.ModelState;
+                    error = GetErrors(modelState, true);                    
+                }
+
+                actionExecutedContext.Response = actionExecutedContext.ActionContext.Request.CreateErrorResponse(HttpStatusCode.PreconditionFailed, error);
+            }
+        }
+
+        private HttpError GetErrors(ModelStateDictionary modelState, bool includeErrorDetail)
+        {
+            var modelStateError = new HttpError();
+            foreach (KeyValuePair<string, ModelState> keyModelStatePair in modelState)
+            {
+                string key = keyModelStatePair.Key;
+                ModelErrorCollection errors = keyModelStatePair.Value.Errors;
+                if (errors != null && errors.Count > 0)
+                {
+                    IEnumerable<string> errorMessages = errors.Select(error =>
+                    {
+                        if (includeErrorDetail && error.Exception != null)
+                        {
+                            return error.Exception.Message;
+                        }
+                        return String.IsNullOrEmpty(error.ErrorMessage) ? "ErrorOccurred" : error.ErrorMessage;
+                    }).ToArray();
+                    modelStateError.Add(key, errorMessages);
+                }
+            }
+
+            return modelStateError;
+        }
+    }
+}
+```
+
+To apply this filter to all Web API controllers, add an instance of the filter to the HttpConfiguration.Filters collection during configuration:
+
+```c#
+public static class WebApiConfig
+{
+	public static void Register(HttpConfiguration config)
+	{
+            // Add a filter for exception handling
+            config.Filters.Add(new AppExceptionFilter());
+        }
+}            
+```
+
+
+
+**Related link and more material**
+* ["Under-Posting" and "Over-Posting"](http://www.asp.net/web-api/overview/formats-and-model-binding/model-validation-in-aspnet-web-api)
+* [Model Validation](http://www.asp.net/web-api/overview/formats-and-model-binding/model-validation-in-aspnet-web-api)
+* [Model Validation in ASP.NET Web API](http://www.codeproject.com/Articles/741551/Model-Validation-in-ASP-NET-Web-API)
+* [Model Validation In Web API Using Data Annotation](http://www.c-sharpcorner.com/UploadFile/dacca2/model-validation-using-in-web-api-using-data-annotation/)
 
