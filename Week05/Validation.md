@@ -23,5 +23,105 @@ On each HTTP request, there is a header field called Accept-Language which deter
         Accept-Language: en-us,en;q=0.5
 This means that my browser prefers English (United States), but it can accept other types of English. The "q" parameter indicates an estimate of the user’s preference for that language. You can control the list of languages using your web browser.
 
+#Multiple languages in web API
+
+To add this feature to a web API service, a new MessageHandler can be created. The message handler validates the request header for localized languages
+
+```c#
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Web;
+
+namespace CoursesAPI
+{
+    public class LanguageMessageHandler : DelegatingHandler
+    {
+        private const string LangdeCH = "de-CH";
+        private const string LangfrFR = "fr-FR";
+        private const string LangesCL = "es-CL";
+        private const string LangenGB = "en-GB";
+
+        private readonly List<string> _supportedLanguages = new List<string> { LangdeCH, LangfrFR, LangesCL, LangenGB };
+
+        private bool SetHeaderIfAcceptLanguageMatchesSupportedLanguage(HttpRequestMessage request)
+        {
+            foreach (var lang in request.Headers.AcceptLanguage)
+            {
+                if (_supportedLanguages.Contains(lang.Value))
+                {
+                    SetCulture(request, lang.Value);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool SetHeaderIfGlobalAcceptLanguageMatchesSupportedLanguage(HttpRequestMessage request)
+        {
+            foreach (var lang in request.Headers.AcceptLanguage)
+            {
+                var globalLang = lang.Value.Substring(0, 2);
+                if (_supportedLanguages.Any(t => t.StartsWith(globalLang)))
+                {
+                    SetCulture(request, _supportedLanguages.FirstOrDefault(i => i.StartsWith(globalLang)));
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void SetCulture(HttpRequestMessage request, string lang)
+        {
+            request.Headers.AcceptLanguage.Clear();
+            request.Headers.AcceptLanguage.Add(new StringWithQualityHeaderValue(lang));
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+        }
+
+        protected override async Task<HttpResponseMessage> SendAsync( HttpRequestMessage request, CancellationToken cancellationToken)
+        {
+            if (!SetHeaderIfAcceptLanguageMatchesSupportedLanguage(request))
+            {
+                // Whoops no localization found. Lets try Globalisation
+                if (!SetHeaderIfGlobalAcceptLanguageMatchesSupportedLanguage(request))
+                {
+                    // no global or localization found
+                    SetCulture(request, LangenGB);
+                }
+            }
+
+            var response = await base.SendAsync(request, cancellationToken);
+            return response;
+        }
+    }
+}
+```
+
+The LanguageMessageHandler class is then added to the global config for the Web API.
+
+```c#
+using System.Web.Http;
+ 
+namespace WebAPILocalization
+{
+    public static class WebApiConfig
+    {
+        public static void Register(HttpConfiguration config)
+        {
+            config.MapHttpAttributeRoutes();
+            config.MessageHandlers.Add(new LanguageMessageHandler());
+        }
+    }
+}
+```
+
 ## Validation
 
