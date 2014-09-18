@@ -790,8 +790,6 @@ This code adds the [SystemDiagnosticsTraceWriter](http://msdn.microsoft.com/en-u
 
 If you run your application in the debugger and issue a request, the trace statements are written to the Output window in Visual Studio.
 
-#Configuring SystemDiagnosticsTraceWriter
-
 You may noticed in the code example above that the SystemDiagnosticsTraceWriter has two properties that allow you to control the settings.
 
 * IsVerbose: If false, each trace contains minimal information. If true, traces include more information.
