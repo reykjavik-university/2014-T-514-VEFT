@@ -763,3 +763,115 @@ Now that we have seen all the possible implementations for error handling the fo
 
 
 ##Tracing
+
+When we are trying to debug a application, there is no substitute for a good set of trace logs. 
+You can use this feature to trace what the Web API framework does before and after it invokes your controller. You can also use it to trace your own code.
+
+
+#Default Tracing
+
+To enable tracing using System.Diagnostics we will need need to install [Microsoft.AspNet.WebApi.Tracing](http://www.nuget.org/packages/Microsoft.AspNet.WebApi.Tracing) which will install the latest Web API tracing package.
+
+Now, to enable dafault tracing add the follwing code to the config in the WebApiConfig class.
+
+
+```c#
+public static void Register(HttpConfiguration config)
+{
+	...
+	SystemDiagnosticsTraceWriter traceWriter = config.EnableSystemDiagnosticsTracing();
+	traceWriter.IsVerbose = true;
+	traceWriter.MinimumLevel = TraceLevel.Debug;
+	...
+}
+```
+
+This code adds the [SystemDiagnosticsTraceWriter](http://msdn.microsoft.com/en-us/library/system.web.http.tracing.systemdiagnosticstracewriter.aspx) class to the Web API pipeline. The SystemDiagnosticsTraceWriter class writes traces to System.Diagnostics.Trace.
+
+If you run your application in the debugger and issue a request, the trace statements are written to the Output window in Visual Studio.
+
+#Configuring SystemDiagnosticsTraceWriter
+
+You may noticed in the code example above that the SystemDiagnosticsTraceWriter has two properties that allow you to control the settings.
+
+* IsVerbose: If false, each trace contains minimal information. If true, traces include more information.
+* MinimumLevel: Sets the minimum trace level. Trace levels, in order, are Debug, Info, Warn, Error, and Fatal.
+
+#Add traces to your code
+
+You can also use the trace writter to trace your own code, like this.
+
+```c#
+[HttpGet]
+[Route("")]
+public IEnumerable<LanguageViewModel> Get()
+{
+    Configuration.Services.GetTraceWriter().Info(Request, "Get", "Get the list of LanguageViewModel.");
+    var languageViewModel = new LanguageViewModel
+    {
+        Description = Resources.Resources.Description,
+        Timestamp = DateTime.UtcNow,
+        Name = Resources.Resources.Name
+    };
+    return new[] { languageViewModel };
+}
+```
+
+#Creating Custom Trace Writer
+
+Instead of using the SystemDiagnosticsTraceWriter class as the trace writer you can also create your own trace writer. To do so you need to create a class that implements the ITraceWriter interface and then implement its Trace() method. The following code shows how this is done:
+
+```c#
+using System;
+using System.Net.Http;
+using System.Web;
+using System.Web.Http.Tracing;
+
+namespace CoursesAPI.Tracers
+{
+    public class CourseAPITracer : ITraceWriter
+    {
+        public void Trace(HttpRequestMessage request, string category, TraceLevel level,
+            Action<TraceRecord> traceAction)
+        {
+            TraceRecord rec = new TraceRecord(request, category, level);
+            traceAction(rec);
+            WriteTrace(rec);
+        }
+
+        protected void WriteTrace(TraceRecord rec)
+        {
+            //Write to output
+            var message = string.Format("{0};{1};{2}", rec.Operator, rec.Operation, rec.Message);            
+            System.Diagnostics.Trace.WriteLine(message, rec.Category);
+            //Write to file
+            string path = HttpContext.Current.Server.MapPath("~/Logs/MyTestLog.txt");
+            System.IO.File.AppendAllText(path, rec.Status + " - " + rec.Message + "\r\n");
+            //Write using any logging technique that you like
+            //...
+        }
+    }
+}
+```
+
+To enable tracing, you must configure Web API to use your ITraceWriter implementation. You can do this by adding the following code the Register method in the WebApiConfig class.
+
+```c#
+public static void Register(HttpConfiguration config)
+{
+	...
+	config.Services.Replace(typeof(ITraceWriter), new CourseAPITracer());
+	...
+}
+...
+```
+
+As you can see the Register() method calls the Replace() method to replace the default trace writer service with an instance of CourseAPITracer.
+
+Only one trace writer can be active. By default, Web API sets a "no-op" tracer that does nothing. (The "no-op" tracer exists so that tracing code does not have to check whether the trace writer is null before writing a trace.)
+
+
+**Related links and more material**
+* [Tracing in ASP.NET Web API](http://www.asp.net/web-api/overview/testing-and-debugging/tracing-in-aspnet-web-api)
+* [Using Tracing in ASP.NET Web API](http://www.codeguru.com/csharp/.net/using-tracing-in-asp.net-web-api.htm)
+* [Microsoft ASP.NET Web API 2.2 Tracing 5.2.2](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Tracing)
