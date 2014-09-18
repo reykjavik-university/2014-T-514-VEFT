@@ -223,6 +223,7 @@ A Post test response in JSON for fr-FR should then look like this:
 **Related link and material**
 * [Web Api Localization](http://damienbod.wordpress.com/2014/03/20/web-api-localization/)
 * [ASP.NET Internationalization](http://www.asp.net/mvc/overview/internationalization)
+* [HTTP Message Handlers](http://www.asp.net/web-api/overview/advanced/http-message-handlers)
 
 
 ##Validation
@@ -446,7 +447,7 @@ The mein purpose of all this is to find a way to handle all types of messages in
 * [Model Validation](http://www.asp.net/web-api/overview/formats-and-model-binding/model-validation-in-aspnet-web-api)
 * [Model Validation in ASP.NET Web API](http://www.codeproject.com/Articles/741551/Model-Validation-in-ASP-NET-Web-API)
 * [Model Validation In Web API Using Data Annotation](http://www.c-sharpcorner.com/UploadFile/dacca2/model-validation-using-in-web-api-using-data-annotation/)
-
+* [WEB API 2 USING ACTIONFILTERATTRIBUTE, OVERRIDEACTIONFILTERSATTRIBUTE AND IOC INJECTION](http://damienbod.wordpress.com/2014/01/04/web-api-2-using-actionfilterattribute-overrideactionfiltersattribute-and-ioc-injection/)
 
 
 ##Exception Handling
@@ -744,6 +745,12 @@ namespace CoursesAPI.Loggers
 ```
 
 In the Web API config, the IExceptionHandler has to be replaced unlike the IExceptionLogger. Only 1 IExceptionHandler can be used for the service. This IExceptionHandler will only be called if the service can still define a response. IExceptionLogger will always be called.
+
+Now that we have seen all the possible implementations for error handling the following points describe when to use which:
+
+* Exception loggers are the solution to seeing all unhandled exception caught by Web API.
+* Exception handlers are the solution for customizing all possible responses to unhandled exceptions caught by Web API.
+* Exception filters are the easiest solution for processing the subset unhandled exceptions related to a specific action or controller. 
 
 
 
