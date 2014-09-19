@@ -223,6 +223,7 @@ A Post test response in JSON for fr-FR should then look like this:
 **Related link and material**
 * [Web Api Localization](http://damienbod.wordpress.com/2014/03/20/web-api-localization/)
 * [ASP.NET Internationalization](http://www.asp.net/mvc/overview/internationalization)
+* [HTTP Message Handlers](http://www.asp.net/web-api/overview/advanced/http-message-handlers)
 
 
 ##Validation
@@ -321,7 +322,7 @@ namespace CoursesAPI.Services.Helpers
 }
 ```
 
-This would then allow us to have a method in our service for creating a Lan model instance like this
+This would then allow us to have a method in our service for creating a LanguageViewModel instance like this
 
 ```c#
 ...
@@ -438,7 +439,7 @@ public static class WebApiConfig
 }            
 ```
 
-The mein purpose of all this is to find a way to handle all types of messages in a standard and equal way. The code above always returns a response in a key,value format which should make it a lot easier for any client to work with
+The mein purpose of all this is to find a way to handle all types of messages in a standard and equal way. The code above always returns a response in a name-value pair format which should make it a lot easier for any client to work with.
 
 
 **Related link and more material**
@@ -446,4 +447,429 @@ The mein purpose of all this is to find a way to handle all types of messages in
 * [Model Validation](http://www.asp.net/web-api/overview/formats-and-model-binding/model-validation-in-aspnet-web-api)
 * [Model Validation in ASP.NET Web API](http://www.codeproject.com/Articles/741551/Model-Validation-in-ASP-NET-Web-API)
 * [Model Validation In Web API Using Data Annotation](http://www.c-sharpcorner.com/UploadFile/dacca2/model-validation-using-in-web-api-using-data-annotation/)
+* [WEB API 2 USING ACTIONFILTERATTRIBUTE, OVERRIDEACTIONFILTERSATTRIBUTE AND IOC INJECTION](http://damienbod.wordpress.com/2014/01/04/web-api-2-using-actionfilterattribute-overrideactionfiltersattribute-and-ioc-injection/)
 
+
+##Exception Handling
+
+#HttpResponseException
+
+What happens if a Web API controller throws an uncaught exception? By default, most exceptions are translated into an HTTP response with status code 500, Internal Server Error.
+
+The ***HttpResponseException*** type is a special case. This exception returns any HTTP status code that you specify in the exception constructor. For example, the following method returns 404, Not Found, if the id parameter is not valid.
+
+
+```c#
+[HttpGet]
+[Route("{id}")]
+public LanguageViewModel Get(int id)
+{
+    LanguageViewModel model = _service.GetLanguageById(id);
+    if (model == null)
+    {
+        throw new HttpResponseException(HttpStatusCode.NotFound);
+    }
+    return model;
+}
+```
+
+For more control over the response, you can also construct the entire response message and include it with the ***HttpResponseException***:
+
+```c#
+[HttpGet]
+[Route("{id}")]
+public LanguageViewModel Get(int id)
+{
+    LanguageViewModel model = _service.GetLanguageById(id);
+    if (model == null)
+    {
+        HttpError error = new HttpError();
+        error.Add("IdDoesNotExistException", Resources.Resources.IdDoesNotExistException + " Id: " + id);
+
+        HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.NotFound,error)
+
+        throw new HttpResponseException(response);
+    }
+    return model;
+}
+```
+
+#Exception Filters
+
+Like described earlier in this document you can customize how Web API handles exceptions by writing an exception filter. An exception filter is executed when a controller method throws any unhandled exception that is not an HttpResponseException exception. The HttpResponseException type is a special case, because it is designed specifically for returning an HTTP response.
+
+The following is the same example:
+
+```c#
+using CoursesAPI.Services.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Filters;
+using System.Web.Http.ModelBinding;
+
+namespace CoursesAPI.Filters
+{
+    public class AppExceptionFilter : ExceptionFilterAttribute
+    {
+        public override void OnException(HttpActionExecutedContext actionExecutedContext)
+        {
+            base.OnException(actionExecutedContext);
+            
+            if (actionExecutedContext.Exception is CoursesAPIValidationException)
+            {
+                var ex = actionExecutedContext.Exception as CoursesAPIValidationException;
+                HttpError error = new HttpError();
+
+                var validationResults = ex.GetValidationResults();
+
+                if (validationResults.Count > 0 && validationResults.Where(x => x.ErrorMessage == ErrorCodes.IdDoesNotExistException).FirstOrDefault() != null)
+                {
+                    error.Add("CoursesAPIValidationException", Resources.Resources.IdDoesNotExistException);
+                }
+                else
+                { 
+                    ModelStateDictionary modelState = actionExecutedContext.ActionContext.ModelState;
+                    error = GetErrors(modelState, true);                    
+                }
+
+                actionExecutedContext.Response = actionExecutedContext.ActionContext.Request.CreateErrorResponse(HttpStatusCode.PreconditionFailed, error);
+            }
+        }
+
+	...
+	...
+    }
+}
+```
+
+The Response property of the HttpActionExecutedContext object contains the HTTP response message that will be sent to the client.
+
+
+There are several ways to register a Web API exception filter:
+
+* By action
+* By controller
+* Globally
+
+To apply the filter to a specific action, add the filter as an attribute to the action:
+
+```c#
+[AppExceptionFilter]
+public LanguageViewModel Get(int id)
+{
+...
+}
+```
+
+To apply the filter to all of the actions on a controller, add the filter as an attribute to the controller class:
+
+```c#
+[AppExceptionFilter]
+public class LanguageController : ApiController
+{
+...
+}
+```
+
+To apply the filter globally to all Web API controllers
+
+
+```c#
+config.Filters.Add(new AppExceptionFilter());
+```
+
+This allows the methods or other layers to contain no exception logic, this is all in the exception filter attribute class.
+
+
+#Logging unhandled exceptions
+
+Today there’s no easy way in Web API to log or handle errors globally. Some unhandled exceptions can be processed via exception filters, but there are a number of cases that exception filters can’t handle. For example:
+
+* Exceptions thrown from controller constructors.
+* Exceptions thrown from message handlers.
+* Exceptions thrown during routing.
+* Exceptions thrown during response content serialization.
+
+The ExceptionLogger class which inherits from the IExceptionLogger interface can be used to log all unhandled exceptions. If an unhandled exception occurs, the Log method will be called directly after the exception and before all ExceptionFilter attributes defined for the controller.
+
+Exception loggers provide you a single point into which you can plug in a service that would log information about any exceptions occurring in the Web API pipeline – regardless where they originated from. Moreover, the relevant ExceptionContext will be provided to you inside that logger, giving you access to contextual information which are specific for the controller or filter or any other Web API component from which the exception was thrown.
+
+The great thing about exception loggers is that they will always be called – even if the exception occurs in funky edge situation such as when writing to the response stream from the media type formatter.
+Finally, an important point is that you can register multiple ExceptionLoggers in Web API, so you can pipe this exception information into different targets.
+
+The following is a simple example of a logger.
+
+```c#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Http.ExceptionHandling;
+
+namespace CoursesAPI.Loggers
+{
+    public class TraceExceptionLogger : ExceptionLogger
+    {
+        public override void Log(ExceptionLoggerContext context)
+        {
+            System.Diagnostics.Trace.TraceError(context.ExceptionContext.Exception.ToString());
+        }
+    }
+}
+```
+
+The implementation above is very simple but if you wanted to use an external service like for example [Raygun](https://raygun.io/) you could do the following.
+
+```c#
+using Mindscape.Raygun4Net;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Http.ExceptionHandling;
+
+namespace CoursesAPI.Loggers
+{
+    public class RaygunExceptionLogger : ExceptionLogger
+    {
+        public override void Log(ExceptionLoggerContext context)
+        {
+            //Create instance of Logging API and log the exception with API
+            RaygunClient _client = new RaygunClient("W6mFxHVXRvLBIyXEPvjiGA==");
+            _client.Send(context.Exception);
+        }
+    }
+}
+```
+
+The IExceptionLogger implementations are added to the config.Services in the WebApiConfig class. Again, You can add as many as you require.
+
+```c#
+using CoursesAPI.Filters;
+using CoursesAPI.Loggers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Http;
+using System.Web.Http.ExceptionHandling;
+
+namespace CoursesAPI
+{
+	public static class WebApiConfig
+	{
+		public static void Register(HttpConfiguration config)
+		{
+			// Web API configuration and services
+
+			// Web API routes
+			config.MapHttpAttributeRoutes();
+
+            // Add a filter for exceptions
+            config.Filters.Add(new AppExceptionFilter());
+
+            // Add logger
+            config.Services.Add(typeof(IExceptionLogger), new TraceExceptionLogger());            
+            config.Services.Add(typeof (IExceptionLogger), new RaygunExceptionLogger());
+
+            // add handler for exceptions
+            config.Services.Replace(typeof(IExceptionHandler), new CourseAPIExceptionHandler());
+
+            // Set Language handler to detect and set localized languages
+            config.MessageHandlers.Add(new LanguageMessageHandler());
+
+			config.Routes.MapHttpRoute(
+				name: "DefaultApi",
+				routeTemplate: "api/{controller}/{id}",
+				defaults: new { id = RouteParameter.Optional }
+			);            
+		}
+	}
+}
+```
+
+#Global IExceptionHandler
+
+The IExceptionHandler handles all unhandled exceptions from all controllers. This is the last in the list. If an exception occurs, the IExceptionLogger will be called first, then the controller ExceptionFilters and if still unhandled, the IExceptionHandler implementation.
+
+Here is an example.
+
+```c#
+using System.Net;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.ExceptionHandling;
+
+namespace CoursesAPI.Loggers
+{
+    public class CourseAPIExceptionHandler : ExceptionHandler
+    {
+        public override void Handle(ExceptionHandlerContext context)
+        {
+            context.Result = new TextPlainErrorResult
+            {
+                Request = context.ExceptionContext.Request,
+                Content = "Oops! Sorry! Something went wrong." +
+                            "Please contact support@contoso.com so we can try to fix it."
+            };
+        }
+
+        private class TextPlainErrorResult : IHttpActionResult
+        {
+            public HttpRequestMessage Request { get; set; }
+
+            public string Content { get; set; }
+
+            public HttpError httpError { get; set; }
+
+            public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
+            {
+                HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                response.Content = new StringContent(Content);
+                response.RequestMessage = Request;
+
+                return Task.FromResult(response);
+            }
+        }
+    }
+}
+```
+
+In the Web API config, the IExceptionHandler has to be replaced unlike the IExceptionLogger. Only 1 IExceptionHandler can be used for the service. This IExceptionHandler will only be called if the service can still define a response. IExceptionLogger will always be called.
+
+Now that we have seen all the possible implementations for error handling the following points describe when to use which:
+
+* Exception loggers are the solution to seeing all unhandled exception caught by Web API.
+* Exception handlers are the solution for customizing all possible responses to unhandled exceptions caught by Web API.
+* Exception filters are the easiest solution for processing the subset unhandled exceptions related to a specific action or controller. 
+
+
+
+**Related link and more material**
+* [EXPLORING WEB API EXCEPTION HANDLING](http://damienbod.wordpress.com/2014/02/12/exploring-web-api-exception-handling/)
+* [Error Handling in ASP.NET WebAPI](http://blogs.msdn.com/b/youssefm/archive/2012/06/28/error-handling-in-asp-net-webapi.aspx)
+* [Global Error Handling](http://weblogs.asp.net/jongalloway//looking-at-asp-net-mvc-5-1-and-web-api-2-1-part-4-web-api-help-pages-bson-and-global-error-handling)
+* [Web API Global Error Handling](http://www.asp.net/web-api/overview/testing-and-debugging/web-api-global-error-handling)
+* [ASP.NET Web API exception logging with Raygun.io](http://www.strathweb.com/2014/03/asp-net-web-api-exception-logging-raygun-io/)
+
+
+##Tracing
+
+When we are trying to debug a application, there is no substitute for a good set of trace logs. 
+You can use this feature to trace what the Web API framework does before and after it invokes your controller. You can also use it to trace your own code.
+
+
+#Default Tracing
+
+To enable tracing using System.Diagnostics we will need need to install [Microsoft.AspNet.WebApi.Tracing](http://www.nuget.org/packages/Microsoft.AspNet.WebApi.Tracing) which will install the latest Web API tracing package.
+
+Now, to enable dafault tracing add the follwing code to the config in the WebApiConfig class.
+
+
+```c#
+public static void Register(HttpConfiguration config)
+{
+	...
+	SystemDiagnosticsTraceWriter traceWriter = config.EnableSystemDiagnosticsTracing();
+	traceWriter.IsVerbose = true;
+	traceWriter.MinimumLevel = TraceLevel.Debug;
+	...
+}
+```
+
+This code adds the [SystemDiagnosticsTraceWriter](http://msdn.microsoft.com/en-us/library/system.web.http.tracing.systemdiagnosticstracewriter.aspx) class to the Web API pipeline. The SystemDiagnosticsTraceWriter class writes traces to System.Diagnostics.Trace.
+
+If you run your application in the debugger and issue a request, the trace statements are written to the Output window in Visual Studio.
+
+You may noticed in the code example above that the SystemDiagnosticsTraceWriter has two properties that allow you to control the settings.
+
+* IsVerbose: If false, each trace contains minimal information. If true, traces include more information.
+* MinimumLevel: Sets the minimum trace level. Trace levels, in order, are Debug, Info, Warn, Error, and Fatal.
+
+#Add traces to your code
+
+You can also use the trace writter to trace your own code, like this.
+
+```c#
+[HttpGet]
+[Route("")]
+public IEnumerable<LanguageViewModel> Get()
+{
+    Configuration.Services.GetTraceWriter().Info(Request, "Get", "Get the list of LanguageViewModel.");
+    var languageViewModel = new LanguageViewModel
+    {
+        Description = Resources.Resources.Description,
+        Timestamp = DateTime.UtcNow,
+        Name = Resources.Resources.Name
+    };
+    return new[] { languageViewModel };
+}
+```
+
+#Creating Custom Trace Writer
+
+Instead of using the SystemDiagnosticsTraceWriter class as the trace writer you can also create your own trace writer. To do so you need to create a class that implements the ITraceWriter interface and then implement its Trace() method. The following code shows how this is done:
+
+```c#
+using System;
+using System.Net.Http;
+using System.Web;
+using System.Web.Http.Tracing;
+
+namespace CoursesAPI.Tracers
+{
+    public class CourseAPITracer : ITraceWriter
+    {
+        public void Trace(HttpRequestMessage request, string category, TraceLevel level,
+            Action<TraceRecord> traceAction)
+        {
+            TraceRecord rec = new TraceRecord(request, category, level);
+            traceAction(rec);
+            WriteTrace(rec);
+        }
+
+        protected void WriteTrace(TraceRecord rec)
+        {
+            //Write to output
+            var message = string.Format("{0};{1};{2}", rec.Operator, rec.Operation, rec.Message);            
+            System.Diagnostics.Trace.WriteLine(message, rec.Category);
+            //Write to file
+            string path = HttpContext.Current.Server.MapPath("~/Logs/MyTestLog.txt");
+            System.IO.File.AppendAllText(path, rec.Status + " - " + rec.Message + "\r\n");
+            //Write using any logging technique that you like
+            //...
+        }
+    }
+}
+```
+
+To enable tracing, you must configure Web API to use your ITraceWriter implementation. You can do this by adding the following code the Register method in the WebApiConfig class.
+
+```c#
+public static void Register(HttpConfiguration config)
+{
+	...
+	config.Services.Replace(typeof(ITraceWriter), new CourseAPITracer());
+	...
+}
+...
+```
+
+As you can see the Register() method calls the Replace() method to replace the default trace writer service with an instance of CourseAPITracer.
+
+Only one trace writer can be active. By default, Web API sets a "no-op" tracer that does nothing. (The "no-op" tracer exists so that tracing code does not have to check whether the trace writer is null before writing a trace.)
+
+
+**Related links and more material**
+* [Tracing in ASP.NET Web API](http://www.asp.net/web-api/overview/testing-and-debugging/tracing-in-aspnet-web-api)
+* [Using Tracing in ASP.NET Web API](http://www.codeguru.com/csharp/.net/using-tracing-in-asp.net-web-api.htm)
+* [Microsoft ASP.NET Web API 2.2 Tracing 5.2.2](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Tracing)
