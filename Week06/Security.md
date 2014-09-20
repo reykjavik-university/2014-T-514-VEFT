@@ -34,7 +34,7 @@ For example when building a MVC 5 Application the support for enableing users to
 
 Futher more, this tutorial examlains how to create your own [OAuth 2.0 Authorization Server using OWIN OAuth middleware](http://www.asp.net/aspnet/overview/owin-and-katana/owin-oauth-20-authorization-server)
 
-*** Links ***
+***Links***
 * [The OAuth 1.0 Protocol](http://tools.ietf.org/html/rfc5849#section-1.2)
 * [OAuth](http://oauth.net/)
 * [ASP.NET Identity](http://www.asp.net/identity/overview/getting-started/introduction-to-aspnet-identity)
@@ -65,7 +65,7 @@ One of these libraries is the [IdentityServer v3](https://github.com/thinktectur
 IdentityServer v3 is a .NET-based open source implementation of an OpenID Connect and OAuth2 security token service.
 
 
-*** Links ***
+***Links***
 * [OpenID Connect](http://openid.net/)
 * [Thinktecture IdentityServer v3](https://github.com/thinktecture/Thinktecture.IdentityServer.v3)
 * [Thinktecture IdentityServer v3 Samples](https://github.com/thinktecture/Thinktecture.IdentityServer.v3.Samples)
