@@ -4,10 +4,9 @@
 
 Many luxury cars today come with a valet key. It is a special key you give the parking attendant and unlike your regular key, will not allow the car to drive more than a mile or two. Some valet keys will not open the trunk, while others will block access to your onboard cell phone address book. Regardless of what restrictions the valet key imposes, the idea is very clever. You give someone limited access to your car with a special key, while using your regular key to unlock everything.
 
-Every day new websites launch offering services which tie together functionality from other sites. A photo lab printing your online photos, a social network using your address book to look for friends, and APIs to build your own desktop application version of a popular site. These are all great services – what is not so great about some of the implementations is their request for your username and password to the other site. When you agree to share your secret credentials, not only do you expose your password to someone else (yes, that same password you also use for online banking), you also give them full access to do as they wish. They can do anything they wanted – even change your password and lock you out.
+Every day new websites launch offering services which tie together functionality from other sites. A photo lab printing your online photos, a social network using your address book to look for friends, and APIs to build your own desktop application version of a popular site. These are all great services – what is not so great about some of the implementations is their request for your username and password to the other site. When you agree to share your secret credentials, not only do you expose your password to someone else (yes, that same password you also use for online banking).
 
 This is the problem OAuth solves. It allows you, the User, to grant access to your private resources on one site (which is called the Service Provider), to another site (called Consumer, not to be confused with you, the User). While OpenID is all about using a single identity to sign into many sites, OAuth is about giving access to your stuff without sharing your identity at all (or its secret parts).
-
 
 ### OAuth 1.0
 
@@ -22,17 +21,17 @@ In order for the client to access resources, it first has to obtain permission f
 OAuth 2.0 attempted to replace 1.0 with a simpler protocol but ended up creating a loose framework that is very hard to implement securely. The OAuth 2.0 specification ended up being so poorly done.
 Because of this the lead author and editor is [no longer involved](http://hueniverse.com/2012/07/26/oauth-2-0-and-the-road-to-hell/) in the 2.0 effort and has withdrawn his name and support from it. He highly recommend you use OAuth 1.0 as 2.0 is likely to create security exploits.
 
-[This example explains the protocol workflow](http://hueniverse.com/oauth/guide/workflow/)
+***[This example explains the protocol workflow](http://hueniverse.com/oauth/guide/workflow/)***
 
 ### OAuth and .NET
 
 Building an application in .NET which support OAuth is relatively easy.
 
-Microsoft´s [ASP.NET Identity](http://www.asp.net/identity) system is designed to replace the previous ASP.NET Membership and Simple Membership systems. It includes profile support, OAuth integration, works with OWIN, and is included with the ASP.NET templates shipped with Visual Studio 2013.
+Microsoft´s [ASP.NET Identity](http://www.asp.net/identity) system is designed to replace the previous ASP.NET Membership and Simple Membership systems. It includes profile support, OAuth integration, works with [OWIN](http://www.asp.net/aspnet/overview/owin-and-katana), and is included with the ASP.NET templates shipped with Visual Studio 2013.
 
-For example when building a MVC 5 Application the support for enableing users to log in using OAuth 2.0 with credentials from an external authentication provider, such as Facebook, Twitter or Google is already supported out of the box. [This totutial explains how](http://www.asp.net/mvc/tutorials/mvc-5/create-an-aspnet-mvc-5-app-with-facebook-and-google-oauth2-and-openid-sign-on)
+For example, when building a MVC 5 Application the support for enabling users to log in using OAuth 2.0 with credentials from an external authentication provider, such as Facebook, Twitter or Google is already supported out of the box. [This totutial explains how](http://www.asp.net/mvc/tutorials/mvc-5/create-an-aspnet-mvc-5-app-with-facebook-and-google-oauth2-and-openid-sign-on)
 
-Futher more, this tutorial examlains how to create your own [OAuth 2.0 Authorization Server using OWIN OAuth middleware](http://www.asp.net/aspnet/overview/owin-and-katana/owin-oauth-20-authorization-server)
+Futher more, this tutorial exaplains how to create your own [OAuth 2.0 Authorization Server using OWIN OAuth middleware](http://www.asp.net/aspnet/overview/owin-and-katana/owin-oauth-20-authorization-server)
 
 ***Links***
 * [The OAuth 1.0 Protocol](http://tools.ietf.org/html/rfc5849#section-1.2)
