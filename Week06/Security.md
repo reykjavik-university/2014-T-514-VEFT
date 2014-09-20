@@ -50,6 +50,8 @@ OpenID Connect allows for clients of all types, including browser-based JavaScri
 
 (Identity, Authentication) + OAuth 2.0 = OpenID Connect
 
+***What OpenID Connect does is basically add authentication on top of OAuth.***
+
 [This video explains the basics of the protocol](https://www.youtube.com/watch?feature=player_embedded&v=Kb56GzQ2pSk)
 
 Also, [this video](http://vimeo.com/97344501), which is a talk by Dominick Baier held at the 2014 NDC explains the differences between OpenID Connect & OAuth in an interest way. ***You are encouraged to watch it!***
@@ -57,8 +59,6 @@ Also, [this video](http://vimeo.com/97344501), which is a talk by Dominick Baier
 OAuth 2.0, is a framework, specified by the IETF in RFCs 6749 and 6750 (published in 2012) designed to support the development of authentication and authorization protocols. It provides a variety of standardized message flows based on JSON and HTTP; OpenID Connect uses these to provide Identity services.
 
 There are several [libraries](http://openid.net/developers/libraries/) available in different languages that implement OpenID Connect and related specifications.
-
-***What OpenID Connect does is basically add authentication on top of OAuth.***
 
 One of these libraries is the [IdentityServer v3](https://github.com/thinktecture/Thinktecture.IdentityServer.v3) which is demostrated in the [talk by Dominick Baier](http://vimeo.com/97344501)
 
