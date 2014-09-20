@@ -51,6 +51,8 @@ OpenID Connect allows for clients of all types, including browser-based JavaScri
 
 ***What OpenID Connect does is basically add authentication on top of OAuth.***
 
+One could say that the main difference between these protocols is that OAuth defined access tokens, these tokens are then used to access providers, for example get some information from facebook/google.On the other hand OpenID Connect defined identity tokens which are used to identify the user, for example to access an application.
+
 [This video explains the basics of the protocol](https://www.youtube.com/watch?feature=player_embedded&v=Kb56GzQ2pSk)
 
 Also, [this video](http://vimeo.com/97344501), which is a talk by Dominick Baier held at the 2014 NDC explains the differences between OpenID Connect & OAuth in an interest way. ***You are encouraged to watch it!***
