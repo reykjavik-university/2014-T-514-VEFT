@@ -1,3 +1,7 @@
+
+***NOTE: this document is still a work in progress and only summarises the main topics in discussion, it also quotes on references and articles***
+
+
 # Security
 
 ## OAuth
