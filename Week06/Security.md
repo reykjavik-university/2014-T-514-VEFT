@@ -1,5 +1,5 @@
 
-***NOTE: this document is still a work in progress and only summarises the main topics in discussion, it also quotes on references and articles***
+***NOTE: this document is still a work in progress as it summarises some of the the main topics in discussion, it also quotes on references and articles***
 
 
 # Security
