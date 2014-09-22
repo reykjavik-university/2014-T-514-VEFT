@@ -41,6 +41,8 @@ Futher more, this tutorial exaplains how to create your own [OAuth 2.0 Authoriza
 
 ##OpenID Connect
 
+OpenID Connect 1.0 is a simple identity layer on top of the OAuth 2.0 protocol. It enables Clients to verify the identity of the End-User based on the authentication performed by an Authorization Server, as well as to obtain basic profile information about the End-User in an interoperable and REST-like manner.
+
 OpenID Connect is an interoperable authentication protocol based on the OAuth 2.0 family of specifications. It uses straightforward REST/JSON message flows with a design goal of “making simple things simple and complicated things possible”. It’s uniquely easy for developers to integrate, compared to any preceding Identity protocol.
 
 OpenID Connect lets developers authenticate their users across websites and apps without having to own and manage password files. For the app builder, it provides a secure verifiable, answer to the question: “What is the identity of the person currently using the browser or native app that is connected to me?”
@@ -52,6 +54,14 @@ OpenID Connect allows for clients of all types, including browser-based JavaScri
 ***What OpenID Connect does is basically add authentication on top of OAuth.***
 
 One could say that the main difference between these protocols is that OAuth defined access tokens, these tokens are then used to access providers, for example get some information from facebook/google.On the other hand OpenID Connect defined identity tokens which are used to identify the user, for example to access an application.
+
+The OpenID Connect protocol, in abstract, follows the following steps.
+
+1. The RP (Client) sends a request to the OpenID Provider (OP).
+2. The OP authenticates the End-User and obtains authorization.
+3. The OP responds with an ID Token and usually an Access Token.
+4. The RP can send a request with the Access Token to the UserInfo Endpoint.
+5. The UserInfo Endpoint returns Claims about the End-User.
 
 [This video explains the basics of the protocol](https://www.youtube.com/watch?feature=player_embedded&v=Kb56GzQ2pSk)
 
@@ -68,5 +78,6 @@ IdentityServer v3 is a .NET-based open source implementation of an OpenID Connec
 
 ***Links***
 * [OpenID Connect](http://openid.net/)
+* [Core OpenID Connect functionality specification ](http://openid.net/specs/openid-connect-core-1_0.html)
 * [Thinktecture IdentityServer v3](https://github.com/thinktecture/Thinktecture.IdentityServer.v3)
 * [Thinktecture IdentityServer v3 Samples](https://github.com/thinktecture/Thinktecture.IdentityServer.v3.Samples)
