@@ -79,6 +79,87 @@ One of these libraries is the [IdentityServer v3](https://github.com/thinktectur
 
 IdentityServer v3 is a .NET-based open source implementation of an OpenID Connect and OAuth2 security token service.
 
+###OpenID Connect basic specs
+
+####Flows
+
+The OpenID Connect authentication process consists by requiring the user to authenticate him/her self through a OpenID provider. This process then returns the information about the user in the form of a id token, which contains scopes and claims, as well as other useful information about the user being authenticated.
+
+The way in which this process is conducted is referred as a flow. The main flows are:
+
+* Code Flow
+* Implicit Flow
+* Hybrid Flow
+
+This flow can be specified throught the 'response_type' parameters in the authorization request.
+
+#####Code Flow
+
+The basic steps of this flow are the following:
+
+1. The client send an authentication request to the OpenID provider
+2. The OpenID provider authenticates the user(of behalf of the client) and responds with an authorization code to the client
+3. The client requests an id token with the authorization code.
+3. The client validates the token and retrives the user information.
+
+##### Implicit Flow
+
+The basic steps of this flow are the following:
+
+1. The client send an authentication request to the OpenID provider
+2. The OpenID provider authenticates the user(of behalf of the client) and redirects him/her to the client with an id token.
+3. The client validates the token and retrives the user information.
+
+#####Hybrid Flow
+
+This flow is basically a mix of the other two, which means that in some cases the authorization process is return to the client with a code and sometimes with a id token directly.
+
+
+####Request Parameters
+
+Some of the request parameters or main ones are: 
+
+* client_id       : This is the client identifier
+* response_type   : this is the reponse type. Like 'id-token' or token
+* scope           : This represent the access or information request. f.e. openid, profile, email, read or write 
+* redirect_uri    : This is the location for where the response will be send
+* response_mode   : This defines the Form Post Response Mode
+* state           : This is for maintaining a state between the client and provider.
+* nonce           : This used to associate a client session with an id token
+
+
+#### ID token
+
+As we talked about earlier the id token contains information about the authenticated user in the form of claim. id tokens as represented in a [JSON Web Token](http://jwt.io/) format. 
+Some of the claims contained within a id token are the following:
+
+* iss      : This represents the issuer of the response(url)
+* sub      : This is the subject identifier, a unique identifier that represents a user.
+* aud      : This is the audience which is a client identifier
+* exp      : This represents the expiration date of the id token
+* iat      : This represents the issue date
+* nonce    : Again, this used to associate a client session with an id token
+* at_hash  : This represents the hashed access token
+
+
+####Scopes 
+
+OpenID Connect defines the following scope values:
+
+* openid         : This represents the authorization request
+* profile        : This represents a profile claim request
+* email          : This represents an email claim request
+* address        : This represents an address claim request
+* phone          : This represents an phone claim request
+* offline_access : This represents an OAuth 2.0 Refresh Token request
+
+It is ofcourse also possible to define custom scopes in order to achieve some functionality. 
+
+####Claims
+
+The OpenID Connect also defines several sets of claims.
+For more information on Claim [please refer to these specs](http://openid.net/specs/openid-connect-basic-1_0.html#StandardClaims)
+
 
 ***Links***
 * [OpenID Connect](http://openid.net/)
