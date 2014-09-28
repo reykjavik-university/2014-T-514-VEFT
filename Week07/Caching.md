@@ -49,27 +49,27 @@ Now as an example if we issue the get request mentioned earlier we will get this
 ***Status Code:200 OK***
 
 ***Request Header***
-Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
-Accept-Encoding:gzip,deflate,sdch
-Accept-Language:en-US,en;q=0.8,is;q=0.6
-Cache-Control:no-cache
-Connection:keep-alive
-Cookie:...
-Host:localhost:12298
-Pragma:no-cache
-User-Agent:Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.124 Safari/537.36
+* Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+* Accept-Encoding:gzip,deflate,sdch
+* Accept-Language:en-US,en;q=0.8,is;q=0.6
+* Cache-Control:no-cache
+* Connection:keep-alive
+* Cookie:...
+* Host:localhost:12298
+* Pragma:no-cache
+* User-Agent:Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.124 Safari/537.36
 
 ***Response Headers***
-Cache-Control:no-transform, must-revalidate, max-age=0, private
-Content-Length:10952
-Content-Type:application/xml; charset=utf-8
-Date:Sun, 28 Sep 2014 23:32:09 GMT
-**ETag:W/"c701cee4b1d64c658cc13c7f891139cd"**
-**Last-Modified:Sun, 28 Sep 2014 23:30:40 GMT**
-Server:Microsoft-IIS/8.0
-X-AspNet-Version:4.0.30319
-X-Powered-By:ASP.NET
-X-SourceFiles:...
+* Cache-Control:no-transform, must-revalidate, max-age=0, private
+* Content-Length:10952
+* Content-Type:application/xml; charset=utf-8
+* Date:Sun, 28 Sep 2014 23:32:09 GMT
+* **ETag:W/"c701cee4b1d64c658cc13c7f891139cd"**
+* **Last-Modified:Sun, 28 Sep 2014 23:30:40 GMT**
+* Server:Microsoft-IIS/8.0
+* X-AspNet-Version:4.0.30319
+* X-Powered-By:ASP.NET
+* X-SourceFiles:...
 
 But the second request:
 
