@@ -35,12 +35,12 @@ and to start using it you have to add the following code the WebApiConfig class
 
 ```c#
 ...
-		public static void Register(HttpConfiguration config)
-		{
-        //Caching with CacheCow
-        var cacheCowCacheHandler = new CachingHandler(config);
+public static void Register(HttpConfiguration config)
+{
+	//Caching with CacheCow
+	var cacheCowCacheHandler = new CachingHandler(config);
         config.MessageHandlers.Add(cacheCowCacheHandler);
-		}
+}
 ...
 ```
 
@@ -76,32 +76,32 @@ But the second request:
 ***Status Code:304 Not Modified***
 
 ***Request Headers***
-Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
-Accept-Encoding:gzip,deflate,sdch
-Accept-Language:en-US,en;q=0.8,is;q=0.6
-Cache-Control:max-age=0
-Connection:keep-alive
-Cookie:...
-Host:localhost:12298
-If-Modified-Since:Sun, 28 Sep 2014 23:30:40 GMT
-**If-None-Match:W/"c701cee4b1d64c658cc13c7f891139cd"**
-User-Agent:Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.124 Safari/537.36
+* Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+* Accept-Encoding:gzip,deflate,sdch
+* Accept-Language:en-US,en;q=0.8,is;q=0.6
+* Cache-Control:max-age=0
+* Connection:keep-alive
+* Cookie:...
+* Host:localhost:12298
+* If-Modified-Since:Sun, 28 Sep 2014 23:30:40 GMT
+* **If-None-Match:W/"c701cee4b1d64c658cc13c7f891139cd"**
+* User-Agent:Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.124 Safari/537.36
 
 ***Response Headers***
-Cache-Control:no-cache
-Date:Sun, 28 Sep 2014 23:30:44 GMT
-**ETag:W/"c701cee4b1d64c658cc13c7f891139cd"**
-Expires:-1
-Pragma:no-cache
-Server:Microsoft-IIS/8.0
-X-AspNet-Version:4.0.30319
-X-Powered-By:ASP.NET
-X-SourceFiles:...
+* Cache-Control:no-cache
+* Date:Sun, 28 Sep 2014 23:30:44 GMT
+* **ETag:W/"c701cee4b1d64c658cc13c7f891139cd"**
+* Expires:-1
+* Pragma:no-cache
+* Server:Microsoft-IIS/8.0
+* X-AspNet-Version:4.0.30319
+* X-Powered-By:ASP.NET
+* X-SourceFiles:...
 
 
 Here we notice that that the first request returned a status code 200 with an Etag, then when we issued a second request with the "If-None-Match" header with the Etag value and we got a status code 304, thus cached contents where issued.
 
-As mentioned on there [CacheCow wiki](https://github.com/aliostad/CacheCow/wiki), some features are:
+As mentioned on there [CacheCow wiki](https://github.com/aliostad/CacheCow/wiki), some features include:
 
 **CacheCow.Server features**
 
@@ -117,7 +117,49 @@ As mentioned on there [CacheCow wiki](https://github.com/aliostad/CacheCow/wiki)
 * Validating cached items if must-revalidate parameter of Cache-Control header is set to true. It will use ETag or Expires whichever exists
 * Making conditional PUT for resources that are cached based on their ETag or expires header, whichever exists
 
+
 ###ASP.NET Web API CacheOutput
+
+This library is a litle bit different from CacheCow, it uses attributes to control caching on actions.
+
+To use it install [this library](https://www.nuget.org/packages/Strathweb.CacheOutput.WebApi2/)
+
+As mentioned on [there documentation](https://github.com/filipw/AspNetWebApi-OutputCache), some of the properties you can specifie are:
+
+* *ClientTimeSpan* (corresponds to CacheControl MaxAge HTTP header)
+* *MustRevalidate* (corresponds to MustRevalidate HTTP header - indicates whether the origin server requires revalidation of a cache entry on any subsequent use when the cache entry becomes stale)
+* *ExcludeQueryStringFromCacheKey* (do not vary cache by querystring values)
+* *ServerTimeSpan* (time how long the response should be cached on the server side)
+* *AnonymousOnly* (cache enabled only for requests when Thread.CurrentPrincipal is not set)
+
+Lets say that we would like to cache the following action for 30 seconds on both client and server the code would look like this :
+
+```c#
+[CacheOutput(ClientTimeSpan = 30, ServerTimeSpan = 30)]
+[Route("allpersons")]
+public List<Person> GetAllPersons()
+{
+	return _service.GetPersons();
+}
+```
+
+CacheOutput offer several options for configuring and appliying cache to your API service. 
+Some of these include the possibility to implement you own custom server side cache mechanism. You can also invalidate cache through attributes at controller or action level as well manually. 
+
+For example decorating a controller with [AutoInvalidateCacheOutput] attribute will automatically flush all cached GET data from this controller after a successfull POST/PUT/DELETE request.
+
+
+*** Related material***
+* [AspNetWebApi-OutputCache]()
+* [CacheCow](https://github.com/aliostad/CacheCow)
+* [Building ASP.Net Web API RESTful Service](http://bitoftech.net/2014/02/08/asp-net-web-api-resource-caching-etag-cachecow/)
+* [Exploring Web API 2 Caching](http://damienbod.wordpress.com/2014/05/18/exploring-web-api-2-caching/)
+
+
+
+
+
+
 
 
 
