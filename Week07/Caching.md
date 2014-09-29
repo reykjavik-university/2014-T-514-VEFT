@@ -149,6 +149,59 @@ Some of these include the possibility to implement you own custom server side ca
 For example decorating a controller with [AutoInvalidateCacheOutput] attribute will automatically flush all cached GET data from this controller after a successfull POST/PUT/DELETE request.
 
 
+###Custom Server side cache example
+
+As mentioned in the begining you could also implement your own caching method. 
+A very simple implementation using the defaul cache memory could be like this utility class
+
+```c#
+public class Utilities
+{
+    public static void RemoveFromCache(string key)
+    {
+        System.Runtime.Caching.MemoryCache.Default.Remove(key);
+    }
+
+    public static void AddToCache<T>(T obj, string key, int duration)
+    {
+        System.Runtime.Caching.MemoryCache.Default.Remove(key);
+        System.Runtime.Caching.MemoryCache.Default.Add(key, obj, DateTime.Now.AddMinutes(duration));
+    }
+
+    public static T GetFromCache<T>(string key, bool ignoreCache)
+    {
+        if (System.Runtime.Caching.MemoryCache.Default.Get(key) != null && !ignoreCache)
+        {
+            T cachedObject = (T)System.Runtime.Caching.MemoryCache.Default.Get(key);
+            return cachedObject;
+        }
+
+        return default(T);
+    }
+}
+```
+
+The if you wanted for example to cache a action that return your info one could this:
+
+```c#
+[Route("myperson")]
+public Person GetMyInfo()
+{
+    //Manual caching
+    string myEmail = "patrekur10@ru.is"; // unique identifier
+    int CacheTimeout = 60; // 60 minutes
+    string cacheKey = "GetMyInfo" + myEmail;
+    var person = Utilities.GetFromCache<Person>(cacheKey, false);
+    if (person == null) //Not present in cache or cache has expired
+    {
+        person = _service.GetPersonByEmail(myEmail);
+        Utilities.AddToCache<Person>(person != null ? person : new Person(), cacheKey, CacheTimeout);
+    }
+    return person;
+}
+```
+
+
 *** Related material***
 * [AspNetWebApi-OutputCache]()
 * [CacheCow](https://github.com/aliostad/CacheCow)
