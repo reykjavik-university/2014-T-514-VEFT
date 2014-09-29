@@ -202,7 +202,7 @@ public Person GetMyInfo()
 ```
 
 
-*** Related material***
+***Related material***
 * [AspNetWebApi-OutputCache]()
 * [CacheCow](https://github.com/aliostad/CacheCow)
 * [Building ASP.Net Web API RESTful Service](http://bitoftech.net/2014/02/08/asp-net-web-api-resource-caching-etag-cachecow/)
