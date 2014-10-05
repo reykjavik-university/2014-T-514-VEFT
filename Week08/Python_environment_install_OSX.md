@@ -171,7 +171,7 @@ into file named cinema.py:
 	    Fetches movies that are beeing shown in Icelandic theaters and
 	    prints them out to stdout
 	    """
-	    # Do a get request to cinema api at api.is
+	    # Do a get request to cinema api at apis.is
 	    response = requests.get('http://apis.is/cinema')
 	
 	    # If we don't receive a 2xx status code, we stop and print error.
