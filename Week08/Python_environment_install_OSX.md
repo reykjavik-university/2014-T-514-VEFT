@@ -5,14 +5,14 @@ errors or if you find anything missing, please send in a pull request with your
 changes. All pull requests are well accepted.
 
 There are many great tools that can help you writing awesome Python code. The
-tools that are mentioned in this documents are the once I use daily when
+tools that are mentioned in this documents are the ones I use daily when
 working with Python code.
 
 ## Installing Homebrew
 If you have used other Unix-like operating systems, such as Linux or BSD, you
 must have used some kind of package manager for installing software. If you
 have used OS X for some time you might have noticed that such functionality
-completely missing. There are several projects out there which solves this
+completely missing. There are several projects out there which solve this
 problem. My favorite one, that I trust and love is [Homebrew](http://brew.sh/).
 They even use the subtitle *"The missing package manager for OS X"*.
 
@@ -20,12 +20,12 @@ To install Homebrew you first need to install Xcode and the Xcode command line
 tools.  The Xcode command line tool contains various of Unix tools which Brew
 depend on, such as Git.
 
-If you don't have Xcode you must start by installing it. It might take a while
-where Xcode is a big application (2.46 GB last time i checked).  To install
-Xcode, open up App Store application that comes with OS X, search for Xcode and
-click *Free* button.
+If you don't have Xcode you must start by installing it. It might take a while,
+since Xcode is a big application (2.46 GB last time i checked).  To install
+Xcode, open up the App Store application that comes with OS X, search for Xcode and
+click the *Free* button.
 
-When Xcode is installed you need to accept a million line licence term before
+When Xcode is installed, you need to open it and accept a million line licence term before
 you can use the Xcode command line tools. Open up a terminal and type in
 
 	sudo git
@@ -37,7 +37,7 @@ Next we install Homebrew. Open up a terminal and type in the following.
 
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-If you are person that is not willing to run scripts without reading them; well
+If you are the kind of person that is not willing to run scripts without reading them; well
 in this case it should be safe. I trust the Homebrew guys. If not, read through
 the scripts before you execute them in your shell.
 	
@@ -209,13 +209,13 @@ Exit your editor and run the script.
 	   ...
 
 If everything went well the script should print out the movies that are being
-shown. Nice ey?
+shown. Nice, ey?
 
 If you are new to Python please stop and read through the code and convince
 yourself that it does what it is meant to do. The author of the Python language
-state that the language is so simple that it is almost identical to natural
+states that the language is so simple that it is almost identical to natural
 languages. I don't agree. But simple well written Python code can be that way;
-but most often in large python code base things can be quite tricky. But that
+and most often in large Python code base things can be quite tricky. But that
 is my rant. Don't take my word for it.
 
 You should now have everything setup for writing Python code on your Mac.
