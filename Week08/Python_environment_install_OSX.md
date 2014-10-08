@@ -180,12 +180,12 @@ into file named cinema.py:
 	            .format(response.status_code)
 	        sys.exit(1)
 	
-	    # The respond is on json format. We use python json module to
+	    # The response is on json format. We use python json module to
 	    # parse the json
 	    # and map it into a Python associated array (dictionary)
 	    d = json.loads(response.text)
 	
-	    # We loop the result and print it to stdout.
+	    # We loop through the result and print it to stdout.
 	    for res in d.get('results'):
 	        print colored(res.get('title').encode('utf-8'), 'yellow')
 	        for showtime in res.get('showtimes'):
