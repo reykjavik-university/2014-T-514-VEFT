@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% for entry in entries %}
+<div class="entry">
+  <h1><a href="/entry/{{entry.slug}}">{{entry.title}}</a></h1>
+</div>
+{% endfor %}
+{% endblock %}

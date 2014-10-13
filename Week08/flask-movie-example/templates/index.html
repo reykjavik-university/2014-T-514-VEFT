@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/static/default.css">
+  <title></title>
+</head>
+<body>
+  <h1>Movies API</h1>
+  <p>Supported methods</p>
+  <h2>GET /movies</h2>
+  <p>Fetches movies that have been added</p>
+  <code>curl http://localhost:5000/movies</code>
+  <h2>POST /movies</h2>
+  <p>Adds new movies</p>
+  <code>
+  curl -H "Content-Type: application/json" -d '{"name":"Terminator 2","year":1997}' http://localhost:5000/movies 
+  </code>
+</body>
+</html>
