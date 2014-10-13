@@ -1,0 +1,21 @@
+body {
+    padding: 30px;
+}
+
+.left, .right{
+    border: 1px solid #DADADA;
+    background: #FAFAFA;
+    width: 150px;
+    font-size: 40px;
+    float: left;
+    text-align: center;
+    margin: 10px;
+    border-radius: 10px;
+    color: #4D4D4D;
+}
+
+.paran {
+    font-size: 50px;
+    font-weight: bold;
+}
+
