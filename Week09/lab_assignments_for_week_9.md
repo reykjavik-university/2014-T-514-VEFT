@@ -78,3 +78,111 @@ In code you can connect to the memcached server as follows.
 	client.incr('right')
 
 You can read the documentation for python-memcached at [https://github.com/linsomniac/python-memcached/blob/master/memcache.py](https://github.com/linsomniac/python-memcached/blob/master/memcache.py)
+
+
+
+
+## Exercise 2
+
+Lets write a simple Movie page where users can do the following
+
+- See list of movies
+- See movies by filtering on year
+
+This should be a simple service written in Flask. You can have it as web service or as web page. You can decide.
+
+The only design criteria is that the movies are stored in database using SQLAlchemy. The following section is a light tutorial on SQLAlchemy that you might find helpful when solving this exercise.
+
+
+### SQLAlchemy
+SQLAlchemy is a SQL toolkit and Object Relational mapper (ORM). With SQLAlchemy you can define class models that are mapped to database tables and through them you can do SQL queries.
+
+We know go through a simple example on how we can use SQLAlchemy in Python code to store informations on movies in a database.
+
+To use SQLAlchemy in code you must install it first. To install SQLAlchemy use pip as follows.
+
+	pip install sqlalchemy
+
+
+Let's start py creating a simple python script with the name db.py with the following content.
+
+	from sqlalchemy import create_engine
+	from sqlalchemy.ext.declarative import declarative_base
+	from sqlalchemy.orm import sessionmaker
+	
+	engine = create_engine('sqlite://///tmp/testdb.sqlite', echo=True)
+	Base = declarative_base()
+	Session = sessionmaker(bind=engine)
+	
+First we create an `Engine` instance with engine configuration.
+The Engine is the starting point for any SQLAlchemy application. It’s “home base” for the actual database and its DBAPI, delivered to the SQLAlchemy application through a connection pool and a Dialect, which describes how to talk to a specific kind of database/DBAPI combination.
+
+In this case we are defining Engine to a sqlite file that lives in /tmp/testdb.sqlite. SQLAlchemy supports multiple engine configurations for different database. You can read more on how to configure it for different databases at [http://docs.sqlalchemy.org/en/rel_0_9/core/engines.html](http://docs.sqlalchemy.org/en/rel_0_9/core/engines.html)
+
+Next we create a declarative base. We use this Base as the Base class for our models. Internally, the declarative base class is a catalog of classes and tables relative to that base.
+
+The third value is a Session factory that is bound to our engine. When we communicate with the database we do that through a session created from this factory. The session watches the state of our objects that we query and acts as a transaction manager.
+
+Now, let's define a model. Create a new file called models.py
+
+	from db import Base
+	from sqlalchemy import Column, Integer, String
+	
+	
+	class Movie(Base):
+	    __tablename__ = 'movies'
+	    id = Column(Integer, primary_key=True)
+	    title = Column(String, nullable=False)
+	    year = Column(Integer, nullable=False)
+
+There are many other column types that SQLAlchemy provides. You can read about them here [http://docs.sqlalchemy.org/en/rel_0_9/core/types.html](http://docs.sqlalchemy.org/en/rel_0_9/core/types.html)
+
+Before you can start querying the database, it must be created. When models have been defined and registered with the declarative base SQLAlchemy can create the database for you. Simply open up your shell (with your virtualenv enabled), run python and do the following
+
+	from db import engine, Base
+	from model import Movie
+	
+	Base.metadata.create_all(engine)
+	
+This will create the database using the engine defined in db.py. If you are using the sqlite configuration you should now have a sqlite file on your machine.
+
+#### Create movies and save them to database
+
+	from models import Movie	
+	from db import Session
+
+	session = Session()
+	m = Movie(title='Terminator', year=1995)
+	session.add(m)
+	session.commit()
+
+#### Count movies
+
+	from models import Movie	
+	from db import Session
+
+	session = Session()
+	session.query(Movie).count()
+	
+#### Fetch all movies
+
+	from models import Movie
+	from db import Session
+	
+	session = Session()
+	movies = session.query(Movie).all()
+	
+#### Filter movies by a given field
+
+	from models import Movie
+	from db import Session
+	
+	session = Session()
+	movies = session.query(Movie).filter(Movie.year == 2004).all()
+
+
+
+#### Read more about the power of SQLAlchemy
+- [http://docs.sqlalchemy.org/en/rel_0_9/orm/tutorial.html](http://docs.sqlalchemy.org/en/rel_0_9/orm/tutorial.html)
+
+ 
