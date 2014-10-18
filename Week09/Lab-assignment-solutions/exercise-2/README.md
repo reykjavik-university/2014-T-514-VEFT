@@ -6,7 +6,7 @@
 	
 To generate database
 
-	python manage.py sync_db
+	python manage.py create_db
 
 to start web server 
 
