@@ -20,7 +20,7 @@ def list_entries():
         session.add(entry)
         session.commit()
 
-        return 'you are doing a post'
+        return 'ok'
 
     else:
         session = Session()
@@ -30,12 +30,21 @@ def list_entries():
                         mimetype='application/json')
 
 
-@app.route('/api/search')
+@app.route('/api/search', methods=['POST'])
 def search():
     res = []
     es = Elasticsearch()
+    data = json.loads(request.data)
 
-    for x in es.search().get('hits').get('hits'):
+    search_body = {
+        "query": {
+            "query_string": {
+                "query": data.get('search')
+            }
+        }
+    }
+
+    for x in es.search(body=search_body).get('hits').get('hits'):
         _src = x.get('_source')
         entry = {'id': x.get('_id')}
         entry.update(_src)

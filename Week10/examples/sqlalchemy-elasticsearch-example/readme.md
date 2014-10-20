@@ -17,3 +17,12 @@ on the default port
     pip install -r requirements.txt
 
     python manage debug
+
+## Add a new post
+    
+    curl -H "Content-Type: application/json" -d '{"title":"my stuff","content":"haha"}' http://localhost:5000/api/entries
+
+## Curl a search
+
+    curl -H "Content-Type: application/json" -d '{"search": "stuff"}' http://localhost:5000/api/search
+
