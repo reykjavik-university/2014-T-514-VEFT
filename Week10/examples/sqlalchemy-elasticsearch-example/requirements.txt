@@ -1,0 +1,4 @@
+Flask==0.10.1
+Flask-Script==2.0.5
+SQLAlchemy==0.9.8
+elasticsearch==1.2.0

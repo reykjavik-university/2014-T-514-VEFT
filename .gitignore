@@ -175,3 +175,6 @@ FakesAssemblies/
 
 # For rope
 .ropeproject
+
+# Virtualenv
+.venv
