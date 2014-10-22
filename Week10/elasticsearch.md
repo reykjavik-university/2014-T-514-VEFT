@@ -163,7 +163,7 @@ You can also delete all the documents under a given type as follows
 
 or, remove the whole index
     
-    curl -XDELETE http://localhost:9200/entries/entry
+    curl -XDELETE http://localhost:9200/entries/
 
 # Search
 Now we have seen how we can create, update and delete documents. Let us now look at the
