@@ -10,7 +10,7 @@ The idea of Kodemon is as follows. You place a decorator on Python functions as 
     from kodemon import kodemon
 
     @kodemon
-    function fetch_latest_entries():
+    def fetch_latest_entries():
     	...
     	return entries
 
@@ -26,6 +26,8 @@ You don't have to implement the Kodemon Python decorator. It is given and can be
 You can install it into your project virtualenv with
 
 	pip install git+https://github.com/hlysig/kodemon-python
+
+Note: Make sure that the path to your working directory does **not** contain any spaces as this command may fail if that's the case (e.g. `/home/smu/project3`, not `/home/smu/project 3`).
 
 By default, if placed on a function that is executed, it will send a UDP message to localhost on port 4000. The message that the decorator sends is a Json a string on the form
 
