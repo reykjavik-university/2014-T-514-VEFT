@@ -267,8 +267,29 @@ queue.
     
     
 # Message acknowledgment
-todo fill me out
-https://www.rabbitmq.com/tutorials/tutorial-two-python.html
+
+With our current code once RabbitMQ delivers message to the customer it immediately removes it from memory. In this case, if you kill a worker we will lose the message it was just processing. We'll also lose all the messages that were dispatched to this particular worker but were not yet handled.
+
+If a worker dies, we'd like the task to be delivered to another worker.
+
+In order to make sure a message is never lost, RabbitMQ supports message acknowledgments. An ack(nowledgement) is sent back from the consumer to tell RabbitMQ that a particular message had been received, processed and that RabbitMQ is free to delete it.
+
+If consumer dies without sending an ack, RabbitMQ will understand that a message wasn't processed fully and will redeliver it to another consumer.
+
+There aren't any message timeouts; RabbitMQ will redeliver the message only when the worker connection dies.
+
+Message acknowledgments are turned on by default.
+
+def callback(ch, method, properties, body):
+    print " [x] Received %r" % (body,)
+    time.sleep( body.count('.') )
+    print " [x] Done"
+    ch.basic_ack(delivery_tag = method.delivery_tag)
+
+channel.basic_consume(callback,
+                      queue='hello')
+
+Using this code we can be sure that even if you kill a worker using CTRL+C while it was processing a message, nothing will be lost. Soon after the worker dies all unacknowledged messages will be redelivered.
 
 # Message durability
 todo fill me out
