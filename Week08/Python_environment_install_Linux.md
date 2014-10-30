@@ -16,7 +16,7 @@ which are not written in Python depend on these things.
 
 Before, let us install the famous build essentinal package which includes the C/C++ compilers from GNU. Open up your terminal and type in the following.
 
-    sudo apt-get install build-essential
+    $ sudo apt-get install build-essential
 
 Next we install the python development package which installs the Python shared library and header files.
 
