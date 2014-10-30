@@ -15,7 +15,7 @@ For example, you can print out all the arguments passed into a script as
 follows.
 
 	import sys
-	
+
 	for x in sys.argv:
 		print x
 
@@ -57,9 +57,9 @@ Your code should be similar to the following code skeleton.
 	def euler1(n):
 		# TODO: Implement
 		return 0
-	
+
 	case1 = euler1(10)
-	
+
 	if case1 != 23:
 	    print 'script is incorrect for the base case!'
 	else:
@@ -69,9 +69,7 @@ Your code should be similar to the following code skeleton.
 
 
 # Exercise 3
-Enough math of problems! Let's start doing something more realistic. Let's
-write a little Phonebook framework to store contact informations and let's use
-the OOP features of Python to do so.
+Enough of math problems! Let's start doing something more realistic. Let's write a little Phonebook framework to store contact informations and let's use the OOP features of Python to do so.
 
 Let's start by creating some [DTO](http://en.wikipedia.org/wiki/Data_transfer_object) which represents a Contact entry.
 
@@ -98,8 +96,7 @@ resides in and create instance of the Contact class to verify that it works.
 	hlysig Huldudalur 9 8931337
 	>>>
 	
-What does the `__init__` function do and what does the `__str__` function do?
-Go to the Python manual and read about these functions.
+What does the `__init__` function do and what does the `__str__` function do? Go to the [Python manual](https://docs.python.org/2/reference/datamodel.html) and read about these functions.
 
 Now we have a simple class that can store contact informations.
 	
@@ -120,7 +117,7 @@ let's store the contact instances in memory.
 		
 		def add(self, contact):
 			"""
-			Adds contact to the Phone book.
+			Adds contact to the Phonebook.
 			Add it to the dictionary using the name as
 			the key, and store the contact object in
 			the dictionary
@@ -142,7 +139,7 @@ let's store the contact instances in memory.
 		
 		def remove(self, contact):
 			"""
-			Remove contact from the Phonebook
+			Remove a contact from the Phonebook
 			"""
 			pass
 		
@@ -198,8 +195,7 @@ environment installation guide that is on Github you have most likely installed
 tools called virtualenv and Pip. If not, got to that tutorial and read about
 these tools.
 
-Let's create a virtualenv and install nose so we can run the test. In the
-folder where test_phonebook.py and  contacts.py reside, do the following.
+Let's create a virtualenv and install nose so we can run the test. In the folder where test_phonebook.py and contacts.py reside, do the following.
 
 	virtualenv .
 	source bin/activate
