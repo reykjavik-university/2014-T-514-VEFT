@@ -11,17 +11,17 @@ working with Python code.
 ## Installing Homebrew
 If you have used other Unix-like operating systems, such as Linux or BSD, you
 must have used some kind of package manager for installing software. If you
-have used OS X for some time you might have noticed that such functionality
+have used OS X for some time you might have noticed that such functionality is 
 completely missing. There are several projects out there which solve this
 problem. My favorite one, that I trust and love is [Homebrew](http://brew.sh/).
 They even use the subtitle *"The missing package manager for OS X"*.
 
 To install Homebrew you first need to install Xcode and the Xcode command line
-tools.  The Xcode command line tool contains various of Unix tools which Brew
+tools. The Xcode command line tool contains various of Unix tools which Brew
 depend on, such as Git.
 
 If you don't have Xcode you must start by installing it. It might take a while,
-since Xcode is a big application (2.46 GB last time i checked).  To install
+since Xcode is a big application (2.46 GB last time i checked). To install
 Xcode, open up the App Store application that comes with OS X, search for Xcode and
 click the *Free* button.
 
@@ -29,7 +29,7 @@ When Xcode is installed, you need to open it and accept a million line licence t
 you can use the Xcode command line tools. Open up a terminal and type in
 
 	sudo git
-	
+
 Type in your password, and agree to the licence terms. After that commands like
 `git` and `gcc` should be available in your terminal.
 
@@ -37,7 +37,7 @@ Next we install Homebrew. Open up a terminal and type in the following.
 
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-If you are the kind of person that is not willing to run scripts without reading them; well
+If you are the kind of person that is not willing to run scripts without reading them, well
 in this case it should be safe. I trust the Homebrew guys. If not, read through
 the scripts before you execute them in your shell.
 	
@@ -78,21 +78,21 @@ well. We use Pip heavily when we are writing our Python projects in this course
 so be sure to install it properly.
 
 Next we install Python virtualenv. This one is my favourite and I can't
-understand how I was able to live without it couple of years ago.  Virtualenv
+understand how I was able to live without it couple of years ago. Virtualenv
 allows you to create a virtual environment, put simply, an isolated working
 copy of Python which allows you to work on a specific project without worry of
 affecting other projects. For example, if you are working on two different
 projects with different dependencies you can install them into the virtualenv
 without installing it into the global Python installation on your machine.
-Brilliant.  When the virtualenv is active you can use all the packages that
+Brilliant. When the virtualenv is active you can use all the packages that
 were installed into that environment. When you are done, you remove the
 environment without leaving any trace of files on your hard drive.
 
 To install virtualenv, open up your terminal and type in the following.
 
 	sudo pip install virtualenv
-	
-Before you continue; take a brew moment and Google Pip and virtualenv and read
+
+Before you continue, take a brew moment and Google Pip and virtualenv and read
 more about them. They will make your life so much easier in the future. I
 recommend this
 [blog](http://www.dabapps.com/blog/introduction-to-pip-and-virtualenv-python/)
@@ -111,7 +111,7 @@ Our application will depend on two Python packages:
 - [requests](http://docs.python-requests.org/en/latest/): Nice package for crafting web requests.
 - [termcolor](https://pypi.python.org/pypi/termcolor): For printing out on stdout in colours.
 
-Create folder somewhere on your disk, I used ~/Desktop/movies. You can do the
+Create a folder somewhere on your disk, I used ~/Desktop/movies. You can do the
 same.
 
 	➜  mkdir ~/Desktop/cinema
@@ -180,12 +180,12 @@ into file named cinema.py:
 	            .format(response.status_code)
 	        sys.exit(1)
 	
-	    # The respond is on json format. We use python json module to
+	    # The response is on json format. We use python json module to
 	    # parse the json
 	    # and map it into a Python associated array (dictionary)
 	    d = json.loads(response.text)
 	
-	    # We loop the result and print it to stdout.
+	    # We loop through the result and print it to stdout.
 	    for res in d.get('results'):
 	        print colored(res.get('title').encode('utf-8'), 'yellow')
 	        for showtime in res.get('showtimes'):

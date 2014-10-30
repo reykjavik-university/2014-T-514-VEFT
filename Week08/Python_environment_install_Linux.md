@@ -44,15 +44,15 @@ copy of Python which allows you to work on a specific project without worry of
 affecting other projects. For example, if you are working on two different
 projects with different dependencies you can install them into the virtualenv
 without installing it into the global Python installation on your machine.
-Brilliant.  When the virtualenv is active you can use all the packages that
+Brilliant. When the virtualenv is active you can use all the packages that
 were installed into that environment. When you are done, you remove the
 environment without leaving any trace of files on your hard drive.
 
 To install virtualenv, open up your terminal and type in the following.
 
 	~$ sudo apt-get install python-virtualenv
-	
-Before you continue; take a brew moment and Google Pip and virtualenv and read
+
+Before you continue, take a brew moment and Google Pip and virtualenv and read
 more about them. They will make your life so much easier in the future. I
 recommend this
 [blog](http://www.dabapps.com/blog/introduction-to-pip-and-virtualenv-python/)
@@ -71,7 +71,7 @@ Our application will depend on two Python packages:
 - [requests](http://docs.python-requests.org/en/latest/): Nice package for crafting web requests.
 - [termcolor](https://pypi.python.org/pypi/termcolor): For printing out on stdout in colours.
 
-Create folder somewhere on your disk, I used ~/Desktop/movies. You can do the
+Create a folder somewhere on your disk, I used ~/Desktop/movies. You can do the
 same.
 
 	~$ mkdir ~/Desktop/cinema
@@ -140,12 +140,12 @@ into file named cinema.py:
 	            .format(response.status_code)
 	        sys.exit(1)
 	
-	    # The respond is on json format. We use python json module to
+	    # The response is on json format. We use python json module to
 	    # parse the json
 	    # and map it into a Python associated array (dictionary)
 	    d = json.loads(response.text)
 	
-	    # We loop the result and print it to stdout.
+	    # We loop through the result and print it to stdout.
 	    for res in d.get('results'):
 	        print colored(res.get('title').encode('utf-8'), 'yellow')
 	        for showtime in res.get('showtimes'):
@@ -173,8 +173,8 @@ shown. Nice ey?
 
 If you are new to Python please stop and read through the code and convince
 yourself that it does what it is meant to do. The author of the Python language
-state that the language is so simple that it is almost identical to natural
-languages. I don't agree. But simple well written Python code can be that way;
+states that the language is so simple that it is almost identical to natural
+languages. I don't agree. But simple well written Python code can be that way,
 but most often in large python code base things can be quite tricky. But that
 is my rant. Don't take my word for it.
 

@@ -16,10 +16,10 @@ def is_even(value):
     """
     return value % 2 == 0
 
-# If script is executed directly from command line, then __name__ becomes
-# __main__. Thus, this code in only executed if the script is executed
+# If the script is executed directly from command line, then __name__ becomes
+# __main__. Thus, this code is only executed if the script is executed
 # from the command line. This "guard" is used to prevent code from being
-# execute if the package is imported from another script.
+# executed if the package is imported from another script.
 if __name__ == '__main__':
     if len(sys.argv) == 1:
         print 'Missing argument to evaluate'
@@ -28,12 +28,12 @@ if __name__ == '__main__':
         sys.exit(1)
 
     # We loop through all the values in sys.argv. This list contains
-    # All the values that are passed in as argments to the script.
+    # all the values that are passed in as arguments to the script.
     # The first parameter is the name of the script, therefore we
     # slice the list from by skipping the first element of the list.
     for n in sys.argv[1:]:
-        # The values in sys.argv are string, thus we need to typecast
-        # each elemnt to an integer before we can use them in calculations.
+        # The values in sys.argv are of type string, thus we need to typecast
+        # each element to an integer before we can use them in calculations.
         n = int(n)
         if is_even(n):
             print '{0} is even'.format(n)
