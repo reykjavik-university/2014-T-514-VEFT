@@ -10,17 +10,17 @@ working with Python code.
 
 
 ## Install Python
-Python 2.7 is pre-installed installed when you install Ubuntu  is  but the
+Python 2.7 is pre-installed when you install Ubuntu but the
 Python shared library and the library headers are missing. Many python packages
 which are not written in Python depend on these things.
 
 Before, let us install the famous build essentinal package which includes the C/C++ compilers from GNU. Open up your terminal and type in the following.
 
-    $ sudo apt-get install build-essential
+    ~$ sudo apt-get install build-essential
 
 Next we install the python development package which installs the Python shared library and header files.
 
-    sudo apt-get install python-dev
+    ~$ sudo apt-get install python-dev
 
 
 ## Pip and virtualenv
@@ -32,7 +32,7 @@ from Github or from local packages on your machine.
 With Pip we can install external Python packages that we need in our Python
 projects. To name a few, these can be Flask, Django or SQLAlchemy.
 
-    sudo apt-get install python-pip
+    ~$ sudo apt-get install python-pip
 
 We use Pip heavily when we are writing our Python projects in this course so be
 sure to install it properly.
@@ -50,7 +50,7 @@ environment without leaving any trace of files on your hard drive.
 
 To install virtualenv, open up your terminal and type in the following.
 
-	sudo apt-get install python-virtualenv
+	~$ sudo apt-get install python-virtualenv
 	
 Before you continue; take a brew moment and Google Pip and virtualenv and read
 more about them. They will make your life so much easier in the future. I
@@ -74,13 +74,13 @@ Our application will depend on two Python packages:
 Create folder somewhere on your disk, I used ~/Desktop/movies. You can do the
 same.
 
-	➜  mkdir ~/Desktop/cinema
-	➜  cd ~/Desktop/cinema
+	~$ mkdir ~/Desktop/cinema
+	~$ cd ~/Desktop/cinema
 	
 In that folder we will create a Python virtualenv (under the folder .venv) for
 the external packages that we depend on.
 
-	➜  cinema  virtualenv .venv
+	~/Desktop/cinema$ virtualenv .venv
 	New python executable in .venv/bin/python2.7
 	Also creating executable in .venv/bin/python
 	Installing setuptools, pip...done.
@@ -89,22 +89,22 @@ Next we enable the virtualenv in our shell. Note that you are only activating
 the virtualenv in the shell that you are using. If you open up a new one you
 must enable the virtualenv for that shell as well.
 
-	➜  cinema  source .venv/bin/activate
-	(.venv)➜  cinema
+	~/Desktop/cinema$ source .venv/bin/activate
+	(.venv)~/Desktop/cinema$ 
 
 Next we install the two above mentioned packages into our virtualenv. Pip
 packages can be install with `pip install`. You can also search on Pypi using
 `pip search`.
 
 
-	(.venv)➜  cinema  pip install requests
+	(.venv)~/Desktop/cinema$ pip install requests
 	Downloading/unpacking requests
 	  Downloading requests-2.4.1-py2.py3-none-any.whl (458kB): 458kB downloaded
 	Installing collected packages: requests
 	Successfully installed requests
 	Cleaning up...
 
-	(.venv)➜  cinema  pip install termcolor
+	(.venv)~/Desktop/cinema$ pip install termcolor
 	Downloading/unpacking termcolor
 	  Downloading termcolor-1.1.0.tar.gz
 	  Running setup.py (path:/Users/hlysig/Desktop/cinema/.venv/build/termcolor/setup.py) egg_info for package termcolor
@@ -160,7 +160,7 @@ into file named cinema.py:
 
 Exit your editor and run the script.
 
-	(.venv)➜  cinema  python cinema.py
+	(.venv)~/Desktop/cinema$ python cinema.py
 	Afinn
 	  Sambíóin Álfabakka
 	   15:20 (1)
