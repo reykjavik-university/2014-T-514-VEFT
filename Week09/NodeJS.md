@@ -71,8 +71,9 @@ Some packages worth mentioning:
 + [MongoDB](http://docs.mongodb.org/ecosystem/drivers/node-js/)
     + Open-source document database and the leading NoSQL database.
 
-##Getting started
-[Node->Express->MongoDB tutorial](http://cwbuecheler.com/web/tutorials/2013/node-express-mongo/)
+##Information and tutorials
+[Node API](http://nodejs.org/api/)
+[Node > Express > MongoDB tutorial](http://cwbuecheler.com/web/tutorials/2013/node-express-mongo/)
 
 
 
