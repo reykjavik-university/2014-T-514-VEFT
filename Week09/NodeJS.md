@@ -50,6 +50,7 @@ You can search for a package with:
 `$ npm search your-package`
 
 and to install packages:
+
 `$ npm install express`
 
 Some packages worth mentioning:
