@@ -14,7 +14,7 @@ Via package manager
 + [OSX](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#osx)
 + [Linux & other](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#debian-and-ubuntu-based-linux-distributions)
 
-For `.msi`, `.pkg` , `tar.gz` and etc. [Nodejs.com](http://nodejs.org/download/)
+For `.msi`, `.pkg` , `tar.gz` and etc. [Download](http://nodejs.org/download/)
 
 Building
 + [Windows](https://github.com/joyent/node/wiki/Installation#building-on-windows)
