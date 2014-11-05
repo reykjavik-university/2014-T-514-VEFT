@@ -8,7 +8,7 @@ In the terminology of RabbitMQ (and other message brokers) you have a process
 that creates a message and sends it to a message queue. We refer to this
 process as "The producer" of the message. Then we have another processes
 monitoring the queue for new messages. We refer to this process as "The
-"consumers". Note that there can be many producers and consumers working on the
+consumers". Note that there can be many producers and consumers working on the
 same queue.
 
 This way of process communication is platform independent and programming
@@ -51,7 +51,7 @@ take more then couple of ms.
 
 Now let's dream big. Few years later your small business has grown big and you
 now have hundred of employers working at your company and you have added some
-"crucial" departments into your organization structure, such as sales- and
+"crucial" departments into your organization structure, such as sales and
 marketing. To make this nightmare even worse, the sales department is using
 [SAP](http://www.sap.com/index.html) and marketing is using some other horrible
 tool for collecting statistical information on orders. These system now need to
