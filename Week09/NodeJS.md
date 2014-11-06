@@ -31,7 +31,7 @@ Node.js has a command line shell.  To activate it execute the following command 
 
 	node
 
-and the prompt in terminal should change to 
+and the prompt in terminal should change (something like this)
 
 ```nodejs
 ☁  ~  node
@@ -43,5 +43,7 @@ and the prompt in terminal should change to
 
 
 TODO
+
 node shell
+
 more on npm?
