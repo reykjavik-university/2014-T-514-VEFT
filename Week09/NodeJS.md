@@ -33,7 +33,7 @@ Node.js has a command line shell.  To activate it execute the following command 
 
 and the prompt in terminal should change to 
 
-	'''nodejs
+	'''javascript
 	☁  ~  node
 	>
 	'''
