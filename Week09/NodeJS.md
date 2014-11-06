@@ -1,4 +1,6 @@
 >Before we begin I want that to be noted that the following examples have not been tested in linux.  It is written in the best of my knowledge.  For example how to download node.js on linux.  It would be good if someone using linux would confirm that the following (download and examples) works on linux.
+
+
 # Node.js
 
 [Node.js](http://nodejs.org/) is javascript serverside. It is a colleciton of libaries written in javascript with the focus on networking.
