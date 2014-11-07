@@ -27,7 +27,7 @@ on linux, type in terminal
 
 ## Nodejs shell
 
-Node.js has a command line shell.  To activate it execute the following command in terminal
+Node.js has a command line shell.  Also called nodejs terminal or [REPL](http://nodejs.org/api/repl.html).  To activate it execute the following command in terminal
 
 	node
 
@@ -38,9 +38,53 @@ and the prompt in terminal should change (something like this)
 >
 ```
 
+Inside this shell you can write javascript code.  Here below we write a simple function that takes in a number and doubles it.
 
+```javascript
+> function double(value){return value * 2;}
+```
+Then we rune our function in the nodejs shell be executing the command
 
+```javascript
+> double(2.3)
+```
 
+And the terminal window will show
+
+```nodejs
+> function double(value){return value * 2;}
+undefined
+> double(2.3)
+4.6
+> 
+```
+
+Node.js shell is a interactive javascript shell that is mainly to test statments.  The main power of node.js is when we write a javascript file and run it with nodejs.  Lets start with writing a very simple __helloWorld.js__ file and run it with node.js.  Open your favorite text editor and write the following.
+
+```javascript
+function helloworld() {
+	console.log('Hello World!');
+}
+
+helloworld();
+```
+
+Now save this file in on your computer (in any directory you like).  Let the file name be **helloWorld.js**
+
+Now lets run this file from a terminal window.  You open the terminal window and go to the directory where the file is saved.  In my case I made a directory on my desktop called 'nodejsTest', so in my terminal window I write 'cd ~desktop/nodejsTest/' and execute it.
+To run the file with node.js you execute
+
+```bash
+node helloWorld.js
+```
+Your terminal window should show something very simular to this.
+```bash
+☁  nodejsTest   cd ~
+☁  ~  cd ~/Desktop/nodejsTest
+☁  nodejsTest  node helloWorld.js
+Hello World!
+☁  nodejsTest  
+```
 
 TODO
 
