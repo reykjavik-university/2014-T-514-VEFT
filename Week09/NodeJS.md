@@ -193,9 +193,98 @@ Lets think of this from a web service point aview.  We have a web service that i
 
 ## Echo server
 
-Now it is time to create a simple socket server. As mentioned above node.js contains a cluster of libraries that are mainly focesed on networking.  In this example we are going to write a litle echo server using the [**net** library](http://nodejs.org/api/net.html).  To use it we use the command `require('')`.  `require('')` is a simular thing as **import** in **Python**. To require net library we simply write the following code.
+Now it is time to create a simple socket server. As mentioned above node.js contains a cluster of libraries that are mainly focesed on networking.  In this example we are going to write a little echo server using the [**net** library](http://nodejs.org/api/net.html) that comes with nodejs.  To use it we use the command `require('')`.  **require('')** is a simular thing as **import** in **Python**. To require net library we simply write the following code.
 
 ```javascript
 var net = require('net');
 ``` 
-Next we create the server with the createServer
+Next we create the server with the createServer funciton in the net library, it takes in a callback function and that callback function takes in one argument the `socket`.
+
+```javascript
+var server = net.createServer(function(socket){
+	
+});
+``` 
+
+We can bind this socket server by calling a function named `listen()`. like this.
+
+```javascript
+server.listen(6000)
+``` 
+
+Each time the operating system gets a connection on port 5000 this function is called
+
+We can test this be adding some action to our code.  Something that we want to be done when there is a connection on port 5000.  For example writing a text to the terminal window.  maeby *incoming connection*
+The whole code look like this
+
+```javascript
+var net = require('net');
+
+var server = net.createServer(function(socket){
+	console.log('incoming connection');
+});
+
+server.listen(6000)
+``` 
+
+Lets save this file as `socket.js` and run it with node (write `node socket.js` in terminal).  
+
+Now we have the socket server up and running but we need to test it.  We can use program like [telnet](http://en.wikipedia.org/wiki/Telnet) or [Netcat](http://en.wikipedia.org/wiki/Netcat).  I am going to use Netcat.  Open up a new Terminal window and execute the following command.
+
+```bash
+nc localhost 6000
+```
+In the terminal window that we are running node socket.js we now see 
+
+```bash
+☁  nodejsTest  node helloTest.js
+incoming connection
+```
+And if we open up a new Terminal window and in it we execute `nc localhost 6000` we see the following in the Terminal window running node socket.js
+
+```bash
+☁  nodejsTest  node helloTest.js
+incoming connection
+incoming connection
+```
+OK now we have a scoket server but we still need to be able to receive data and echo it.  So lets add to our server code so it looks like this.
+
+```javascript
+var net = require('net');
+
+var server = net.createServer(function(socket){
+	console.log('incoming connection');
+
+	socket.on('data', function(data){
+		console.log('Data from client: ' + data);
+	});
+});
+
+server.listen(6000)
+``` 
+Now lets start the our node.js server again in terminal window
+and start nc localhost 6000 from two separte Terminal windows.  Now if we write some text in our terminal windows we can see the server terminal window echoing our data.
+
+So we have written a sokect server in node.js.  It can handle multible sockets connections on a single threadid server, by using callback events to handle them.
+
+But it is still not echoing incomming data. Just writing it to the Terminal window.  So we add to it `socket.write(data);` see whole code.
+```javascript
+var net = require('net');
+
+var server = net.createServer(function(socket){
+	console.log('incoming connection');
+
+	socket.on('data', function(data){
+		console.log('Data from client: ' + data);
+		socket.write(data);
+	});
+});
+
+server.listen(6000)
+```
+So now if we start up the three Terminal windows
+> Terminal window 1 -> node server.js
+> Terminal window 2 -> nc localhost 6000 
+> Terminal window 3 -> nc localhost 6000 
+
+Now if we write some text in terminal window 2 and 3 we get a respone back.  Congratulation you have written a sokect server.  Ofcourse alot of code is in the **net** library but by using it we have a simple sokect echo server.
