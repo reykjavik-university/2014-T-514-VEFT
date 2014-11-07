@@ -112,20 +112,51 @@ Did you guess right?  If you did, Good job.  Many programmers that are beginners
 
 ```javascript
 1. The program starts to execute the setTimeout function
-	* in it we tell it to wait for 3 sec. So the programs stops and wait for 3 sec.  
+	* In it we tell it to wait for 3 sec. So the programs stops and wait for 3 sec.  
 2. After these 3 sec. it should run the console.log('Nirvana BEST'); line.
 3. Then it will run the console.log('hello world!'); line
 ```
 
- Lets write a write a 
+Why does the code not run like that?
+The reason is because **node.js** is asynchronous.  What really happends is this.
 
+```javascript
+1. The program starts to execute the setTimeout function
+	* In it we tell it to wait for 3 sec. 
+	* What happens now is that Node.js has a task that will be ran in 3 sec.
+	** it plases this task somewere and continues with the code.  That is it runs the console.log('hello world!'); line
+	** after 3 sec. Node.js will receive a interrupt and when it recives this interrupt it will run the console.log('Nirvana BEST'); line.
+```
 
+This is because node.js is asynchronus.  This is really the pattern in node.js code it will never stop.  It will allways continue to run.  You define tasks and callback but node.js will allways continue to run.  This means that there is really no way to stop in node.js code.  Ofcourse you can do something like we did above with setTimeout() or a callback.  But node.js will not stop even if you do it will keep on going and when it receives the interrupt it will run the task or callback.
+
+The reason for this behavior is because node.js is single threadid.  It is not possible to created threads in node.js.  And node.js is collectons of libraries that are focused on networking.
+
+Don't worry if you are not getting this right away.  Lets take another example.  Lets change the code above like this, using the [setInterval](http://www.w3schools.com/jsref/met_win_setinterval.asp) function.
+
+```javascript
+setInterval(function(){
+	console.log('Nirvana BEST');
+}, 3000);
+
+console.log('Hello world!');
+```
+What happens know, can you assume it before we run the code?  Guess, and then save and run it and see whats happens. (I am assuming that by now you know how to save and run node.js code, because we have done that afew times here above).  The terminal window should show something like this.
+
+```bash
+☁  nodejsTest  node helloTest.js
+Hello world!
+Nirvana BEST
+Nirvana BEST
+Nirvana BEST
+Nirvana BEST
+Nirvana BEST
+.
+.
+.
+```
 
 
 
 
 TODO
-
-node shell
-
-more on npm?
