@@ -1,4 +1,6 @@
->Before we begin I want that to be noted that the following examples have not been tested in __linux__.  It is written in the best of my knowledge.  For example how to download node.js on linux.  It would be good if someone using linux would confirm that the following (download and examples) works on linux.
+>Before we begin I want that to be noted that I work on OSX.  So the following examples have not been tested in __linux__.  All parts that are specially about __linux__ are written in the best of my knowledge.  For example how to download node.js on linux.  It would be good if someone using linux would confirm that the following (download and examples) works on linux.  
+Also I assume that you are familiar with javascript.  If you are not I requment that you take some tutorials in javascript and get familiar with it before you start here. For example on [w3shcools.com](http://www.w3schools.com/js/). 
+Thank you very much.
 
 
 # Node.js
@@ -62,11 +64,7 @@ undefined
 Node.js shell is a interactive javascript shell that is mainly used to test statments.  The main power of node.js is when we write a javascript file and run it with node.js.  Lets start with writing a very simple __helloWorld.js__ file and run it with node.js.  Open your favorite text editor and write the following.
 
 ```javascript
-function helloworld() {
-	console.log('Hello World!');
-}
-
-helloworld();
+console.log('Hello World!');
 ```
 
 Now save this file as **helloWorld.js** on your computer (in any directory you like).
@@ -85,6 +83,47 @@ Your terminal window should show something very simular to this.
 Hello World!
 ☁  nodejsTest  
 ```
+
+## The next step, Node.js is single threadid
+
+Ok, now we have been playing with very easy stuff.  It is time to dive in and try to understand one very interesting part of node.js that many have had hard time time to understand. Even though node.js is single threadid it is still asynchronous.
+
+Lets write a little code and try to understand this.  We will use the [`setTimeout()` function](http://www.w3schools.com/jsref/met_win_settimeout.asp).
+
+```javascript
+setTimeout(function(){
+	console.log('Nirvana BEST');
+}, 3000);
+
+console.log('Hello world!');
+```
+
+What will be written to the Terminal window first `Nirvanda BEST` or `Hello world!`.  What do you think? And why?
+
+Lets save the file as `helloTest.js` in the same directory as before.  And run it be executing `node helloTest.js` in Terminal window (ofcourse in the right directory).  The Terminal window will show
+
+```bash
+☁  nodejsTest  node helloTest.js 
+Hello world!
+Nirvana BEST
+```
+
+Did you guess right?  If you did, Good job.  Many programmers that are beginners with node.js think that the above code runs like this
+
+```javascript
+1. The program starts to execute the setTimeout function
+	* in it we tell it to wait for 3 sec.  
+2. After these 3 sec. it should run the console.log('Nirvana BEST'); line.
+3. Then it will run the console.log('hello world!'); line
+```
+
+
+ Lets write a write a 
+
+
+
+
+
 
 TODO
 
