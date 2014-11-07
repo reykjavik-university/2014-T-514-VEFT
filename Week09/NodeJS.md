@@ -84,9 +84,9 @@ Hello World!
 ☁  nodejsTest  
 ```
 
-## The next step, Node.js is single threadid
+## Node.js is single threadid and asynchronous
 
-Ok, now we have been playing with very easy stuff.  It is time to dive in and try to understand one very interesting part of node.js that many have had hard time time to understand. Even though node.js is single threadid it is still asynchronous.
+Ok, now we have been playing with very easy stuff.  It is time to dive in and try to understand one very interesting part of node.js, that many have had hard time understanding. That is **node.js is single threadid and asynchronous**.
 
 Lets write a little code and try to understand this.  We will use the [`setTimeout()` function](http://www.w3schools.com/jsref/met_win_settimeout.asp).
 
@@ -98,7 +98,7 @@ setTimeout(function(){
 console.log('Hello world!');
 ```
 
-What will be written to the Terminal window first `Nirvanda BEST` or `Hello world!`.  What do you think? And why?
+What will be written to the Terminal window first **`Nirvanda BEST`** or **`Hello world!`**.  What do you think? And why?
 
 Lets save the file as `helloTest.js` in the same directory as before.  And run it be executing `node helloTest.js` in Terminal window (ofcourse in the right directory).  The Terminal window will show
 
