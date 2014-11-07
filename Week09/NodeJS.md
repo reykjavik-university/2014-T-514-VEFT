@@ -156,6 +156,38 @@ Nirvana BEST
 .
 ```
 
+So this code will never stop running.  Lets add another Interval to this code, like this.
+
+```javascript
+setInterval(function(){
+	console.log('Nirvana BEST');
+}, 3000);
+
+setInterval(function(){
+	console.log('Hello world!');
+}, 4000);
+
+```
+
+Note that we are loggin different text and also have different times.  What will happen now? Guess and then run the code.
+The terminal window is showing something like this.
+
+```bash
+☁  nodejsTest  node helloTest.js
+Nirvana BEST
+Hello world!
+Nirvana BEST
+Hello world!
+Nirvana BEST
+Hello world!
+Nirvana BEST
+Nirvana BEST
+Hello world!
+.
+.
+.
+```
+This program will run forever. Note that Node.js is single threadid, still we are getting seperate tasks running at the same time.  It looks like we have two threads but we just have one.  This is because of the interrupt I talked about here above.
 
 
 
