@@ -267,7 +267,7 @@ and start nc localhost 6000 from two separte Terminal windows.  Now if we write 
 
 So we have written a sokect server in node.js.  It can handle multible sockets connections on a single threadid server, by using callback events to handle them.
 
-But it is still not echoing incomming data. Just writing it to the Terminal window.  So we add to it `socket.write(data);` see whole code.
+But it is still not echoing incomming data, so it is not an echo server. The only thing he does is write  it to the Terminal window.  So we add to it `socket.write(data);` see whole code.
 ```javascript
 var net = require('net');
 
@@ -287,4 +287,43 @@ So now if we start up the three Terminal windows
 > Terminal window 2 -> nc localhost 6000 
 > Terminal window 3 -> nc localhost 6000 
 
-Now if we write some text in terminal window 2 and 3 we get a respone back.  Congratulation you have written a sokect server.  Ofcourse alot of code is in the **net** library but by using it we have a simple sokect echo server.
+Now if we write some text in terminal window 2 we get a echo respone back and same happens if you type in text in terminal window 3 you get a response back.  
+Lets add to this.  Lets echo the incoming message to all connected users.  We do this by adding all every socket connection to an array and when and when the server receives a message he will send that message to all connections in his array.  In the code below we have implemented this.
+```javascript
+var net = require('net');
+
+var connectedClients = [];
+
+var server = net.createServer(function(socket){
+	console.log('incoming connection');
+	connectedClients.push(socket);
+
+
+
+	socket.on('data', function(data){
+		console.log('Data from client: ' + data);
+		connectedClients.map(function(cClient){
+			cClient.write(data);
+		});
+	});
+});
+
+server.listen(6000)
+```
+At this point we have written a small socket server that sents all incomming messages (data) to all connected sockets.  Now you should have a good idea about what node.js is, specially the single threadid and asyncronous part.  It is very important to get good understanding of this part if you are going to write node.js programs.
+
+Thou we have been doing some coding in node.js non of them are web services.  So lets look into web services in node.js
+
+## Web services in node.js
+
+
+
+
+
+
+
+Congratulation you have written a echo sokect server.
+
+
+
+  Ofcourse alot of code is in the **net** library but by using it we have a simple sokect echo server.
