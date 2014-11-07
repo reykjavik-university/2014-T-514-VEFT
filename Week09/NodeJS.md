@@ -43,7 +43,7 @@ Inside this shell you can write javascript code.  Here below we write a simple f
 ```javascript
 > function double(value){return value * 2;}
 ```
-Then we rune our function in the nodejs shell be executing the command
+Then we run our function in the nodejs shell be executing the command
 
 ```javascript
 > double(2.3)
@@ -59,7 +59,7 @@ undefined
 > 
 ```
 
-Node.js shell is a interactive javascript shell that is mainly to test statments.  The main power of node.js is when we write a javascript file and run it with nodejs.  Lets start with writing a very simple __helloWorld.js__ file and run it with node.js.  Open your favorite text editor and write the following.
+Node.js shell is a interactive javascript shell that is mainly used to test statments.  The main power of node.js is when we write a javascript file and run it with node.js.  Lets start with writing a very simple __helloWorld.js__ file and run it with node.js.  Open your favorite text editor and write the following.
 
 ```javascript
 function helloworld() {
@@ -69,9 +69,9 @@ function helloworld() {
 helloworld();
 ```
 
-Now save this file in on your computer (in any directory you like).  Let the file name be **helloWorld.js**
+Now save this file as **helloWorld.js** on your computer (in any directory you like).
 
-Now lets run this file from a terminal window.  You open the terminal window and go to the directory where the file is saved.  In my case I made a directory on my desktop called 'nodejsTest', so in my terminal window I write 'cd ~desktop/nodejsTest/' and execute it.
+Lets run **helloWorld.js** from a terminal window.  You open the terminal window and go to the directory where the file is saved.  In my case I made a directory on my desktop called `nodejsTest`, so in my terminal window I write `cd ~desktop/nodejsTest/` and execute it.
 To run the file with node.js you execute
 
 ```bash
