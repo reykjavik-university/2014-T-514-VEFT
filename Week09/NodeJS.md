@@ -189,6 +189,4 @@ Hello world!
 ```
 This program will run forever. Note that Node.js is single threadid, still we are getting seperate tasks running at the same time.  It looks like we have two threads but we just have one.  This is because of the interrupt I talked about here above.
 
-
-
-TODO
+Lets think of this from a web service point aview.  We have a web service that is single threadid and NOT asyncronous. And this web service gets a conneciton from a client, for example requesting some data from database.  What will happen?  If we are single threadid and NOT asyncronous the web service is occupied and is not apple to do any other job.  If we have more clients that want to connect to our single threadid web service the just have to wait until the one client that has the connection with our web service is done.  Node.js can handle this scenario, even though it is single treadid.  Because it is asyncronous.  If we go through the same scenario with nodejs.  The first client connects and asks for data from the database.  Nodejs sends a request to the database and while it waits for the response from the database it handles other clients requests.  When database is finished getting the data and sends the response back to nodejs.  Nodejs gets an interrupt signal, receives the data and gives it the the first client that connected and was asking for this data.
