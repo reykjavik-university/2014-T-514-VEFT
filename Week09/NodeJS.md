@@ -110,12 +110,12 @@ Nirvana BEST
 
 Did you guess right?  If you did, Good job.  Many programmers that are beginners with node.js think that the above code runs like this
 
-
+```javascript
 1. The program starts to execute the setTimeout function
 	* in it we tell it to wait for 3 sec. So the programs stops and wait for 3 sec.  
 2. After these 3 sec. it should run the console.log('Nirvana BEST'); line.
 3. Then it will run the console.log('hello world!'); line
-
+```
 
  Lets write a write a 
 
