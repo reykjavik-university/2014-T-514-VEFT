@@ -310,20 +310,50 @@ var server = net.createServer(function(socket){
 
 server.listen(6000)
 ```
-At this point we have written a small socket server that sents all incomming messages (data) to all connected sockets.  Now you should have a good idea about what node.js is, specially the single threadid and asyncronous part.  It is very important to get good understanding of this part if you are going to write node.js programs.
+At this point we have written a small socket server that sents all incomming messages (data) to all connected sockets.  Now you should have a good idea about what node.js is, specially the single threadid and asyncronous part.  It is very important to get good understanding of this part if you are going to write node.js programs.  Node.js is mainly collection of libraries that are aimed to write network application.
 
 Thou we have been doing some coding in node.js non of them are web services.  So lets look into web services in node.js
 
-## Web services in node.js
+## Web service in node.js
 
+It is realy easy to write a HTTP web service in node.js.  Below is code that shows one example of this.  In it we are using the `HTTP` package.
+```javascript
+var http = require('http');
 
+var server = http.createServer(function(request, response){
+	response.writeHead(200, {'conent-type': 'test/plain'});
+	response.end('Hello World!');
+});
 
+server.listen(7000);
+```
 
+As you probable notice this is very simular coding as we did earliar when we build the socket server. And the *HTTP* package is based *NET* package that we were using when we build the socket server.  The createServer function in the HTTP package takes in a callback that has two parameters request and response (often called req and res). 
 
+Lets go through what happens when there is a request at port 7000.  Then the network package takes control and the HTTP package receives the request. Headers are parsed.  We can read the request and we can write to the response that is sent back to the client. 
 
+Congratulation you have written a HTTP server.  It really does not do mush.  When he gets a request, he answers with status 200, and the body 'Hello World!'.  Ofcourse alot of code is in the **HTTP** library but by using it we have a very simple HTTP server.
 
-Congratulation you have written a echo sokect server.
+Lets save the code and run it in node.js. (just as before `node filename`).
 
+Once the server is up and running you can test it with curl 
 
+	curl http://localhost:7000
 
-  Ofcourse alot of code is in the **net** library but by using it we have a simple sokect echo server.
+or in browser by the url 
+
+	http://localhost:7000
+
+In both cases you should get the response `Hello World!` 
+
+This work just as the socket server.  We create a server.  It takes in a callback and we answer the callback.
+
+Lets try sending multible requests at the same time.  Todo that we use [ab](http://httpd.apache.org/docs/2.2/programs/ab.html).
+
+We still have our HTTP server running.  Open up a terminal window and execute the following funciton
+
+	ab -n 100 -c 100 http://127.0.0.1:7000/
+
+>Note: There are two things I like to point out to you.
+>1. You need to `127.0.0.1` instead of `localhost`, this is some localhost proplem.
+>2. It is very important to have the `/` at the end.  If you don't the ab command wount work.
