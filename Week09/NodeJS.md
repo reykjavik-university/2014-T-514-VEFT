@@ -356,4 +356,44 @@ We still have our HTTP server running.  Open up a terminal window and execute th
 
 >Note: There are two things I like to point out to you.
 >1. You need to `127.0.0.1` instead of `localhost`, this is some localhost proplem.
->2. It is very important to have the `/` at the end.  If you don't the ab command wount work.
+>2. It is very important to have the `/` at the end.  If you don't the `ab` command won't work.
+
+The terminal window should show you this message.
+```bash
+Server Software:        
+Server Hostname:        127.0.0.1
+Server Port:            7000
+
+Document Path:          /
+Document Length:        0 bytes
+
+Concurrency Level:      100
+Time taken for tests:   0.024 seconds
+Complete requests:      100
+Failed requests:        0
+Write errors:           0
+Total transferred:      0 bytes
+HTML transferred:       0 bytes
+Requests per second:    4146.45 [#/sec] (mean)
+Time per request:       24.117 [ms] (mean)
+Time per request:       0.241 [ms] (mean, across all concurrent requests)
+Transfer rate:          0.00 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:    14   15   1.0     15      18
+Waiting:        0    0   0.0      0       0
+Total:         14   15   1.0     15      18
+
+Percentage of the requests served within a certain time (ms)
+  50%     15
+  66%     16
+  75%     16
+  80%     16
+  90%     17
+  95%     17
+  98%     17
+  99%     18
+ 100%     18 (longest request)
+ ```
