@@ -436,9 +436,53 @@ This is fake message from fake database
 
 There are two things in the headder response that se should take a close look at.
 1. The first one is that the connection is keep alive [`Connection: keep-alive`](http://en.wikipedia.org/wiki/HTTP_persistent_connection)
-2. Is that the transfer encoding method is chunked `Transfer-Encoding: chunked`
+2. Is that the transfer encoding method is chunked [`Transfer-Encoding: chunked`](http://en.wikipedia.org/wiki/Chunked_transfer_encoding)
 Remember that node.js is single threadid. Be having the connection keep alive and the transfer encoding chunked makes it possible for node.js to handle multible requests.
 
->Transfer_encoding
+Now that we have changed our HTTP server (added our fake fetch to database).  Lets do multible requests again with ab.  See command and response that we got in terminal window
+```terminal
+☁  2014-T-514-VEFT [master] ab -n 100 -c 100 http://127.0.0.1:7000/
+This is ApacheBench, Version 2.3 <$Revision: 655654 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
 
- ``
+Benchmarking 127.0.0.1 (be patient).....done
+
+
+Server Software:        
+Server Hostname:        127.0.0.1
+Server Port:            7000
+
+Document Path:          /
+Document Length:        45 bytes
+
+Concurrency Level:      100
+Time taken for tests:   2.027 seconds
+Complete requests:      100
+Failed requests:        0
+Write errors:           0
+Total transferred:      14500 bytes
+HTML transferred:       4500 bytes
+Requests per second:    49.33 [#/sec] (mean)
+Time per request:       2026.990 [ms] (mean)
+Time per request:       20.270 [ms] (mean, across all concurrent requests)
+Transfer rate:          6.99 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        1    4   2.0      4       8
+Processing:  2005 2013   3.2   2014    2018
+Waiting:        3    9   3.9     10      15
+Total:       2013 2017   1.6   2018    2019
+
+Percentage of the requests served within a certain time (ms)
+  50%   2018
+  66%   2018
+  75%   2018
+  80%   2018
+  90%   2018
+  95%   2018
+  98%   2019
+  99%   2019
+ 100%   2019 (longest request)
+```
