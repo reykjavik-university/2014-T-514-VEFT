@@ -542,4 +542,6 @@ Percentage of the requests served within a certain time (ms)
   99%   2024
  100%   2024 (longest request)
 ```
-As we can see the total time for these 200 request is 4 sec. `Time taken for tests:   4.049 seconds`
+See the total time for these 200 request is 4 sec. `Time taken for tests:   4.049 seconds`
+
+Node.js is handling this concurrent requests easily even although it is single threadid but by now you know why.
