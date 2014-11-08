@@ -358,7 +358,7 @@ We still have our HTTP server running.  Open up a terminal window and execute th
 >1. You need to `127.0.0.1` instead of `localhost`, this is some localhost proplem.
 >2. It is very important to have the `/` at the end.  If you don't the `ab` command won't work.
 
-The terminal window should show you this message.
+`-n 100` means that we will send 100 requests and `-c 100` means that they will be sent at the same time (parallel). And `http://127.0.0.1:7000` means that the all the requests will be sent to localhost port 7000. The terminal window should show you this message.
 ```bash
 Server Software:        
 Server Hostname:        127.0.0.1
@@ -397,3 +397,48 @@ Percentage of the requests served within a certain time (ms)
   99%     18
  100%     18 (longest request)
  ```
+ This message has some information for us.  Like how much time it took to sent all the reqests `Time taken for tests:   0.024 seconds` and time per request `Time per request: 0.241 [ms]` and much more.
+
+ Lets add to your HTTP server a delay function.  We can think of this delay as time it takes our HTTP server to get data from a database.  In our example below we have added 2 sec. delay  See code below.  
+```javascript
+var http = require('http');
+
+var server = http.createServer(function(request, response){
+	response.writeHead(200, {'conent-type': 'test/plain'});
+	response.write('Hallo\n');
+	setTimeout(function(){
+		response.end('This is fake message from fake database');
+	}, 2000);
+});
+
+server.listen(7000);
+```
+If we save and run this code with node and then curl our HTTP server and see the response header by adding -i to our curl request, as this. 
+
+```curl
+curl -i http://localhost:7000
+```
+The response we get back is like this
+```
+HTTP/1.1 200 OK
+conent-type: test/plain
+Date: Sat, 08 Nov 2014 11:04:52 GMT
+Connection: keep-alive
+Transfer-Encoding: chunked
+
+Hallo
+```
+And then after 2 sec get added
+
+```
+This is fake message from fake database
+```
+
+There are two things in the headder response that se should take a close look at.
+1. The first one is that the connection is keep alive [`Connection: keep-alive`](http://en.wikipedia.org/wiki/HTTP_persistent_connection)
+2. Is that the transfer encoding method is chunked `Transfer-Encoding: chunked`
+Remember that node.js is single threadid. Be having the connection keep alive and the transfer encoding chunked makes it possible for node.js to handle multible requests.
+
+>Transfer_encoding
+
+ ``
