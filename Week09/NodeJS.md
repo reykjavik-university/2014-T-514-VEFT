@@ -486,3 +486,60 @@ Percentage of the requests served within a certain time (ms)
   99%   2019
  100%   2019 (longest request)
 ```
+Look at the time it took to do this test `Time taken for tests:   2.027 seconds`.  This is only 2 sec. more it took before we added the 2 sec. delay.  Note that we are making 100 request all at the same time.
+How much time will it take if we make 200 request in two chunks.  100 request at the same time and when there finished there will be another 100 requests sent immediately.  Can you assume how much time it will take?
+Lets try it.
+```terminal
+ab -n 200 -c 100 http://127.0.0.1:7000/
+```
+We get in the Terminal window
+```terminal
+☁  2014-T-514-VEFT [master] ab -n 200 -c 100 http://127.0.0.1:7000/
+This is ApacheBench, Version 2.3 <$Revision: 655654 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 100 requests
+Completed 200 requests
+Finished 200 requests
+
+
+Server Software:        
+Server Hostname:        127.0.0.1
+Server Port:            7000
+
+Document Path:          /
+Document Length:        45 bytes
+
+Concurrency Level:      100
+Time taken for tests:   4.049 seconds
+Complete requests:      200
+Failed requests:        0
+Write errors:           0
+Total transferred:      29000 bytes
+HTML transferred:       9000 bytes
+Requests per second:    49.40 [#/sec] (mean)
+Time per request:       2024.334 [ms] (mean)
+Time per request:       20.243 [ms] (mean, across all concurrent requests)
+Transfer rate:          6.99 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    3   2.3      2       9
+Processing:  2003 2014   5.3   2014    2023
+Waiting:        1   10   3.2     11      15
+Total:       2004 2017   5.2   2016    2024
+
+Percentage of the requests served within a certain time (ms)
+  50%   2016
+  66%   2020
+  75%   2020
+  80%   2024
+  90%   2024
+  95%   2024
+  98%   2024
+  99%   2024
+ 100%   2024 (longest request)
+```
+As we can see the total time for these 200 request is 4 sec. `Time taken for tests:   4.049 seconds`
