@@ -26,6 +26,7 @@ Some of the more popular middleware that we can use to make our life easier incl
 + `body-parser` parses the body of HTTP requests to JSON format.
 + `fs` allows you to use the file system of the server.
 + `mongoose` abstraction for talking to MongoDB.
++ `passport` authentication service for Node.js
 
 
 ## Lets dance
@@ -184,7 +185,7 @@ app.listen(PORT, function () {
 Now we have everything, lets test it out. Start by running MongoDB then run
     node server.js
 
-Test our server with cURL, POST:
+Test our server with Curl, POST:
 ```
 curl -i -H "Content-Type: application/json" -X POST -d '{"title": "Get to the chopper", "dueDate": "2014-11-09T14:23:31+00:00", "prority": 1}' http://127.0.0.1:3000/api/todos
 ```
@@ -202,9 +203,20 @@ curl -i http://127.0.0.1:3000/api/todos/{id from first curl}
 Awesome, our server is up and running and works. The good thing about this design is that our server can easily expand to more endpoints and be easily configured.
 
 
+## MEAN Sack
 
+If you want to develop with Express and like JavaScript the [MEAN](http://mean.io/) stack has been gaining a big following. 
+MEAN stands for MongDB, Express.js, Angular.js, Node.js and is a fullstack solution that comes with preconfigured with many helpful packages like Mongoose and Passport.
 
+## Helpful resources
 
+[Express](http://expressjs.com/)
+[Passport](http://passportjs.org/)
+[MEAN](http://learn.mean.io/)
+[Yeoman](http://yeoman.io/)
+[Mongoose docs](http://mongoosejs.com/docs/index.html)
+[body-parser guide](https://github.com/expressjs/body-parser)
+[Curl guide](http://blog.scottlowe.org/2014/02/19/using-curl-to-interact-with-a-restful-api/)
 
 
 
