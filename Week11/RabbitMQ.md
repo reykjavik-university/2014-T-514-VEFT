@@ -96,7 +96,17 @@ RabbitMQ is an application server that you must setup and execute on a server
     brew install rabbitmq
     rabbitmq-plugins enable rabbitmq_management
 
-And on Ubuntu, or other Linux distributions that use apt.
+The RabbitMQ server scripts are installed into /usr/local/sbin through Homebrew.
+This is not automatically added to your path, so you may want to add it, to be able
+to use the RabbitMQ commands. This can be accomplished by either adding 
+PATH=$PATH:/usr/local/sbin to your .bash_profile or .profile. Or opening your
+/etc/path by writing this in terminal:
+
+    sudo vim /etc/paths
+    
+(or any other text editor of you choosing) and add /usr/local/sbin to the file.
+
+On Ubuntu, or other Linux distributions that use apt.
 
     sudo apt-get install rabbitmq-server
     sudo rabbitmq-plugins enable rabbitmq_management
@@ -119,8 +129,10 @@ If it didn't start automatically, you can start RabbitMQ in foreground with
     
 When you install the management plugin you can manage RabbitMQ with through a
 web console. If you are running RabbitMQ on your local machine, the url should
-be [http://localhost:55672](http://localhost:15672/)
-
+be [http://localhost:55672](http://localhost:15672/). The management plugin does
+also include a browser-based UI where you can observe your queues, see how many
+are connected etc. To gain access to the UI you type the same path into your 
+browser and use 'guest' for both username and password.
     
 # Example 1 
 Now let's write a simple producer, which creates messages and adds them to
@@ -267,10 +279,55 @@ queue.
     
     
 # Message acknowledgment
-todo fill me out
+Now lets say we lose one of our consumer while it was processing some message. 
+The message will never be delivered since as soon as messages are dispatched from 
+RabbitMQ they are gone from its memory. To be able to handle these kind of 
+situations RabbitMQ supports message acknowledgements. How it works is a consumer 
+sends RabbitMQ acknowledgments, saying that it has received and processed the message
+and RabbitMQ can now safely delete it from its queue. If RabbitMQ does not 
+receive an acknowledgement, it will understand that a message was not processed 
+fully and will resend the message to another consumer.
+
+There are no timeouts for messages. RabbitMQ only resends the message when a consumer
+connection dies. So if a processing of a message takes a very long time we don't need
+to worry about duplicates being processed. 
+
+The message acknowledgements are turned on by default. They can be turned off via the
+'no_ack=True' flag, as can be seen in the code for the consumer above. 
+Do make sure to add the basic_ack to your callback so that message will be redelivered
+when your consumer dies. Otherwise RabbitMQ might stack up unacknowledged messages
+which might fill it's memory. To see if this is happening you use rabbitmqctl to print
+the message_unacknowledged field and make sure it's 0.
+
+For further information check:
 https://www.rabbitmq.com/tutorials/tutorial-two-python.html
 
 # Message durability
-todo fill me out
+Now lets think, that instead of losing our consumer, we lose our RabbitMQ server. If
+the RabbitMQ server crashes everything in our queues is gone. But don't panic just yet
+because there is a way to tell RabbitMQ to store our queues and messages if it crashes.
+
+The key to this is making our queues and messages *Durable*. First we make sure that 
+we don't lose our queue by making it durable.
+
+    channel.queue_declare(queue='durable_orders', durable=True)
+
+The queue_declare change needs to be applied to both the producer and consumer code.
+Observe that the name of the queue must be changed if you have already defined a queue
+which is not durable. RabbitMQ does not allow you redefine an existing queue with 
+different parameters.
+
+Next we need to make sure that task_queue will still be there if RabbitMQ is restarted.
+For this we mark our messages as persistent by adding deliver_mode property with the 
+value 2.
+
+    channel.basic_publish(exchange='',
+                          routing_key='durable_orders',
+                          body=json.dumps(message),
+                          properties=pika.BasicProperties(
+                            delivery_mode = 2,
+                          ))
+                          
+More on this at:
 https://www.rabbitmq.com/tutorials/tutorial-two-python.html
 
