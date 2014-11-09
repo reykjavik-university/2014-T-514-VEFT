@@ -13,7 +13,7 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 ## Table of contents ##
 
  **Week 00:**
->Good to know
+>*Good to know*
 >
 >[1. Git and GitHub](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week00/1.%20Git%20And%20GitHub.md#git-and-github)
 >
@@ -22,13 +22,13 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 >[3. Tutorials](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week00/1.%20Git%20And%20GitHub.md#tutorials)
 
 **Week 01:**
->Web Services
+>*Web Services*
 >
 >[1. Historical background](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week01/1.%20Web%20Services.md#historical-background)
 >
 >[2. Types of web services](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week01/1.%20Web%20Services.md#types-of-web-services)
 
->REST Services
+>*REST Services*
 >
 >[1. REST Resources](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week01/2.%20REST.md#rest-services)
 >
@@ -46,7 +46,7 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 >
 >[8. Further reading](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week01/2.%20REST.md#further-reading)
 
->ASP.NET Web API
+>*ASP.NET Web API*
 >
 >[1. Architecture](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week01/3.%20ASP.NET%20Web%20API.md#aspnet-web-api)
 >
@@ -54,7 +54,7 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 >
 >[3. CORS](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week01/3.%20ASP.NET%20Web%20API.md#cors)
 
->Web API Routing
+>*Web API Routing*
 >
 >[1. Routing](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week01/4.%20Web%20API%20Routing.md#routing)
 >
@@ -62,14 +62,14 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 >
 >[3. Parameters from the HTTP body](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week01/4.%20Web%20API%20Routing.md#parameters-from-the-http-body)
 
->API Documentation
+>*API Documentation*
 >
 >[1. API Documentation](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week01/5.%20API%20Documentation.md#api-documentation)
 >
 >[2. Machine-readable documentation](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week01/5.%20API%20Documentation.md#machine-readable-documentation)
 
 **Week 02:**
->Web Service Architecture
+>*Web Service Architecture*
 >
 >[1. Web Service Architecture](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week02/6.%20Web%20Service%20Architecture.md#web-service-architecture)
 >
@@ -77,13 +77,13 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 >
 >[3. Project Setup](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week02/6.%20Web%20Service%20Architecture.md#project-setup)
 
->Unit of Work
+>*Unit of Work*
 >
 >[1. Unit of Work](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week02/7.%20Unit%20of%20Work.md#unit-of-work)
 >
 >[2. Command/Query Object Pattern](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week02/7.%20Unit%20of%20Work.md#commandquery-object-pattern)
 
->Dependency Injection
+>*Dependency Injection*
 >
 >[1. Dependency Injection](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week02/8.%20Dependency%20Injection.md#dependency-injection)
 >
@@ -97,7 +97,7 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 >
 >[6. NInject](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week02/8.%20Dependency%20Injection.md#ninject)
 
->Assignment 1
+>*Assignment 1*
 >[1. Assignment 1](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week02/Assignment%201.md#assignment-1)
 >
 >[2. Install Visual Studio](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week02/Assignment%201.md#install-visual-studio)
@@ -109,7 +109,7 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 **Week 03:**
 >[1. Assignment1 Starter Code](https://github.com/reykjavik-university/2014-T-514-VEFT/tree/master/Week03/Assignment1StarterCode)
 
->LINQ
+>*LINQ*
 >
 >[1. LINQ](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week03/9.%20LINQ.md#linq)
 >
@@ -122,7 +122,7 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 >
 >[6. Extending LINQ](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week03/9.%20LINQ.md#extending-linq)
 
->Entity relationships
+>*Entity relationships*
 >
 >[1. Entity relationships](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week03/10.%20Entity%20relationships.md#entity-relationships)
 >
@@ -130,20 +130,20 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 >
 >[3. Loading options](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week03/10.%20Entity%20relationships.md#loading-options)
 
->Mapping
+>*Mapping*
 >
 >[1. Mapping](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week03/11.%20Mapping.md#mapping)
 
->Fluent API
+>*Fluent API*
 >
 >[1. Fluent API](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week03/12.%20Fluent%20API.md#fluent-api)
 
 **Week 04:**
->Example
+>*Example*
 >
 >[1. Example](https://github.com/reykjavik-university/2014-T-514-VEFT/tree/master/Week04/Week04Example)
 
->Assignment
+>*Assignment*
 >
 >[1. Week 4 assignment](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week04/Assignment.md#week-4-assignment)
 >
@@ -153,7 +153,7 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 >
 >[4. Auto mapper](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week04/Assignment.md#auto-mapper)
 
->Unit Testing
+>*Unit Testing*
 >
 >[1. Unit Testing](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week04/13.%20Unit%20testing.md#unit-testing)
 >
@@ -174,7 +174,7 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 >[9. For/against](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week04/13.%20Unit%20testing.md#foragainst)
 
 **Week 05:**
->Globalization and Localization in ASP.NET
+>*Globalization and Localization in ASP.NET*
 >
 >[1. Introduction](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week05/Validation-L10N-Error-Tracing.md#introduction)
 >
@@ -182,7 +182,7 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 >
 >[3. Multiple languages in web API](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week05/Validation-L10N-Error-Tracing.md#multiple-languages-in-web-api)
 
->Validation
+>*Validation*
 >
 >[1. Data Annotations](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week05/Validation-L10N-Error-Tracing.md#data-annotations)
 >
@@ -190,7 +190,7 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 >
 >[3. Handling Validation Errors](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week05/Validation-L10N-Error-Tracing.md#handling-validation-errors)
 
->Exception Handling
+>*Exception Handling*
 >
 >[1. HttpResponseException](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week05/Validation-L10N-Error-Tracing.md#httpresponseexception)
 >
@@ -200,7 +200,7 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 >
 >[4. Global IExceptionHandler](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week05/Validation-L10N-Error-Tracing.md#global-iexceptionhandler)
 
->Tracing
+>*Tracing*
 >
 >[1. Default Tracing](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week05/Validation-L10N-Error-Tracing.md#default-tracing)
 >
@@ -213,7 +213,7 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 >
 >[2. Skil 1 - Nuget](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week06/Skil%201%20-%20nuget.md)
 
->Security
+>*Security*
 >
 >[1. OAuth](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week06/Security.md#oauth)
 >
@@ -227,7 +227,7 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 >
 >[6. OpenID Connect basic specs](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week06/Security.md#openid-connect-basic-specs)
 
->OData
+>*OData*
 >[1. OData](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week06/OData.md#odata)
 >
 >[2. Querying Data](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week06/OData.md#querying-data)
@@ -235,7 +235,7 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 >[3. OData and .NET](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week06/OData.md#odata-and-net)
 
 **Week 07:**
->Caching
+>*Caching*
 >
 >[1. Caching](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week07/Caching.md#caching)
 >
@@ -250,7 +250,7 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 >[6. Custom Server side cache example](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week07/Caching.md#custom-server-side-cache-example)
 
 **Week 08:**
->Examples
+>*Examples*
 >
 >[1. Cinema example](https://github.com/reykjavik-university/2014-T-514-VEFT/tree/master/Week08/cinema-example)
 >
@@ -258,35 +258,35 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 >
 >[3. Flask Restful Movie example](https://github.com/reykjavik-university/2014-T-514-VEFT/tree/master/Week08/flask-restful-movie-example)
 
->Install instructions
+>*Install instructions*
 >
 >[1. Python set-up Ubuntu](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week08/Python_environment_install_Linux.md#setting-up-python-developer-environment-on-ubuntu)
 >
 >[2. Python set-up OSX](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week08/Python_environment_install_OSX.md#setting-up-python-developer-environment-on-os-x)
 
->Assignments
+>*Assignments*
 >
 >[1. Python Lab Assignments](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week08/Python_lab_assignments.md#python-lab-assignment)
 >
 >[2. Lab Solutions](https://github.com/reykjavik-university/2014-T-514-VEFT/tree/master/Week08/lab-solutions)
 
->Flask REST
+>*Flask REST*
 >
 >[1. Flask-Restful](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week08/Flask-Restful.MD)
 
 **Week 09:**
->Node
+>*Node*
 >
 >[1. NodeJS](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week09/NodeJS.md)
 
->Assignments
+>*Assignments*
 >
 >[1. Lab Assignments](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week09/lab_assignments_for_week_9.md#lab-assignment-for-week-9)
 >
 >[2. Lab Solutions](https://github.com/reykjavik-university/2014-T-514-VEFT/tree/master/Week09/Lab-assignment-solutions)
 
 **Week 10:**
->Elastic Search
+>*Elastic Search*
 >
 >[1. Elasticsearch](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week10/elasticsearch.md#elasticsearch)
 >
@@ -301,14 +301,14 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 >
 >[7. Query by range on dates](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week10/elasticsearch.md#query-by-range-on-dates)
 
->Examples
+>*Examples*
 >
 >[1. MyBlogAPI](https://github.com/reykjavik-university/2014-T-514-VEFT/tree/master/Week10/examples/example-from-friday/myblogapi)
 >
 >[2. SQLAlchemy-Elasticsearch](https://github.com/reykjavik-university/2014-T-514-VEFT/tree/master/Week10/examples/sqlalchemy-elasticsearch-example)
 
 **Week 11:**
->RabbitMQ
+>*RabbitMQ*
 >
 >[1. RabbitMQ](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week11/RabbitMQ.md#rabbitmq)
 >
@@ -320,16 +320,16 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
 >
 >[5. Message durability](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week11/RabbitMQ.md#message-durability)
 
->Assignments
+>*Assignments*
 >
 >[1. Lab Assignments](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week11/lab_assignment.md#lab-class-week-11)
 
->Examples
+>*Examples*
 >
 >[1. Pizza](https://github.com/reykjavik-university/2014-T-514-VEFT/tree/master/Week11/lectures_examples/pizza)
 
 **Week 12:**
->Project 3
+>*Project 3*
 >
 >[1. Kodemon](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week12/project3.md#project-3---kodemon)
 >
