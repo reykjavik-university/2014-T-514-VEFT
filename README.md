@@ -15,7 +15,9 @@ check out [this tutorial](https://help.github.com/articles/syncing-a-fork).
  **Week 00:**
 >Good to know
 >[1. Git and GitHub](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week00/1.%20Git%20And%20GitHub.md#git-and-github)
+>
 >[2. The Basics](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week00/1.%20Git%20And%20GitHub.md#the-basics)
+>
 >[3. Tutorials](https://github.com/reykjavik-university/2014-T-514-VEFT/blob/master/Week00/1.%20Git%20And%20GitHub.md#tutorials)
 
 **Week 01:**
