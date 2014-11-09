@@ -21,6 +21,8 @@ on linux, type in terminal
 
 *It is a good idea to do **sudo apt-get update** before you do sudo apt-get install to ensure your apt-get is up to date.*
 
+If you are running a Ubuntu linux distro you might have some [conflicts](http://askubuntu.com/questions/235655/node-js-conflicts-sbin-node-vs-usr-bin-node) with a legacy package (Amateur Packet Radio Node Program) this command should get you back on track **sudo apt-get install nodejs-legacy** 
+
 [npm](https://www.npmjs.org/) is node.js package manager.  The abbrebiate npm stands for Node Packaged Modules but often talked about node package manager.  npm is simular to pip in python.
 
  [npm](https://www.npmjs.org/) installs automatically on OSX when __brew install node__ is executed.  But on linux it must be install separately by executing the following command in Terminal window.
