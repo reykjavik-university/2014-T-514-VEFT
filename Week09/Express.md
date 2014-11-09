@@ -115,7 +115,7 @@ exports.remove = function(req, res) {
 };
 ```
 
-Here we have defined CRUD operations on our TODO schema and if you need to a refresher on the `mongoose` syntax, check out [this](http://mongoosejs.com/docs/index.html) guide.
+Here we have defined CRUD operations on our TODO schema and if you need a refresher on the `mongoose` syntax, check out [this](http://mongoosejs.com/docs/index.html) guide.
 
 Now we need to map our newly created functions to routes, so lets checkout our routes.js file in the project root directory.
 
@@ -136,9 +136,8 @@ module.exports = function(app) {
 };
 ```
 
-This will route our CRUD operations to given routes.
-Well now we have a basic API end points for our TODO schema, what we have to do now is bring it all together in our server.js file.
-One thing to note here is the app.param method, this works as middleware to the request and actually fetches the record based on the todoId and relays that record to the actual functions, pretty DRY ehh?
+This will route our CRUD operations to given routes.One thing to note here is the app.param method, this works as middleware to the request and actually fetches the record based on the todoId and relays that record to the actual functions, pretty DRY ehh?
+Now we have a basic API end point for our TODO schema, what we have to do now is bring it all together in our server.js file.
 
 ```javascript
 var express = require('express'),
@@ -180,13 +179,19 @@ Now we have everything, lets test it out. Start by running MongoDB then run
     node server.js
 
 Test our server with cURL, POST:
-    curl -i -H "Content-Type: application/json" -X POST -d '{"title": "Get to the chopper", "dueDate": "2014-11-09T14:23:31+00:00", "prority": 1}' http://127.0.0.1:3000/api/todos
+```
+curl -i -H "Content-Type: application/json" -X POST -d '{"title": "Get to the chopper", "dueDate": "2014-11-09T14:23:31+00:00", "prority": 1}' http://127.0.0.1:3000/api/todos
+```
 
 GET:
-    curl -i http://127.0.0.1:3000/api/todos
+```
+curl -i http://127.0.0.1:3000/api/todos
+```
 
 See if we can find by id:
-    curl -i http://127.0.0.1:3000/api/todos/<id from first curl>
+```
+curl -i http://127.0.0.1:3000/api/todos/{id from first curl}
+```
 
 Awesome, our server is up and running and works. The good thing about this design is that our server can easily expand to more endpoints and be easily configured.
 
