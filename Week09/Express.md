@@ -203,7 +203,7 @@ curl -i http://127.0.0.1:3000/api/todos/{id from first curl}
 Awesome, our server is up and running and works. The good thing about this design is that our server can easily expand to more endpoints and be easily configured.
 
 
-## MEAN Sack
+## MEAN Stack
 
 If you want to develop with Express and like JavaScript the [MEAN](http://mean.io/) stack has been gaining a big following. 
 MEAN stands for MongoDB, Express.js, Angular.js, Node.js and is a fullstack solution that comes preconfigured with many helpful packages like Mongoose and Passport.
