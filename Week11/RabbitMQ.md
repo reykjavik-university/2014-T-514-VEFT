@@ -267,8 +267,34 @@ queue.
     
     
 # Message acknowledgment
-todo fill me out
-https://www.rabbitmq.com/tutorials/tutorial-two-python.html
+
+It can take a few seconds for the worker to complete a message.  What happens if the consumer closes the connection to the worker when the task is half finished?  As we implemented the queue earlier the message from the consumer will be lost and also all messages that were not yet handled.     
+
+We need to make sure that a message is never lost.  For that RabbitMQ supports message acknowledgments.   When message acknowledgments is turned on the consumer app sends a message (ack) to RabbitMQ notifying that the message have been received and processed.   When RabbitMQ receives the confirmation it will delete the message form the queue.  RabbitMQ has no message timeout, so messages are completed even though it takes a long time.  
+
+Message acknowledgment is turned on by default, in the previous example it was turned off with the: no_ack = True, parameter to channel.basic_consume function.  Let’s change the consumer code a little bit, 
+
+    def callback(ch, method, properties, body):
+         """
+        Callback function when we get a message from RabbitMQ
+        This message wil handle our logic.
+        """
+        print body
+        ch.basic_ack(delivery_tag = method.delivery_tag)
+
+    # Starting consuming messages from queue named orders.
+    # This call is blocking so you must exit with ctrl+c
+    channel.basic_consume(callback, queue='orders')
+    channel.start_consuming()
+
+It is a common mistake to forget to add the ch.basic_ack, if that happens RabbitMQ won’t be able to delete messages and will eat up memory to store them.   To debug this and find all callbacks functions that are missing ch.basic_ack use rabbitmqctl. This tool prints the messages_unacknowledged field:
+
+    $ sudo rabbitmqctl list_queues name messages_ready messages_unacknowledged
+    Listing queues ...
+    hello    0       0
+    ...done.
+
+https://www.rabbitmq.com/tutorials/tutorial-two-python.html     
 
 # Message durability
 todo fill me out
