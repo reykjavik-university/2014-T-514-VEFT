@@ -206,17 +206,17 @@ Awesome, our server is up and running and works. The good thing about this desig
 ## MEAN Sack
 
 If you want to develop with Express and like JavaScript the [MEAN](http://mean.io/) stack has been gaining a big following. 
-MEAN stands for MongDB, Express.js, Angular.js, Node.js and is a fullstack solution that comes with preconfigured with many helpful packages like Mongoose and Passport.
+MEAN stands for MongoDB, Express.js, Angular.js, Node.js and is a fullstack solution that comes preconfigured with many helpful packages like Mongoose and Passport.
 
 ## Helpful resources
 
-[Express](http://expressjs.com/)
-[Passport](http://passportjs.org/)
-[MEAN](http://learn.mean.io/)
-[Yeoman](http://yeoman.io/)
-[Mongoose docs](http://mongoosejs.com/docs/index.html)
-[body-parser guide](https://github.com/expressjs/body-parser)
-[Curl guide](http://blog.scottlowe.org/2014/02/19/using-curl-to-interact-with-a-restful-api/)
++[Express](http://expressjs.com/)
++[Passport](http://passportjs.org/)
++[MEAN](http://learn.mean.io/)
++[Yeoman](http://yeoman.io/)
++[Mongoose docs](http://mongoosejs.com/docs/index.html)
++[body-parser guide](https://github.com/expressjs/body-parser)
++[Curl guide](http://blog.scottlowe.org/2014/02/19/using-curl-to-interact-with-a-restful-api/)
 
 
 
