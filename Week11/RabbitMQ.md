@@ -271,6 +271,24 @@ todo fill me out
 https://www.rabbitmq.com/tutorials/tutorial-two-python.html
 
 # Message durability
-todo fill me out
+
+If RabbitMQ server goes down it will lose all of its queues and therefore all of our messages.   To prevent this from happening even though the server crashes we need to mark both the queue and the message as durable.  
+Here is how we declare the queue as durable:
+
+       channel.queue_declare(queue='orders', durable=True)
+
+Notice that it is not possible to change a queue to a durable once after it has been declared. 
+
+Now we need to mark our messages as persistent. 
+
+       channel.basic_publish(exchange='',
+                      routing_key="orders",
+                      body=json.dumps(message),
+                      properties=pika.BasicProperties(
+                         delivery_mode = 2, # make message persistent
+                      ))
+
+When messages and queue is durable RabbitMQ will save all messages to a disk.  Even though all messages are saved it does not guarantee that no messages will be lost.  There is still a short window when RabbitMQ has received the message and has not yet saved it to a disk, and sometimes RabbitMQ stores the message in a cache.  To get a stronger guarantee it is possible to use: publisher confirms.  
+
 https://www.rabbitmq.com/tutorials/tutorial-two-python.html
 
