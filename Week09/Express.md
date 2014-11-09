@@ -26,6 +26,7 @@ Some of the more popular middleware that is used in almost all Express apps incl
 + `body-parser` parses the body of HTTP requests to JSON format.
 + `fs` allows you to use the file system of the server.
 + `mongoose` abstraction for talking to MongoDB.
++ `method-override` over
 
 
 ## Lets dance
@@ -144,7 +145,6 @@ var express = require('express'),
 	path = require('path'),
 	fs = require('fs'),
 	bodyParser = require('body-parser'),
-	methodOverride = require('method-override'),
 	mongoose = require('mongoose');
 
 // Set up our connection to MongoDB using mongoose
@@ -166,7 +166,6 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(methodOverride());
 require('./routes')(app);
 
 // Start the server
