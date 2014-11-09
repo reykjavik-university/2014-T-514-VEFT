@@ -21,12 +21,11 @@ But our example is going to simple so we are just going to start from scratch.
 
 ## Middleware
 As was stated before Express is a lightweight framework which only encapsulates the most important parts of an HTTP server, so if we need more features middleware is here to save the day.
-Some of the more popular middleware that is used in almost all Express apps include:
+Some of the more popular middleware that we can use to make our life easier include:
 
 + `body-parser` parses the body of HTTP requests to JSON format.
 + `fs` allows you to use the file system of the server.
 + `mongoose` abstraction for talking to MongoDB.
-+ `method-override` over
 
 
 ## Lets dance
@@ -47,6 +46,14 @@ Lets start with the file structure, this is a very basic application so it will 
        |
        +--contains our CRUD controllers
 
+The npm packages used in the example below are:
+```
+npm install express
+npm install path
+npm install mongoose
+npm install fs
+npm install body-parser
+```
 
 Alright lets first define our TODO schema under the models folder, which will use `mongoose` to talk to MongoDB.
 
