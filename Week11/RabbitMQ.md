@@ -267,8 +267,25 @@ queue.
     
     
 # Message acknowledgment
-todo fill me out
-https://www.rabbitmq.com/tutorials/tutorial-two-python.html
+
+The question of how what happens if a task is killed or dies while still in progress. The code in the examples above removes the message from memory after delivery. In other words, when the worker thread is killed the message, and all messages that were pending to be processed, is lost and cannot be retrieved. 
+
+Tasks need to be preserved, so we need to devise a way to move messages to another worker when/if a thread dies
+
+To work with that problem RabbitMQ implements ACK (acknowledgement). That means an acknowledgement packet is sent back from the consumer to tell RabbitMQ that the message has been recieved and processed so it is safe to be deleted.
+
+Acknowledgement works well at RabbitMQ side, if an ack packet isn't recieved from the consumer RabbitMQ takes it as the message wasn't processed and redelivers it. This method is highly effective on preserving a message. RabbitMQ doesn't care if the duration of the connection takes longer than normal, it only acts if the connection with the consumer dies.
+
+    def callback(ch, method, properties, body):
+        print " [x] Received %r" % (body,)
+        time.sleep( body.count('.') )
+        print " [x] Done"
+        ch.basic_ack(delivery_tag = method.delivery_tag)
+    
+    channel.basic_consume(callback,
+                          queue='hello')
+
+this simple code makes sure that a message is not lost on worker being killed, unacknowledged messages are redelivered
 
 # Message durability
 todo fill me out
