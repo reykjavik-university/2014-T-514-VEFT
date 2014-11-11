@@ -4,6 +4,8 @@
 multitenant-capable full-text search engine with a RESTful web interface and
 schema-free JSON documents.
 
+A great tutorial for beginners in Elasticsearch can be found at [http://okfnlabs.org/blog/2013/07/01/elasticsearch-query-tutorial.html](http://okfnlabs.org/blog/2013/07/01/elasticsearch-query-tutorial.html).
+
 A common use case for engines like Elasticsearch is to replicate data that we
 have in our persistent storage and use the search engine for searching for data
 across multiple document types. Elasticsearch includes a blazingly fast text
