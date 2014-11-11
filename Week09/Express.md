@@ -5,11 +5,11 @@ Express is the most popular web framework that has been written for Node because
 
 Express isn't the be-all and end-all for Node frameworks many exciting frameworks are being developed like [Sails.js](http://sailsjs.org) and [Total.js](https://www.totaljs.com/).
 
-In this example we are going to focus on using Express as an RESTful server which is also its most popular use case.
+In this example we are going to focus on using Express as a RESTful server which is also its most popular use case.
 
 ## Download and install
 There are quite a few ways to set up an Express application on your machine.
-You can use generators like [Yeoman](http://yeoman.io/) or use Express' own generator which can be installed using:
+You can use generators like [Yeoman](http://yeoman.io/) or use Express own generator which can be installed using:
 
     npm install express-generator -g
 
@@ -17,7 +17,7 @@ and run with:
 
     express myapp
 
-But our example is going to simple so we are just going to start from scratch.
+But our example is going to be simple so we are just going to start from scratch.
 
 ## Middleware
 As was stated before Express is a lightweight framework which only encapsulates the most important parts of an HTTP server, so if we need more features middleware is here to save the day.
@@ -73,7 +73,7 @@ mongoose.model('Todo', TodoSchema);
 
 A fairly simple Schema that uses three different data types, you can check out other datatypes that mongoose offers [here](http://mongoosejs.com/docs/schematypes.html).
 
-So we got our Schema defined now we need to add some operations to our Schema. Because this is a RESTful API we need to define CRUD methods. We add these methods in a seperate file under the controllers folder
+So we got our Schema defined now we need to add some operations to our Schema. Because this is a RESTful API we need to define CRUD methods. We add these methods in a seperate file under the controllers folder.
 
 ```javascript
 var mongoose = require('mongoose'),
@@ -145,8 +145,8 @@ module.exports = function(app) {
 };
 ```
 
-This will route our CRUD operations to given routes.One thing to note here is the app.param method, this works as middleware to the request and actually fetches the record based on the todoId and relays that record to the actual functions, pretty DRY ehh?
-Now we have a basic API end point for our TODO schema, what we have to do now is bring it all together in our server.js file.
+This will route our CRUD operations to given routes. One thing to note here is the app.param method, this works as middleware to the request and actually fetches the record based on the todoId and relays that record to the actual functions, pretty DRY ehh?
+Now we have a basic API end point for our TODO schema, what we have to do now is to bring it all together in our server.js file.
 
 ```javascript
 var express = require('express'),
@@ -182,8 +182,7 @@ app.listen(PORT, function () {
 });
 ```
 
-Now we have everything, lets test it out. Start by running MongoDB then run
-    node server.js
+Now we have everything, lets test it out. Start by running MongoDB then run node server.js
 
 Test our server with Curl, POST:
 ```
@@ -202,7 +201,6 @@ curl -i http://127.0.0.1:3000/api/todos/{id from first curl}
 
 Awesome, our server is up and running and works. The good thing about this design is that our server can easily expand to more endpoints and be easily configured.
 
-
 ## MEAN Stack
 
 If you want to develop with Express and like JavaScript the [MEAN](http://mean.io/) stack has been gaining a big following. 
@@ -217,6 +215,7 @@ MEAN stands for MongoDB, Express.js, Angular.js, Node.js and is a fullstack solu
 + [Mongoose docs](http://mongoosejs.com/docs/index.html)
 + [body-parser guide](https://github.com/expressjs/body-parser)
 + [Curl guide](http://blog.scottlowe.org/2014/02/19/using-curl-to-interact-with-a-restful-api/)
++ [Mongodb docs](http://docs.mongodb.org/manual/)
 
 
 
