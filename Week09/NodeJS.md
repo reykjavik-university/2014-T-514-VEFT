@@ -126,13 +126,13 @@ The reason is because **node.js** is asynchronous.  What really happends is this
 1. The program starts to execute the setTimeout function
 	* In it we tell it to wait for 3 sec. 
 	* What happens now is that Node.js has a task that will be ran in 3 sec.
-	** it plases this task somewere and continues with the code.  That is it runs the console.log('hello world!'); line
+	** it places this task somewere and continues with the code.  That is it runs the console.log('hello world!'); line
 	** after 3 sec. Node.js will receive a interrupt and when it recives this interrupt it will run the console.log('Nirvana BEST'); line.
 ```
 
 This is because node.js is asynchronus.  This is really the pattern in node.js code it will never stop.  It will allways continue to run.  You define tasks and callback but node.js will allways continue to run.  This means that there is really no way to stop in node.js code.  Ofcourse you can do something like we did above with setTimeout() or a callback.  But node.js will not stop even if you do it will keep on going and when it receives the interrupt it will run the task or callback.
 
-The reason for this behavior is because node.js is single threadid.  It is not possible to created threads in node.js.  And node.js is collectons of libraries that are focused on networking.
+The reason for this behavior is because node.js is single threaded.  It is not possible to created threads in node.js.  And node.js is collectons of libraries that are focused on networking.
 
 Don't worry if you are not getting this right away.  Lets take another example.  Lets change the code above like this, using the [setInterval](http://www.w3schools.com/jsref/met_win_setinterval.asp) function.
 
@@ -143,7 +143,7 @@ setInterval(function(){
 
 console.log('Hello world!');
 ```
-What happens know, can you assume it before we run the code?  Guess, and then save and run it and see whats happens. (I am assuming that by now you know how to save and run node.js code, because we have done that afew times here above).  The terminal window should show something like this.
+What happens know, can you assume it before we run the code?  Guess, and then save and run it and see whats happens. (I am assuming that by now you know how to save and run node.js code, because we have done that a few times here above).  The terminal window should show something like this.
 
 ```bash
 ☁  nodejsTest  node helloTest.js
@@ -189,9 +189,9 @@ Hello world!
 .
 .
 ```
-This program will run forever. Note that Node.js is single threadid, still we are getting seperate tasks running at the same time.  It looks like we have two threads but we just have one.  This is because of the interrupt I talked about here above.
+This program will run forever. Note that Node.js is single threaded, still we are getting seperate tasks running at the same time.  It looks like we have two threads but we just have one.  This is because of the interrupt I talked about here above.
 
-Lets think of this from a web service point aview.  We have a web service that is single threadid and NOT asyncronous. And this web service gets a conneciton from a client, for example requesting some data from database.  What will happen?  If we are single threadid and NOT asyncronous the web service is occupied and is not apple to do any other job.  If we have more clients that want to connect to our single threadid web service the just have to wait until the one client that has the connection with our web service is done.  Node.js can handle this scenario, even though it is single treadid.  Because it is asyncronous.  If we go through the same scenario with nodejs.  The first client connects and asks for data from the database.  Nodejs sends a request to the database and while it waits for the response from the database it handles other clients requests.  When database is finished getting the data and sends the response back to nodejs.  Nodejs gets an interrupt signal, receives the data and gives it the the first client that connected and was asking for this data.
+Lets think of this from a web service point of view.  We have a web service that is single threaded and NOT asyncronous. And this web service gets a connection from a client, for example requesting some data from database.  What will happen?  If we are single threaded and NOT asyncronous the web service is occupied and is not able to do any other job.  If we have more clients that want to connect to our single threaded web service the just have to wait until the one client that has the connection with our web service is done.  Node.js can handle this scenario, even though it is single treaded.  Because it is asyncronous.  If we go through the same scenario with nodejs.  The first client connects and asks for data from the database.  Nodejs sends a request to the database and while it waits for the response from the database it handles other clients requests.  When database is finished getting the data and sends the response back to nodejs.  Nodejs gets an interrupt signal, receives the data and gives it the the first client that connected and was asking for this data.
 
 ## Echo server
 
@@ -200,7 +200,7 @@ Now it is time to create a simple socket server. As mentioned above node.js cont
 ```javascript
 var net = require('net');
 ``` 
-Next we create the server with the createServer funciton in the net library, it takes in a callback function and that callback function takes in one argument the `socket`.
+Next we create the server with the createServer function in the net library, it takes in a callback function and that callback function takes in one argument the `socket`.
 
 ```javascript
 var server = net.createServer(function(socket){
@@ -249,7 +249,7 @@ And if we open up a new Terminal window and in it we execute `nc localhost 6000`
 incoming connection
 incoming connection
 ```
-OK now we have a scoket server but we still need to be able to receive data and echo it.  So lets add to our server code so it looks like this.
+OK now we have a socket server but we still need to be able to receive data and echo it.  So lets add to our server code so it looks like this.
 
 ```javascript
 var net = require('net');
@@ -267,9 +267,9 @@ server.listen(6000)
 Now lets start the our node.js server again in terminal window
 and start nc localhost 6000 from two separte Terminal windows.  Now if we write some text in our terminal windows we can see the server terminal window echoing our data.
 
-So we have written a sokect server in node.js.  It can handle multible sockets connections on a single threadid server, by using callback events to handle them.
+So we have written a sokect server in node.js.  It can handle multible sockets connections on a single threaded server, by using callback events to handle them.
 
-But it is still not echoing incomming data, so it is not an echo server. The only thing he does is write  it to the Terminal window.  So we add to it `socket.write(data);` see whole code.
+But it is still not echoing incoming data, so it is not an echo server. The only thing he does is write  it to the Terminal window.  So we add to it `socket.write(data);` see whole code.
 ```javascript
 var net = require('net');
 
@@ -314,11 +314,11 @@ server.listen(6000)
 ```
 At this point we have written a small socket server that sents all incomming messages (data) to all connected sockets.  Now you should have a good idea about what node.js is, specially the single threadid and asyncronous part.  It is very important to get good understanding of this part if you are going to write node.js programs.  Node.js is mainly collection of libraries that are aimed to write network application.
 
-Thou we have been doing some coding in node.js non of them are web services.  So lets look into web services in node.js
+Although we have been doing some coding in node.js none of them are web services.  So lets look into web services in node.js
 
 ## Web service in node.js
 
-It is realy easy to write a HTTP web service in node.js.  Below is code that shows one example of this.  In it we are using the `HTTP` package.
+It is really easy to write a HTTP web service in node.js.  Below is code that shows one example of this.  In it we are using the `HTTP` package.
 ```javascript
 var http = require('http');
 
@@ -330,11 +330,11 @@ var server = http.createServer(function(request, response){
 server.listen(7000);
 ```
 
-As you probable notice this is very simular coding as we did earliar when we build the socket server. And the *HTTP* package is based *NET* package that we were using when we build the socket server.  The createServer function in the HTTP package takes in a callback that has two parameters request and response (often called req and res). 
+As you probably notice this is very simular coding as we did earlier when we build the socket server. And the *HTTP* package is based *NET* package that we were using when we build the socket server.  The createServer function in the HTTP package takes in a callback that has two parameters request and response (often called req and res). 
 
 Lets go through what happens when there is a request at port 7000.  Then the network package takes control and the HTTP package receives the request. Headers are parsed.  We can read the request and we can write to the response that is sent back to the client. 
 
-Congratulation you have written a HTTP server.  It really does not do mush.  When he gets a request, he answers with status 200, and the body 'Hello World!'.  Ofcourse alot of code is in the **HTTP** library but by using it we have a very simple HTTP server.
+Congratulation you have written a HTTP server.  It really does not do much.  When he gets a request, he answers with status 200, and the body 'Hello World!'.  Ofcourse alot of code is in the **HTTP** library but by using it we have a very simple HTTP server.
 
 Lets save the code and run it in node.js. (just as before `node filename`).
 
@@ -350,14 +350,14 @@ In both cases you should get the response `Hello World!`
 
 This work just as the socket server.  We create a server.  It takes in a callback and we answer the callback.
 
-Lets try sending multible requests at the same time.  Todo that we use [ab](http://httpd.apache.org/docs/2.2/programs/ab.html).
+Lets try sending multiple requests at the same time.  Todo that we use [ab](http://httpd.apache.org/docs/2.2/programs/ab.html).
 
 We still have our HTTP server running.  Open up a terminal window and execute the following funciton
 
 	ab -n 100 -c 100 http://127.0.0.1:7000/
 
 >Note: There are two things I like to point out to you.
->1. You need to `127.0.0.1` instead of `localhost`, this is some localhost proplem.
+>1. You need to `127.0.0.1` instead of `localhost`, this is some localhost problem.
 >2. It is very important to have the `/` at the end.  If you don't the `ab` command won't work.
 
 `-n 100` means that we will send 100 requests and `-c 100` means that they will be sent at the same time (parallel). And `http://127.0.0.1:7000` means that the all the requests will be sent to localhost port 7000. The terminal window should show you this message.
@@ -399,7 +399,7 @@ Percentage of the requests served within a certain time (ms)
   99%     18
  100%     18 (longest request)
  ```
- This message has some information for us.  Like how much time it took to sent all the reqests `Time taken for tests:   0.024 seconds` and time per request `Time per request: 0.241 [ms]` and much more.
+ This message has some information for us.  Like how much time it took to sent all the requests `Time taken for tests:   0.024 seconds` and time per request `Time per request: 0.241 [ms]` and much more.
 
  Lets add to your HTTP server a delay function.  We can think of this delay as time it takes our HTTP server to get data from a database.  In our example below we have added 2 sec. delay  See code below.  
 ```javascript
@@ -436,12 +436,12 @@ And then after 2 sec get added
 This is fake message from fake database
 ```
 
-There are two things in the headder response that se should take a close look at.
+There are two things in the header response that we should take a close look at.
 1. The first one is that the connection is keep alive [`Connection: keep-alive`](http://en.wikipedia.org/wiki/HTTP_persistent_connection)
 2. Is that the transfer encoding method is chunked [`Transfer-Encoding: chunked`](http://en.wikipedia.org/wiki/Chunked_transfer_encoding)
-Remember that node.js is single threadid. Be having the connection keep alive and the transfer encoding chunked makes it possible for node.js to handle multible requests.
+Remember that node.js is single threaded. Be having the connection keep alive and the transfer encoding chunked makes it possible for node.js to handle multiple requests.
 
-Now that we have changed our HTTP server (added our fake fetch to database).  Lets do multible requests again with ab.  See command and response that we got in terminal window
+Now that we have changed our HTTP server (added our fake fetch to database).  Lets do multiple requests again with ab.  See command and response that we got in terminal window
 ```terminal
 ☁  2014-T-514-VEFT [master] ab -n 100 -c 100 http://127.0.0.1:7000/
 This is ApacheBench, Version 2.3 <$Revision: 655654 $>
@@ -546,4 +546,4 @@ Percentage of the requests served within a certain time (ms)
 ```
 See the total time for these 200 request is 4 sec. `Time taken for tests:   4.049 seconds`
 
-Node.js is handling this concurrent requests easily even although it is single threadid but by now you know why.
+Node.js is handling this concurrent requests easily even although it is single threaded but by now you know why.
