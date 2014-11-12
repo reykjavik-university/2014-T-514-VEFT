@@ -23,6 +23,7 @@ Strings are powerful in Python, it is possible to work with strings as an array.
 > 'Hlyn'  
 > a[-1]
 > 'a'
+
 Python offers many string functions that can be found in the documentation.
 
 A function in Python is defined with the keyword def: 
@@ -49,6 +50,7 @@ Functions can also have key-value pair parameters.
 
 Here is how you define a list in Python:
 > x = [1, 'x', 3.5, 41]
+
 It is possible to have different types of values in an array but that should be avoided.   
 Python offers built in string functions, see the documentation. 
 
