@@ -5,7 +5,7 @@ databases do but instead all data is stored in documents and collections.  Mongo
 Data is stored on BSON format which is a binary-encoded serialization of JSON-like documents.  
 These objects are added to a collection.  Collections are similar to tables in a relational database. 
 
-MongoDB is a fast and scalable database, it is good for many things but it is no recommended to use this as a database for 
+MongoDB is a fast and scalable database, it is good for many things but it is not recommended to use this as a database for 
 applications that store sensitive data.    
 
 It is easy to run many instances of MongoDB, if that is done the instances replicate the data between them.   
@@ -31,12 +31,12 @@ And then behind closed doors let’s give everyone access rights to this folder:
 #Mongo
 
 Mongo is a console based client that can be used to query data in MongoDB.  There are also other tools available online 
-that have more visual interface as [Robomongo](http://robomongo.org/)
+that have more visual interface such as [Robomongo](http://robomongo.org/)
 
 This command lists all databases
 > show database 
 
-This command switches or creates the database mydb
+This command switches to or creates the database mydb
 > use mydb
 
 This command shows all collections in mydb.
