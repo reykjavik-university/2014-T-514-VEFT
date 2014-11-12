@@ -96,7 +96,17 @@ RabbitMQ is an application server that you must setup and execute on a server
     brew install rabbitmq
     rabbitmq-plugins enable rabbitmq_management
 
-And on Ubuntu, or other Linux distributions that use apt.
+The RabbitMQ server scripts are installed into /usr/local/sbin through Homebrew.
+This is not automatically added to your path, so you may want to add it, to be able
+to use the RabbitMQ commands. This can be accomplished by either adding 
+PATH=$PATH:/usr/local/sbin to your .bash_profile or .profile. Or opening your
+/etc/path by writing this in terminal:
+
+    sudo vim /etc/paths
+    
+(or any other text editor of you choosing) and add /usr/local/sbin to the file.
+
+On Ubuntu, or other Linux distributions that use apt.
 
     sudo apt-get install rabbitmq-server
     sudo rabbitmq-plugins enable rabbitmq_management
@@ -119,8 +129,10 @@ If it didn't start automatically, you can start RabbitMQ in foreground with
     
 When you install the management plugin you can manage RabbitMQ with through a
 web console. If you are running RabbitMQ on your local machine, the url should
-be [http://localhost:55672](http://localhost:15672/)
-
+be [http://localhost:55672](http://localhost:15672/). The management plugin does
+also include a browser-based UI where you can observe your queues, see how many
+are connected etc. To gain access to the UI you type the same path into your 
+browser and use 'guest' for both username and password.
     
 # Example 1 
 Now let's write a simple producer, which creates messages and adds them to
@@ -287,6 +299,8 @@ Acknowledgement works well at RabbitMQ side, if an ack packet isn't recieved fro
 
 this simple code makes sure that a message is not lost on worker being killed, unacknowledged messages are redelivered
 
+For further information check:
+
 # Message durability
 
 If RabbitMQ server goes down it will lose all of its queues and therefore all of our messages.   To prevent this from happening even though the server crashes we need to mark both the queue and the message as durable.  
@@ -307,5 +321,12 @@ Now we need to mark our messages as persistent.
 
 When messages and queue is durable RabbitMQ will save all messages to a disk.  Even though all messages are saved it does not guarantee that no messages will be lost.  There is still a short window when RabbitMQ has received the message and has not yet saved it to a disk, and sometimes RabbitMQ stores the message in a cache.  To get a stronger guarantee it is possible to use: publisher confirms.  
 
+                          routing_key='durable_orders',
+                          body=json.dumps(message),
+                          properties=pika.BasicProperties(
+                            delivery_mode = 2,
+                          ))
+                          
+More on this at:
 https://www.rabbitmq.com/tutorials/tutorial-two-python.html
 
