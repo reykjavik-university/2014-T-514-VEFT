@@ -86,9 +86,9 @@ Hello World!
 ☁  nodejsTest  
 ```
 
-## Node.js is single threadid and asynchronous
+## Node.js is single threaded and asynchronous
 
-Ok, now we have been playing with very easy stuff.  It is time to dive in and try to understand one very interesting part of node.js, that many have had hard time understanding. That is **node.js is single threadid and asynchronous**.
+Ok, now we have been playing with very easy stuff.  It is time to dive in and try to understand one very interesting part of node.js, that many have had hard time understanding. That is **node.js is single threaded and asynchronous**.
 
 Lets write a little code and try to understand this.  We will use the [`setTimeout()`](http://www.w3schools.com/jsref/met_win_settimeout.asp) function.
 
@@ -312,7 +312,7 @@ var server = net.createServer(function(socket){
 
 server.listen(6000)
 ```
-At this point we have written a small socket server that sents all incomming messages (data) to all connected sockets.  Now you should have a good idea about what node.js is, specially the single threadid and asyncronous part.  It is very important to get good understanding of this part if you are going to write node.js programs.  Node.js is mainly collection of libraries that are aimed to write network application.
+At this point we have written a small socket server that sents all incomming messages (data) to all connected sockets.  Now you should have a good idea about what node.js is, specially the single threaded and asyncronous part.  It is very important to get good understanding of this part if you are going to write node.js programs.  Node.js is mainly collection of libraries that are aimed to write network application.
 
 Although we have been doing some coding in node.js none of them are web services.  So lets look into web services in node.js
 
