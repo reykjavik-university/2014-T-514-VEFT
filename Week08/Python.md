@@ -39,14 +39,14 @@ Function can have optional parameters,
 > def add(a, b, variation=10):
 >     return a+b
 >
-> x = add(10, 20)   >>> 30
-> y = add(10, 20, variation=2)   >>> 32
+> x = add(10, 20)   -- 30
+> y = add(10, 20, variation=2)   -- 32
 
 Functions can also have key-value pair parameters. 
 > def add(**kwargs):
 >     return kwargs.get('a') + kwargs.get('b')
 >
-> x = add(a=10, b=20)   >>> 30
+> x = add(a=10, b=20)   -- 30
 
 Here is how you define a list in Python:
 > x = [1, 'x', 3.5, 41]
