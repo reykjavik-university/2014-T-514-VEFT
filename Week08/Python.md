@@ -20,12 +20,13 @@ a, b, c = 10, 20, 30
 ```
 
 Strings are powerful in Python, it is possible to work with strings as an array. 
-> a = 'Hlynur er hetja'
-> a[0:4]
-> 'Hlyn'  
-> a[-1]
-> 'a'
-
+```
+a = 'Hlynur er hetja'
+a[0:4]
+'Hlyn'
+a[-1]
+'a'
+```
 Python offers many string functions that can be found in the documentation.
 
 A function in Python is defined with the keyword def: 
