@@ -10,8 +10,7 @@ The key rule for python is to use 4 spaces pr. indentation level, do not use tab
 There are no curly brackets around the body of a Python function.  It starts after the colon in the next new line.   
 Classes and functions should be separated by a blank line. 
 
-Python is interpreted language, which means that the interpreter takes the code and compiles it and runs it at the same time.  
-Code is interpreted to byte code which is then executed.   There is no precompile needed as in C# and java. 
+Python is interpreted language, which means that the interpreter takes the code and compiles it and runs it at the same time. Code is interpreted to byte code which is then executed.   There is no precompile needed as in C# and java. 
 
 Python is a dynamic language and that’s way you don’t need to specify the type of a variable.   
 When 'a = 10' is declared Python interpreter knows that this variable is an integer.   
