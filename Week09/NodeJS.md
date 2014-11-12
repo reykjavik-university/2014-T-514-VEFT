@@ -7,7 +7,7 @@ Also I assume that you are familiar with javascript. If you are not I recommend 
 
 ## How to install Node.js
 
-To install node.js on OSX, open a terminal window and type
+To install Node.js on OSX, open a terminal window and type
 
 	brew install node
 
@@ -123,9 +123,9 @@ The reason is because **node.js** is asynchronous. What really happens is this:
 ```javascript
 1. The program starts to execute the setTimeout function
 	* In it we tell it to wait for 3 sec. 
-	* What happens now is that Node.js has a task that will be ran in 3 sec.
-	** it places this task somewere and continues with the code.  That is it runs the console.log('hello world!'); line
-	** after 3 sec. Node.js will receive a interrupt and when it recives this interrupt it will run the console.log('Nirvana BEST'); line.
+	* What happens now is that Node.js has a task that will be run after 3 sec.
+	** it places this task somewhere and continues with the code.  That is it runs the console.log('hello world!'); line
+	** after 3 sec. Node.js will receive a interrupt and when it receives this interrupt it will run the console.log('Nirvana BEST'); line.
 ```
 
 This is because node.js is asynchronous. This is really the pattern in node.js code, it will never stop. It will allways continue to run. You define tasks and callback but node.js will allways continue to run. This means that there is really no way to stop in node.js code. Of course you can do something like we did above with setTimeout() or a callback. But node.js will not stop even if you do it, it will keep on going and when it receives the interrupt it will run the task or callback.
@@ -209,7 +209,7 @@ var server = net.createServer(function(socket){
 });
 ``` 
 
-We can bind this socket server by calling a function named `listen()`. like this.
+We can bind this socket server by calling a function named `listen()`. Like this.
 
 ```javascript
 server.listen(6000)
@@ -265,7 +265,8 @@ var server = net.createServer(function(socket){
 });
 
 server.listen(6000)
-``` 
+```
+
 Now lets start our node.js server again in terminal window and start nc localhost 6000 from two separte Terminal windows. Now if we write some text in our terminal windows we can see the server terminal window echoing our data.
 
 So we have written a socket server in node.js. It can handle multible socket connections on a single threaded server, by using callback events to handle them.
@@ -328,7 +329,7 @@ It is really easy to write a HTTP web service in node.js. Below is a code that s
 var http = require('http');
 
 var server = http.createServer(function(request, response){
-	response.writeHead(200, {'conent-type': 'test/plain'});
+	response.writeHead(200, {'content-type': 'text/plain'});
 	response.end('Hello World!');
 });
 
@@ -432,13 +433,14 @@ The response we get back is like this:
 
 ```
 HTTP/1.1 200 OK
-conent-type: test/plain
+conent-type: text/plain
 Date: Sat, 08 Nov 2014 11:04:52 GMT
 Connection: keep-alive
 Transfer-Encoding: chunked
 
 Hallo
 ```
+
 And then after 2 secs get added:
 
 ```
@@ -449,6 +451,7 @@ There are two things in the header response that we should take a close look at:
 
 1. The first one is that the connection is keep alive [`Connection: keep-alive`](http://en.wikipedia.org/wiki/HTTP_persistent_connection)
 2. Is that the transfer encoding method is chunked [`Transfer-Encoding: chunked`](http://en.wikipedia.org/wiki/Chunked_transfer_encoding)
+
 Remember that node.js is single threaded. By having the connection keep alive and the transfer encoding chunked makes it possible for node.js to handle multible requests.
 
 Now that we have changed our HTTP server (added our fake fetch to database). Lets do multible requests again with ab. See command and response that we got in terminal window:
@@ -499,13 +502,16 @@ Percentage of the requests served within a certain time (ms)
   99%   2019
  100%   2019 (longest request)
 ```
+
 Look at the time it took to do this test `Time taken for tests:   2.027 seconds`. This is only 2 sec. more it took before we added the 2 sec. delay. Note that we are making 100 requests all at the same time.
 How much time will it take if we make 200 requests in two chunks. 100 requests at the same time and when finished there there will be another 100 requests sent immediately. Can you assume how much time it will take?
+
 Lets try it.
 
 ```terminal
 ab -n 200 -c 100 http://127.0.0.1:7000/
 ```
+
 We get in the Terminal window:
 
 ```terminal

@@ -27,7 +27,9 @@ On the other hand if we wanted to issue a PUT/PATCH request we would have to inc
 
 ###CacheCow
 
-CacheCow library implements server and client by means of [message handlers](http://www.asp.net/web-api/overview/advanced/http-message-handlers).
+The CacheCow library implements HTTP caching on both client and server in ASP.NET Web API. It uses [message handlers](http://www.asp.net/web-api/overview/advanced/http-message-handlers) on both client and server to intercept request and response and apply caching logic and rules.
+
+CacheCow comes with an in-memory database what will be used on the server if nothing else is specified. If the API is to be use for anything else than debugging, testing or a website that you don't want be get popular, something like sql, redis or memcached is recommended.
 
 First you need to install [this library](https://www.nuget.org/packages/CacheCow.Server/)
 
@@ -101,7 +103,7 @@ But the second request:
 
 Here we notice that that the first request returned a status code 200 with an Etag, then when we issued a second request with the "If-None-Match" header with the Etag value and we got a status code 304, thus cached contents where issued.
 
-As mentioned on there [CacheCow wiki](https://github.com/aliostad/CacheCow/wiki), some features include:
+As mentioned on their [wiki](https://github.com/aliostad/CacheCow/wiki), some features include:
 
 **CacheCow.Server features**
 
