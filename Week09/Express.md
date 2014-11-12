@@ -1,7 +1,13 @@
 # Express
 [Express.js](http://expressjs.com/) is lightweight, minimalist web framework for Nodejs.
 
-Express is the most popular web framework that has been written for Node because of its robust set of features and support for many kinds of applications.
+Express is the most popular web framework that has been written for Node because of its robust set of features and support for many kinds of applications. 
+
+Using a framework like Express for developing web applications has many advantages, such as:  
++ Less time needed to create web applications
++ Routing and view layers are handled by the framework
++ Stable code that is regularly used, tested and maintained.
++ Assumptions made about developers needs so that less code needs to be written - don't reinvent the wheel
 
 Express isn't the be-all and end-all for Node frameworks many exciting frameworks are being developed like [Sails.js](http://sailsjs.org) and [Total.js](https://www.totaljs.com/).
 
@@ -18,6 +24,7 @@ and run with:
     express myapp
 
 But our example is going to be simple so we are just going to start from scratch.
+When we start working on a web application then a lot of time goes into creating boilerplate code, creating folder structures and downloading dependencies. Generators handle this for us and more.
 
 ## Middleware
 As was stated before Express is a lightweight framework which only encapsulates the most important parts of an HTTP server, so if we need more features middleware is here to save the day.
@@ -186,7 +193,7 @@ Now we have everything, lets test it out. Start by running MongoDB then run node
 
 Test our server with Curl, POST:
 ```
-curl -i -H "Content-Type: application/json" -X POST -d '{"title": "Get to the chopper", "dueDate": "2014-11-09T14:23:31+00:00", "prority": 1}' http://127.0.0.1:3000/api/todos
+curl -i -H "Content-Type: application/json" -X POST -d '{"title": "Get to the chopper", "dueDate": "2014-11-09T14:23:31+00:00", "priority": 1}' http://127.0.0.1:3000/api/todos
 ```
 
 GET:
@@ -204,7 +211,7 @@ Awesome, our server is up and running and works. The good thing about this desig
 ## MEAN Stack
 
 If you want to develop with Express and like JavaScript the [MEAN](http://mean.io/) stack has been gaining a big following. 
-MEAN stands for MongoDB, Express.js, Angular.js, Node.js and is a fullstack solution that comes preconfigured with many helpful packages like Mongoose and Passport.
+MEAN stands for MongoDB, Express.js, Angular.js, Node.js and is a fullstack solution that comes preconfigured with many helpful packages like Mongoose and Passport. Creating web applications that are fast, robust and maintainable is the main goal of the MEAN stack.
 
 ## Helpful resources
 
@@ -216,7 +223,3 @@ MEAN stands for MongoDB, Express.js, Angular.js, Node.js and is a fullstack solu
 + [body-parser guide](https://github.com/expressjs/body-parser)
 + [Curl guide](http://blog.scottlowe.org/2014/02/19/using-curl-to-interact-with-a-restful-api/)
 + [Mongodb docs](http://docs.mongodb.org/manual/)
-
-
-
-

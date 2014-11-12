@@ -124,7 +124,7 @@ The reason is because **node.js** is asynchronous. What really happens is this:
 1. The program starts to execute the setTimeout function
 	* In it we tell it to wait for 3 sec. 
 	* What happens now is that Node.js has a task that will be ran in 3 sec.
-	** it plases this task somewere and continues with the code.  That is it runs the console.log('hello world!'); line
+	** it places this task somewere and continues with the code.  That is it runs the console.log('hello world!'); line
 	** after 3 sec. Node.js will receive a interrupt and when it recives this interrupt it will run the console.log('Nirvana BEST'); line.
 ```
 
@@ -141,6 +141,7 @@ setInterval(function(){
 
 console.log('Hello world!');
 ```
+
 What happens now, can you assume it before we run the code? Guess, and then save and run it and see what happens. (I am assuming that by now you know how to save and run node.js code, because we have done that a few times here above). The terminal window should show something like this.
 
 ```bash
@@ -187,6 +188,7 @@ Hello world!
 .
 .
 ```
+
 This program will run forever. Note that Node.js is single threaded, still we are getting seperate tasks running at the same time. It looks like we have two threads but we just have one. This is because of the interrupt I talked about here above.
 
 Lets think of this from a web service point a view. We have a web service that is single threaded and NOT asyncronous. And this web service gets a conneciton from a client, for example requesting some data from database. What will happen? If it's single threaded and NOT asyncronous the web service is occupied and is not able to do any other job. If we have more clients that want to connect to our single threaded web service they just have to wait until the one client that has the connection with our web service is done. Node.js can handle this scenario, even though it is single treaded. Because it is asyncronous. If we go through the same scenario with nodejs. The first client connects and asks for data from the database. Nodejs sends a request to the database and while it waits for the response from the database it handles other clients requests. When the database is finished getting the data and sends the response back to nodejs. Nodejs gets an interrupt signal, receives the data and gives it to the first client that connected and was asking for this data.
@@ -198,6 +200,7 @@ Now it is time to create a simple socket server. As mentioned above node.js cont
 ```javascript
 var net = require('net');
 ``` 
+
 Next we create the server with the createServer function in the net library, it takes in a callback function and that callback function takes in one argument, the `socket`.
 
 ```javascript
@@ -247,6 +250,7 @@ And if we open up a new Terminal window and in it we execute `nc localhost 6000`
 incoming connection
 incoming connection
 ```
+
 OK now we have a socket server but we still need to be able to receive data and echo it. So lets add to our server code so it looks like this:
 
 ```javascript
@@ -311,6 +315,7 @@ var server = net.createServer(function(socket){
 
 server.listen(6000)
 ```
+
 At this point we have written a small socket server that sends all incoming messages (data) to all connected sockets. Now you should have a good idea about what node.js is, specially the single threaded and asyncronous part. It is very important to get good understanding of this part if you are going to write node.js programs. Node.js is mainly collections of libraries that are aimed to write network applications.
 
 Though we have been doing some coding in node.js none of them are web services. So lets look into web services in node.js.
@@ -400,6 +405,7 @@ Percentage of the requests served within a certain time (ms)
   99%     18
  100%     18 (longest request)
  ```
+
 This message has some information for us. Like how much time it took to send all the reqests `Time taken for tests:   0.024 seconds` and time per request `Time per request: 0.241 [ms]` and much more.
 
 Lets add to your HTTP server a delay function. We can think of this delay as time it takes our HTTP server to get data from a database. In our example below we have added 2 sec. delay. See code below:
