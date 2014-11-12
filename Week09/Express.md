@@ -225,6 +225,7 @@ MEAN stands for MongoDB, Express.js, Angular.js, Node.js and is a fullstack solu
 + [Mongoose docs](http://mongoosejs.com/docs/index.html)
 + [body-parser guide](https://github.com/expressjs/body-parser)
 + [Curl guide](http://blog.scottlowe.org/2014/02/19/using-curl-to-interact-with-a-restful-api/)
++ [Nice tutorial to write a simple restful web app with Express](http://cwbuecheler.com/web/tutorials/2014/restful-web-app-node-express-mongodb/)
 
 
 
