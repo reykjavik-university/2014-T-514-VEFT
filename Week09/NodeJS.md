@@ -22,8 +22,8 @@ on linux, type in terminal
 *It is a good idea to do **sudo apt-get update** before you do sudo apt-get install to ensure your apt-get is up to date.*
 
 If you are running a Ubuntu linux distro you might have some [conflicts](http://askubuntu.com/questions/235655/node-js-conflicts-sbin-node-vs-usr-bin-node) with a legacy package (Amateur Packet Radio Node Program) this command should get you back on track **sudo apt-get install nodejs-legacy** 
+[npm](https://www.npmjs.org/) is node.js package manager.  The abbreviate npm stands for Node Packaged Modules but often talked about as node package manager.  npm is simular to pip in python.
 
-[npm](https://www.npmjs.org/) is node.js package manager.  The abbrebiate npm stands for Node Packaged Modules but often talked about node package manager.  npm is simular to pip in python.
 
  [npm](https://www.npmjs.org/) installs automatically on OSX when __brew install node__ is executed.  But on linux it must be install separately by executing the following command in Terminal window.
 
@@ -63,7 +63,7 @@ undefined
 > 
 ```
 
-Node.js shell is a interactive javascript shell that is mainly used to test statments.  The main power of node.js is when we write a javascript file and run it with node.js.  Lets start with writing a very simple __helloWorld.js__ file and run it with node.js.  Open your favorite text editor and write the following.
+Node.js shell is a interactive javascript shell that is mainly used to test statements.  The main power of node.js is when we write a javascript file and run it with node.js.  Lets start with writing a very simple __helloWorld.js__ file and run it with node.js.  Open your favorite text editor and write the following.
 
 ```javascript
 console.log('Hello World!');
@@ -126,11 +126,11 @@ The reason is because **node.js** is asynchronous.  What really happends is this
 1. The program starts to execute the setTimeout function
 	* In it we tell it to wait for 3 sec. 
 	* What happens now is that Node.js has a task that will be ran in 3 sec.
-	** it places this task somewere and continues with the code.  That is it runs the console.log('hello world!'); line
-	** after 3 sec. Node.js will receive a interrupt and when it recives this interrupt it will run the console.log('Nirvana BEST'); line.
+	** it places this task somewhere and continues with the code.  That is it runs the console.log('hello world!'); line
+	** after 3 sec. Node.js will receive a interrupt and when it receives this interrupt it will run the console.log('Nirvana BEST'); line.
 ```
 
-This is because node.js is asynchronus.  This is really the pattern in node.js code it will never stop.  It will allways continue to run.  You define tasks and callback but node.js will allways continue to run.  This means that there is really no way to stop in node.js code.  Ofcourse you can do something like we did above with setTimeout() or a callback.  But node.js will not stop even if you do it will keep on going and when it receives the interrupt it will run the task or callback.
+This is because node.js is asynchronous.  This is really the pattern in node.js code it will never stop.  It will always continue to run.  You define tasks and callback but node.js will always continue to run.  This means that there is really no way to stop in node.js code.  Of course you can do something like we did above with setTimeout() or a callback.  But node.js will not stop even if you do it will keep on going and when it receives the interrupt it will run the task or callback.
 
 The reason for this behavior is because node.js is single threaded.  It is not possible to created threads in node.js.  And node.js is collectons of libraries that are focused on networking.
 
@@ -143,7 +143,7 @@ setInterval(function(){
 
 console.log('Hello world!');
 ```
-What happens know, can you assume it before we run the code?  Guess, and then save and run it and see whats happens. (I am assuming that by now you know how to save and run node.js code, because we have done that a few times here above).  The terminal window should show something like this.
+What happens know, can you assume it before we run the code?  Guess, and then save and run it and see what happens. (I am assuming that by now you know how to save and run node.js code, because we have done that a few times here above).  The terminal window should show something like this.
 
 ```bash
 ☁  nodejsTest  node helloTest.js
@@ -158,7 +158,7 @@ Nirvana BEST
 .
 ```
 
-So this code will never stop running.  Lets add another Interval to this code, like this.
+So this code will never stop running.  Lets add another interval to this code, like this.
 
 ```javascript
 setInterval(function(){
@@ -171,7 +171,7 @@ setInterval(function(){
 
 ```
 
-Note that we are loggin different text and also have different times.  What will happen now? Guess and then run the code.
+Note that we are logging different text and also have different times.  What will happen now? Guess and then run the code.
 The terminal window is showing something like this.
 
 ```bash
@@ -191,11 +191,11 @@ Hello world!
 ```
 This program will run forever. Note that Node.js is single threaded, still we are getting seperate tasks running at the same time.  It looks like we have two threads but we just have one.  This is because of the interrupt I talked about here above.
 
-Lets think of this from a web service point of view.  We have a web service that is single threaded and NOT asyncronous. And this web service gets a connection from a client, for example requesting some data from database.  What will happen?  If we are single threaded and NOT asyncronous the web service is occupied and is not able to do any other job.  If we have more clients that want to connect to our single threaded web service the just have to wait until the one client that has the connection with our web service is done.  Node.js can handle this scenario, even though it is single treaded.  Because it is asyncronous.  If we go through the same scenario with nodejs.  The first client connects and asks for data from the database.  Nodejs sends a request to the database and while it waits for the response from the database it handles other clients requests.  When database is finished getting the data and sends the response back to nodejs.  Nodejs gets an interrupt signal, receives the data and gives it the the first client that connected and was asking for this data.
+Lets think of this from a web service point aview.  We have a web service that is single threaded and NOT asyncronous. And this web service gets a connection from a client, for example requesting some data from database.  What will happen?  If we are single threaded and NOT asynchronous the web service is occupied and is not able to do any other job.  If we have more clients that want to connect to our single threaded web service the just have to wait until the one client that has the connection with our web service is done.  Node.js can handle this scenario, even though it is single treaded.  Because it is asynchronous.  If we go through the same scenario with nodejs.  The first client connects and asks for data from the database.  Nodejs sends a request to the database and while it waits for the response from the database it handles other client requests.  When database is finished getting the data and sends the response back to nodejs.  Nodejs gets an interrupt signal, receives the data and gives it the the first client that connected and was asking for this data.
 
 ## Echo server
 
-Now it is time to create a simple socket server. As mentioned above node.js contains a cluster of libraries that are mainly focesed on networking.  In this example we are going to write a little echo server using the [**net** library](http://nodejs.org/api/net.html) that comes with nodejs.  To use it we use the command `require('')`.  **require('')** is a simular thing as **import** in **Python**. To require net library we simply write the following code.
+Now it is time to create a simple socket server. As mentioned above node.js contains a cluster of libraries that are mainly focused on networking.  In this example we are going to write a little echo server using the [**net** library](http://nodejs.org/api/net.html) that comes with nodejs.  To use it we use the command `require('')`.  **require('')** is a similar thing as **import** in **Python**. To require net library we simply write the following code.
 
 ```javascript
 var net = require('net');
@@ -208,7 +208,7 @@ var server = net.createServer(function(socket){
 });
 ``` 
 
-We can bind this socket server by calling a function named `listen()`. like this.
+We can bind this socket server by calling a function named `listen()`. Like this.
 
 ```javascript
 server.listen(6000)
@@ -216,7 +216,7 @@ server.listen(6000)
 
 Each time the operating system gets a connection on port 5000 this function is called
 
-We can test this be adding some action to our code.  Something that we want to be done when there is a connection on port 5000.  For example writing a text to the terminal window.  maeby *incoming connection*
+We can test this be adding some action to our code.  Something that we want to be done when there is a connection on port 5000.  For example writing a text to the terminal window.  Maybe *incoming connection*
 The whole code look like this
 
 ```javascript
@@ -264,12 +264,12 @@ var server = net.createServer(function(socket){
 
 server.listen(6000)
 ``` 
-Now lets start the our node.js server again in terminal window
-and start nc localhost 6000 from two separte Terminal windows.  Now if we write some text in our terminal windows we can see the server terminal window echoing our data.
+Now lets start our node.js server again in terminal window
+and start nc localhost 6000 from two separte terminal windows.  Now if we write some text in our terminal windows we can see the server terminal window echoing our data.
 
-So we have written a sokect server in node.js.  It can handle multible sockets connections on a single threaded server, by using callback events to handle them.
+So we have written a sokect server in node.js.  It can handle multiple sockets connections on a single threaded server, by using callback events to handle them.
 
-But it is still not echoing incoming data, so it is not an echo server. The only thing he does is write  it to the Terminal window.  So we add to it `socket.write(data);` see whole code.
+But it is still not echoing incoming data, so it is not an echo server. The only thing he does is write it to the terminal window.  So we add to it `socket.write(data);` see whole code.
 ```javascript
 var net = require('net');
 
@@ -290,7 +290,7 @@ So now if we start up the three Terminal windows
 > Terminal window 3 -> nc localhost 6000 
 
 Now if we write some text in terminal window 2 we get a echo respone back and same happens if you type in text in terminal window 3 you get a response back.  
-Lets add to this.  Lets echo the incoming message to all connected users.  We do this by adding all every socket connection to an array and when and when the server receives a message he will send that message to all connections in his array.  In the code below we have implemented this.
+Lets add to this.  Lets echo the incoming message to all connected users.  We do this by adding every socket connection to an array and when the server receives a message he will send that message to all connections in his array.  In the code below we have implemented this.
 ```javascript
 var net = require('net');
 
@@ -312,7 +312,7 @@ var server = net.createServer(function(socket){
 
 server.listen(6000)
 ```
-At this point we have written a small socket server that sents all incomming messages (data) to all connected sockets.  Now you should have a good idea about what node.js is, specially the single threaded and asyncronous part.  It is very important to get good understanding of this part if you are going to write node.js programs.  Node.js is mainly collection of libraries that are aimed to write network application.
+At this point we have written a small socket server that sents all incomming messages (data) to all connected sockets.  Now you should have a good idea about what node.js is, specially the single threaded and asynchronous part.  It is very important to get good understanding of this part if you are going to write node.js programs.  Node.js is mainly collection of libraries that are aimed to write network application.
 
 Although we have been doing some coding in node.js none of them are web services.  So lets look into web services in node.js
 
@@ -334,7 +334,7 @@ As you probably notice this is very simular coding as we did earlier when we bui
 
 Lets go through what happens when there is a request at port 7000.  Then the network package takes control and the HTTP package receives the request. Headers are parsed.  We can read the request and we can write to the response that is sent back to the client. 
 
-Congratulation you have written a HTTP server.  It really does not do much.  When he gets a request, he answers with status 200, and the body 'Hello World!'.  Ofcourse alot of code is in the **HTTP** library but by using it we have a very simple HTTP server.
+Congratulation you have written a HTTP server.  It really does not do much.  When he gets a request, he answers with status 200, and the body 'Hello World!'.  Of course a lot of code is in the **HTTP** library but by using it we have a very simple HTTP server.
 
 Lets save the code and run it in node.js. (just as before `node filename`).
 
@@ -350,7 +350,7 @@ In both cases you should get the response `Hello World!`
 
 This work just as the socket server.  We create a server.  It takes in a callback and we answer the callback.
 
-Lets try sending multiple requests at the same time.  Todo that we use [ab](http://httpd.apache.org/docs/2.2/programs/ab.html).
+Lets try sending multiple requests at the same time.  To do that we use [ab](http://httpd.apache.org/docs/2.2/programs/ab.html).
 
 We still have our HTTP server running.  Open up a terminal window and execute the following funciton
 
@@ -439,7 +439,7 @@ This is fake message from fake database
 There are two things in the header response that we should take a close look at.
 1. The first one is that the connection is keep alive [`Connection: keep-alive`](http://en.wikipedia.org/wiki/HTTP_persistent_connection)
 2. Is that the transfer encoding method is chunked [`Transfer-Encoding: chunked`](http://en.wikipedia.org/wiki/Chunked_transfer_encoding)
-Remember that node.js is single threaded. Be having the connection keep alive and the transfer encoding chunked makes it possible for node.js to handle multiple requests.
+Remember that node.js is single threaded. By having the connection keep alive and the transfer encoding chunked makes it possible for node.js to handle multiple requests.
 
 Now that we have changed our HTTP server (added our fake fetch to database).  Lets do multiple requests again with ab.  See command and response that we got in terminal window
 ```terminal
@@ -488,8 +488,8 @@ Percentage of the requests served within a certain time (ms)
   99%   2019
  100%   2019 (longest request)
 ```
-Look at the time it took to do this test `Time taken for tests:   2.027 seconds`.  This is only 2 sec. more it took before we added the 2 sec. delay.  Note that we are making 100 request all at the same time.
-How much time will it take if we make 200 request in two chunks.  100 request at the same time and when there finished there will be another 100 requests sent immediately.  Can you assume how much time it will take?
+Look at the time it took to do this test `Time taken for tests:   2.027 seconds`.  This is only 2 sec. more it took before we added the 2 sec. delay.  Note that we are making 100 requests all at the same time.
+How much time will it take if we make 200 request in two chunks.  100 requests at the same time and when they are finished there will be another 100 requests sent immediately.  Can you assume how much time it will take?
 Lets try it.
 ```terminal
 ab -n 200 -c 100 http://127.0.0.1:7000/
@@ -544,6 +544,6 @@ Percentage of the requests served within a certain time (ms)
   99%   2024
  100%   2024 (longest request)
 ```
-See the total time for these 200 request is 4 sec. `Time taken for tests:   4.049 seconds`
+See the total time for these 200 requests is 4 sec. `Time taken for tests:   4.049 seconds`
 
-Node.js is handling this concurrent requests easily even although it is single threaded but by now you know why.
+Node.js is handling this concurrent requests easily even though it is single threaded but by now you know why.
