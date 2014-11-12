@@ -34,7 +34,7 @@ A function in Python is defined with the keyword def:
 > def add(a, b):
 >     return a+b
 >
-> x = add(10, 20)  >>> 30
+> x = add(10, 20)  -- 30
 ```
 Functions in Python will always return value, if there is no return statement the function will return 'none' 
 which is the null value in Python.   Function in Python can also return many values (variables).   
