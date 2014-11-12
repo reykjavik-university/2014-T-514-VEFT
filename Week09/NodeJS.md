@@ -114,7 +114,7 @@ Did you guess right?  If you did, Good job.  Many programmers that are beginners
 
 ```javascript
 1. The program starts to execute the setTimeout function
-	* In it we tell it to wait for 3 sec. So the programs stops and wait for 3 sec.  
+	* In it we tell it to wait for 3 sec. So the programs will stop and wait for 3 sec.  
 2. After these 3 sec. it should run the console.log('Nirvana BEST'); line.
 3. Then it will run the console.log('hello world!'); line
 ```
@@ -125,7 +125,7 @@ The reason is because **node.js** is asynchronous.  What really happens is this.
 ```javascript
 1. The program starts to execute the setTimeout function
 	* In it we tell it to wait for 3 sec. 
-	* What happens now is that Node.js has a task that will be run after 3 sec.
+	* What happens now is that Node.js has a task that will be executed after 3 sec.
 	** it places this task somewhere and continues with the code.  That is it runs the console.log('hello world!'); line
 	** after 3 sec. Node.js will receive a interrupt and when it receives this interrupt it will run the console.log('Nirvana BEST'); line.
 ```
@@ -357,7 +357,7 @@ We still have our HTTP server running.  Open up a terminal window and execute th
 	ab -n 100 -c 100 http://127.0.0.1:7000/
 
 >Note: There are two things I like to point out to you.
->1. You need to `127.0.0.1` instead of `localhost`, this is some localhost problem.
+>1. You have to use `127.0.0.1` instead of `localhost`, this is some localhost problem.
 >2. It is very important to have the `/` at the end.  If you don't the `ab` command won't work.
 
 `-n 100` means that we will send 100 requests and `-c 100` means that they will be sent at the same time (parallel). And `http://127.0.0.1:7000` means that the all the requests will be sent to localhost port 7000. The terminal window should show you this message.
@@ -488,7 +488,7 @@ Percentage of the requests served within a certain time (ms)
   99%   2019
  100%   2019 (longest request)
 ```
-Look at the time it took to do this test `Time taken for tests:   2.027 seconds`.  This is only 2 sec. more it took before we added the 2 sec. delay.  Note that we are making 100 requests all at the same time.
+Look at the time it took to do this test `Time taken for tests:   2.027 seconds`.  This is only 2 sec. more than it took before we added the 2 sec. delay.  Note that we are making 100 requests all at the same time.
 How much time will it take if we make 200 request in two chunks.  100 requests at the same time and when they are finished there will be another 100 requests sent immediately.  Can you guess how much time it will take?
 Lets try it.
 ```terminal
