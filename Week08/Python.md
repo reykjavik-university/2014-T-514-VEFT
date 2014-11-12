@@ -61,7 +61,6 @@ Here is how you define a list in Python:
 > x = [1, 'x', 3.5, 41]
 ```
 It is possible to have different types of values in an array but that should be avoided.   
-Python offers built in string functions, see the documentation. 
 
 Dictionaries are defined like this:
 ```
