@@ -12,11 +12,7 @@ Classes and functions should be separated by a blank line.
 
 Python is interpreted language, which means that the interpreter takes the code and compiles it and runs it at the same time. Code is interpreted to byte code which is then executed.   There is no precompile needed as in C# and java. 
 
-Python is a dynamic language and that’s way you don’t need to specify the type of a variable.   
-When 'a = 10' is declared Python interpreter knows that this variable is an integer.   
-It is also possible to change the data type of a variable, 'a' can fec. be changed into string later in a function. 
-The built in function: type(x), tells us of what type a variable or an object is.  
-The function: dir(x) gives us all functions and properties the object x has. 
+Python is a dynamic language and that’s way you don’t need to specify the type of a variable.  When 'a = 10' is declared Python interpreter knows that this variable is an integer.  It is also possible to change the data type of a variable, 'a' can fec. be changed into string later in a function. The built in function: type(x), tells us of what type a variable or an object is. The function: dir(x) gives us all functions and properties the object x has. 
 
 It is possible to declare and assignee values to man variables at the same time. 
 > a, b, c = 10, 20, 30
@@ -24,9 +20,9 @@ It is possible to declare and assignee values to man variables at the same time.
 Strings are powerful in Python, it is possible to work with strings as an array. 
 > a = 'Hlynur er hetja'
 > a[0:4]
->>> 'Hlyn'  
+> 'Hlyn'  
 > a[-1]
->>> 'a'
+> 'a'
 Python offers many string functions that can be found in the documentation.
 
 A function in Python is defined with the keyword def: 
