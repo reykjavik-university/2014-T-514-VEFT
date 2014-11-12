@@ -15,7 +15,9 @@ Python is interpreted language, which means that the interpreter takes the code 
 Python is a dynamic language and that’s way you don’t need to specify the type of a variable.  When 'a = 10' is declared Python interpreter knows that this variable is an integer.  It is also possible to change the data type of a variable, 'a' can fec. be changed into string later in a function. The built in function: type(x), tells us of what type a variable or an object is. The function: dir(x) gives us all functions and properties the object x has. 
 
 It is possible to declare and assignee values to man variables at the same time. 
-> a, b, c = 10, 20, 30
+```
+a, b, c = 10, 20, 30
+```
 
 Strings are powerful in Python, it is possible to work with strings as an array. 
 > a = 'Hlynur er hetja'
