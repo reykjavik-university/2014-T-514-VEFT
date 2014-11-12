@@ -1,15 +1,15 @@
 >Before we begin I want that to be noted that I work on OSX.  So the following examples have not been tested in __linux__.  All parts that are specially about __linux__ are written in the best of my knowledge.  For example how to download node.js on linux.  It would be good if someone using linux would confirm that the following (download and examples) works on linux.  
-Also I assume that you are familiar with javascript.  If you are not I requment that you take some tutorials in javascript and get familiar with it before you start here. For example on [w3shcools.com](http://www.w3schools.com/js/). 
+Also I assume that you are familiar with javascript.  If you are not I recommend that you take some tutorials in javascript and get familiar with it before you start here. For example on [w3schools.com](http://www.w3schools.com/js/). 
 Thank you very much.
 
 
 # Node.js
 
-[Node.js](http://nodejs.org/) is an open source, cross-platform runtime environment for server-side and networking applications. Node.js applications are written in JavaScript, and can be run within the Node.js runtime on OS X, Microsoft Windows, Linux and FreeBSD.  You can read more about node.js on node.js homepage [http://nodejs.org/](http://nodejs.org/) and on [wikipedia](http://en.wikipedia.org/wiki/Node.js).
+[Node.js](http://nodejs.org/) is an open source, cross-platform runtime environment for server-side and networking applications. Node.js applications are written in JavaScript, and can be run within the Node.js runtime on OS X, Microsoft Windows, Linux and FreeBSD.  You can read more about Node.js on the Node.js homepage [http://nodejs.org/](http://nodejs.org/) and on [wikipedia](http://en.wikipedia.org/wiki/Node.js).
 
 ## How to install Node.js
 
-To install node.js on OSX, open a terminal window and type
+To install Node.js on OSX, open a terminal window and type
 
 	brew install node
 
@@ -22,7 +22,7 @@ on linux, type in terminal
 *It is a good idea to do **sudo apt-get update** before you do sudo apt-get install to ensure your apt-get is up to date.*
 
 If you are running a Ubuntu linux distro you might have some [conflicts](http://askubuntu.com/questions/235655/node-js-conflicts-sbin-node-vs-usr-bin-node) with a legacy package (Amateur Packet Radio Node Program) this command should get you back on track **sudo apt-get install nodejs-legacy** 
-[npm](https://www.npmjs.org/) is node.js package manager.  The abbreviate npm stands for Node Packaged Modules but often talked about as node package manager.  npm is simular to pip in python.
+[npm](https://www.npmjs.org/) is a Node.js package manager.  The abbreviation npm stands for Node Packaged Modules but often talked about as node package manager.  npm is simular to pip in python.
 
 
  [npm](https://www.npmjs.org/) installs automatically on OSX when __brew install node__ is executed.  But on linux it must be install separately by executing the following command in Terminal window.
@@ -120,19 +120,19 @@ Did you guess right?  If you did, Good job.  Many programmers that are beginners
 ```
 
 Why does the code not run like that?
-The reason is because **node.js** is asynchronous.  What really happends is this.
+The reason is because **node.js** is asynchronous.  What really happens is this.
 
 ```javascript
 1. The program starts to execute the setTimeout function
 	* In it we tell it to wait for 3 sec. 
-	* What happens now is that Node.js has a task that will be ran in 3 sec.
+	* What happens now is that Node.js has a task that will be run after 3 sec.
 	** it places this task somewhere and continues with the code.  That is it runs the console.log('hello world!'); line
 	** after 3 sec. Node.js will receive a interrupt and when it receives this interrupt it will run the console.log('Nirvana BEST'); line.
 ```
 
 This is because node.js is asynchronous.  This is really the pattern in node.js code it will never stop.  It will always continue to run.  You define tasks and callback but node.js will always continue to run.  This means that there is really no way to stop in node.js code.  Of course you can do something like we did above with setTimeout() or a callback.  But node.js will not stop even if you do it will keep on going and when it receives the interrupt it will run the task or callback.
 
-The reason for this behavior is because node.js is single threaded.  It is not possible to created threads in node.js.  And node.js is collectons of libraries that are focused on networking.
+The reason for this behavior is because node.js is single threaded.  It is not possible to create threads in node.js.  Node.js is a collecton of libraries that are focused on networking.
 
 Don't worry if you are not getting this right away.  Lets take another example.  Lets change the code above like this, using the [setInterval](http://www.w3schools.com/jsref/met_win_setinterval.asp) function.
 
@@ -143,7 +143,7 @@ setInterval(function(){
 
 console.log('Hello world!');
 ```
-What happens know, can you assume it before we run the code?  Guess, and then save and run it and see what happens. (I am assuming that by now you know how to save and run node.js code, because we have done that a few times here above).  The terminal window should show something like this.
+What happens know, can you guess before we run the code?  Guess, and then save and run it and see what happens. (I am assuming that by now you know how to save and run node.js code, because we have done that a few times here above).  The terminal window should show something like this.
 
 ```bash
 ☁  nodejsTest  node helloTest.js
@@ -171,7 +171,7 @@ setInterval(function(){
 
 ```
 
-Note that we are logging different text and also have different times.  What will happen now? Guess and then run the code.
+Note that we are logging different text output and have also set different interval times.  What will happen now? Guess and then run the code.
 The terminal window is showing something like this.
 
 ```bash
@@ -191,11 +191,11 @@ Hello world!
 ```
 This program will run forever. Note that Node.js is single threaded, still we are getting seperate tasks running at the same time.  It looks like we have two threads but we just have one.  This is because of the interrupt I talked about here above.
 
-Lets think of this from a web service point aview.  We have a web service that is single threaded and NOT asyncronous. And this web service gets a connection from a client, for example requesting some data from database.  What will happen?  If we are single threaded and NOT asynchronous the web service is occupied and is not able to do any other job.  If we have more clients that want to connect to our single threaded web service the just have to wait until the one client that has the connection with our web service is done.  Node.js can handle this scenario, even though it is single treaded.  Because it is asynchronous.  If we go through the same scenario with nodejs.  The first client connects and asks for data from the database.  Nodejs sends a request to the database and while it waits for the response from the database it handles other client requests.  When database is finished getting the data and sends the response back to nodejs.  Nodejs gets an interrupt signal, receives the data and gives it the the first client that connected and was asking for this data.
+Lets think of this from a web services point of view.  We have a web service that is single threaded and NOT asyncronous. This web service gets a connection from a client, for example requesting some data from database.  What will happen?  If we are single threaded and NOT asynchronous the web service is occupied and is not able to do any other job.  If we have more clients that want to connect to our single threaded web service then they have to wait until the one client that has the connection with our web service is done.  Node.js can handle this scenario, even though it is single treaded.  Because it is asynchronous.  If we go through the same scenario with nodejs.  The first client connects and asks for data from the database.  Nodejs sends a request to the database and while it waits for the response from the database it handles other client requests.  When database is finished getting the data and sends the response back to nodejs.  Nodejs gets an interrupt signal, receives the data and gives it the the first client that connected and was asking for this data.
 
 ## Echo server
 
-Now it is time to create a simple socket server. As mentioned above node.js contains a cluster of libraries that are mainly focused on networking.  In this example we are going to write a little echo server using the [**net** library](http://nodejs.org/api/net.html) that comes with nodejs.  To use it we use the command `require('')`.  **require('')** is a similar thing as **import** in **Python**. To require net library we simply write the following code.
+Now it is time to create a simple socket server. As mentioned above node.js contains a cluster of libraries that are mainly focused on networking.  In this example we are going to write a little echo server using the [**net** library](http://nodejs.org/api/net.html) that comes with nodejs.  To use it we use the command `require('')`.  **require('')** is a similar thing as **import** in **Python**. To require the net library we simply write the following code.
 
 ```javascript
 var net = require('net');
@@ -312,7 +312,7 @@ var server = net.createServer(function(socket){
 
 server.listen(6000)
 ```
-At this point we have written a small socket server that sents all incomming messages (data) to all connected sockets.  Now you should have a good idea about what node.js is, specially the single threaded and asynchronous part.  It is very important to get good understanding of this part if you are going to write node.js programs.  Node.js is mainly collection of libraries that are aimed to write network application.
+At this point we have written a small socket server that sends all incoming messages (data) to all connected sockets.  Now you should have a good idea about what node.js is, especially the single threaded and asynchronous part.  It is very important to get a good understanding of this part if you are going to write node.js programs.  Node.js is mainly a collection of libraries that are aimed to write network application.
 
 Although we have been doing some coding in node.js none of them are web services.  So lets look into web services in node.js
 
@@ -323,14 +323,14 @@ It is really easy to write a HTTP web service in node.js.  Below is code that sh
 var http = require('http');
 
 var server = http.createServer(function(request, response){
-	response.writeHead(200, {'conent-type': 'test/plain'});
+	response.writeHead(200, {'content-type': 'text/plain'});
 	response.end('Hello World!');
 });
 
 server.listen(7000);
 ```
 
-As you probably notice this is very simular coding as we did earlier when we build the socket server. And the *HTTP* package is based *NET* package that we were using when we build the socket server.  The createServer function in the HTTP package takes in a callback that has two parameters request and response (often called req and res). 
+As you probably notice this is very similar code to the code that we wrote earlier when we built the socket server. And the *HTTP* package is based *NET* package that we were using when we built the socket server.  The createServer function in the HTTP package takes in a callback that has two parameters request and response (often called req and res). 
 
 Lets go through what happens when there is a request at port 7000.  Then the network package takes control and the HTTP package receives the request. Headers are parsed.  We can read the request and we can write to the response that is sent back to the client. 
 
@@ -348,11 +348,11 @@ or in browser by the url
 
 In both cases you should get the response `Hello World!` 
 
-This work just as the socket server.  We create a server.  It takes in a callback and we answer the callback.
+This works just like the socket server.  We create a server.  It takes in a callback and we answer the callback.
 
 Lets try sending multiple requests at the same time.  To do that we use [ab](http://httpd.apache.org/docs/2.2/programs/ab.html).
 
-We still have our HTTP server running.  Open up a terminal window and execute the following funciton
+We still have our HTTP server running.  Open up a terminal window and execute the following function
 
 	ab -n 100 -c 100 http://127.0.0.1:7000/
 
@@ -399,7 +399,7 @@ Percentage of the requests served within a certain time (ms)
   99%     18
  100%     18 (longest request)
  ```
- This message has some information for us.  Like how much time it took to sent all the requests `Time taken for tests:   0.024 seconds` and time per request `Time per request: 0.241 [ms]` and much more.
+ This message has some information for us.  Like how much time it took to send all the requests `Time taken for tests:   0.024 seconds` and time per request `Time per request: 0.241 [ms]` and much more.
 
  Lets add to your HTTP server a delay function.  We can think of this delay as time it takes our HTTP server to get data from a database.  In our example below we have added 2 sec. delay  See code below.  
 ```javascript
@@ -423,14 +423,14 @@ curl -i http://localhost:7000
 The response we get back is like this
 ```
 HTTP/1.1 200 OK
-conent-type: test/plain
+conent-type: text/plain
 Date: Sat, 08 Nov 2014 11:04:52 GMT
 Connection: keep-alive
 Transfer-Encoding: chunked
 
 Hallo
 ```
-And then after 2 sec get added
+And then after 2 sec we get
 
 ```
 This is fake message from fake database
@@ -489,12 +489,12 @@ Percentage of the requests served within a certain time (ms)
  100%   2019 (longest request)
 ```
 Look at the time it took to do this test `Time taken for tests:   2.027 seconds`.  This is only 2 sec. more it took before we added the 2 sec. delay.  Note that we are making 100 requests all at the same time.
-How much time will it take if we make 200 request in two chunks.  100 requests at the same time and when they are finished there will be another 100 requests sent immediately.  Can you assume how much time it will take?
+How much time will it take if we make 200 request in two chunks.  100 requests at the same time and when they are finished there will be another 100 requests sent immediately.  Can you guess how much time it will take?
 Lets try it.
 ```terminal
 ab -n 200 -c 100 http://127.0.0.1:7000/
 ```
-We get in the Terminal window
+We open up the Terminal window
 ```terminal
 ☁  2014-T-514-VEFT [master] ab -n 200 -c 100 http://127.0.0.1:7000/
 This is ApacheBench, Version 2.3 <$Revision: 655654 $>
