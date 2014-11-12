@@ -2,10 +2,10 @@
 
 Python is easy to learn, powerful programming language.  Python has efficient high-level data structures, 
 and a simple but effective approach to object-oriented programming.    Python has an elegant syntax and dynamic typing.    
-Python can be downloaded from: [https://www.python.org/](Python Web site)
+Python can be downloaded from: [https://www.python.org/]
 
 Python syntax is defined in a style guide 	that can be found here, 
-[http://legacy.python.org/dev/peps/pep-0008/#code-lay-out](Code layout)
+[http://legacy.python.org/dev/peps/pep-0008/#code-lay-out].
 The key rule for python is to use 4 spaces pr. indentation level, do not use tabs.  
 There are no curly brackets around the body of a Python function.  It starts after the colon in the next new line.   
 Classes and functions should be separated by a blank line. 
