@@ -61,7 +61,7 @@ name Perun. If you don't specify the name of your node Elasticsearch will
 provide one for you. This node was elected the master node for our cluster and
 is in the state of accepting other nodes into the cluster for replication.
 Finally we can see that the Elasticsearch API has the public address
-localhost:9200. 
+localhost:9200.
 
 Remember to give your cluster a name. If you use the default one, your node
 might join a cluster that is on the same network, specially if your are doing
@@ -74,7 +74,7 @@ Now let's play around with Elasticsearch by adding, updating and deleting
 documents.
 
 To add documents to Elasticsearch we use the Elasticsearch API and we use the
-well known HTTP methods to do so. 
+well known HTTP methods to do so.
 
 To index a document we do a PUT command with a JSON object in the body.
 The url that we PUT to is on the following format.
@@ -135,11 +135,11 @@ If we `PUT` the document again, using the same id, the document is updated in th
 
     curl -XPUT http://localhost:9200/entries/entry/1 -d '{
     "title": "Today I learned to search",
-    "data": "Lets change the blog content", 
+    "data": "Lets change the blog content",
     "created": "2014-12-24T14:24:23"}'
-    {"_index":"entries","_type":"entry","_id":"1","_version":2,"created":false}%   
+    {"_index":"entries","_type":"entry","_id":"1","_version":2,"created":false}%
 
-    % curl http://localhost:9200/entries/entry/1            
+    % curl http://localhost:9200/entries/entry/1
     {"_index":"entries","_type":"entry","_id":"1","_version":2,"found":true,"_source":{
     "title": "Today I learned to search",
     "data": "Lets change the blog content",
@@ -152,8 +152,8 @@ You can remove a given document from the index using the `DELETE` HTTP method.
 
     % curl -XDELETE http://localhost:9200/entries/entry/1
     {"found":true,"_index":"entries","_type":"entry","_id":"1","_version":3}%
-    
-    % curl http://localhost:9200/entries/entry/1         
+
+    % curl http://localhost:9200/entries/entry/1
     {"_index":"entries","_type":"entry","_id":"1","found":false}%
 
 If we try to fetch the document after the delete, we can see that it has been
@@ -164,7 +164,7 @@ You can also delete all the documents under a given type as follows
     curl -XDELETE http://localhost:9200/entries/entry
 
 or, remove the whole index
-    
+
     curl -XDELETE http://localhost:9200/entries/
 
 # Search
@@ -228,7 +228,7 @@ To perform a query we POST on the _search endpoint with our query in the body of
     curl -XPOST http://localhost:9200/entries/_search -d '
     {
         "query":{
-            // query goes here! 
+            // query goes here!
         }
     }'
 
@@ -244,7 +244,7 @@ Let's create a query and search for entries that contain the work "scaffolding" 
             "query_string": {
                 "query": "scaffolding",
                 "default_field" : "data"
-            } 
+            }
         }
     }'
 
@@ -256,7 +256,7 @@ When execute this query,
     quote>             "query_string": {
     quote>                 "query": "scaffolding",
     quote>                 "default_field" : "data"
-    quote>             } 
+    quote>             }
     quote>         }
     quote>     }'
     {"took":3,"timed_out":false,"_shards":{"total":5,"successful":5,"failed":0},"hits":{"total":1,"max_score":0.095891505,"hits":[{"_index":"entries","_type":"entry","_id":"2","_score":0.095891505,"_source":{
@@ -264,7 +264,7 @@ When execute this query,
       "data": "Yeah, Ruby on rails is awesome, but scaffolding is not!",
       "created": "2013-04-02T12:34:02",
       "tags": ["programming", "ruby", "rails"]
-    }}]}}%            
+    }}]}}%
 
 We get back one entry where we have the text scaffolding in and that is document with id 2.
 
@@ -289,7 +289,7 @@ We get back one entry where we have the text scaffolding in and that is document
     '
 
 ## query by range on dates.
-    
+
     curl -XPOST http://localhost:9200/entries/_search -d '
     {
         "query" : {
@@ -301,3 +301,81 @@ We get back one entry where we have the text scaffolding in and that is document
             }
         }
     }'
+
+# Advanced key storing
+When storing keys in Elastic search it automatically stores the keys cleverly, for example when storing a key that includes a dash it splits the key on dashes.
+
+If we have a slug for example (some-pretty-long-slug), elastic would want to split this into smaller pieces to make the lookup faster. In some cases this is not good since we might want to look up by the slug (which should be unique). In order to prevent elastic search from changing the key we need to create our own mapping for elastic search.
+
+Let's use Kodemon from PA3 as an example. There we had keys that had a combined name of function and file. These keys should be unique (although it's not 100% accurate since 2 files could have the same name in different directories) and we want to look up each key as a unique key in the index.
+
+>If you want to run the following code make sure Elastic Search is running with the default settings, or change the code according to your own setup.
+
+>Do note that this will not work if you have data in elastic search that do not want to loose. To be able to use this method for existing data you would need to create data migration which is not covered in this section.
+
+We start of by creating the index. We can use the following script to do so
+```bash
+# Delete the kodemon index if you have one already
+curl -XDELETE http://127.0.0.1:9200/kodemon
+# Create the kodemon/execution index with one document
+curl -XPOST http://127.0.0.1:9200/kodemon/execution -d '{ "key": "script-hehe", "token": "token" }'
+# Delete all documents from the execution index
+curl -XDELETE http://127.0.0.1:9200/kodemon/execution
+```
+
+Now we can be sure that we have the index we want to create a custom mapping for.
+Let's assume the data is in the following format when it gets posted to elastic search.
+```json
+{
+    "execution_time": 0.0019073486328125,
+    "timestamp": "2014-11-05T02:12:39.000Z",
+    "token": "test-token",
+    "key": "second.py-cool_function",
+    "_id": "54598797538bb0f6084f0072"
+}
+```
+
+The next thing we want to do is to make sure that our the propertie key will not be stored as ```second.py``` and ```cool_function``` but as a single piece ```second.py-cool_function```.
+
+In order to do that we could execute the following script.
+```bash
+curl -X POST http://127.0.0.1:9200/kodemon/execution/_mapping?pretty=true -d '
+{
+    "execution": {
+        "properties": {
+            "key": {
+                "type": "multi_field",
+                "fields": {
+                    "original_key": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "key": {
+                        "type": "string",
+                        "index": "analyzed"
+                    }
+                }
+            },
+            "token": {
+                "type": "multi_field",
+                "fields": {
+                    "original_token": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "token": {
+                        "type": "string",
+                        "index": "analyzed"
+                    }
+                }
+            }
+        }
+    }
+}'
+```
+
+The following code takes all executions in and looks at the properties key and token specifically to see how to store them, the rest gets it's default mapping.
+
+We take both the key and token properties and tell elastic search to store these single fields as two properties. First as the original string which we say is not analyzed, which means that if we now query the propertie key by key.original_key then we are asking elastic to filter out where each key is exactly as it was when it got saved (ex. ```second.py-cool_function```).
+
+On the other hand if we still want to be able to look it up in a clever way elastic has also saved the properties like it wants to. So if we query by key as before we'll get the key split up on dashes like the default mapping behavior wants to. You can read more about mapping [here](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html)
