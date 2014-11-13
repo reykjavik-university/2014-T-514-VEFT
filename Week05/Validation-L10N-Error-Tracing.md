@@ -1,6 +1,6 @@
-##Globalization and Localization in ASP.NET
+#Globalization and Localization in ASP.NET
 
-#Introduction
+##Introduction
 
 Internationalization involves Globalization and Localization. Globalization is the process of designing applications that support different cultures. Localization is the process of customizing an application for a given culture.
 The format for the culture name is "<languagecode2>-<country/regioncode2>", where <languagecode2> is the language code and <country/regioncode2> is the subculture code. Examples include es-CL for Spanish (Chile) and en-US for English (United States).
@@ -17,15 +17,15 @@ Terms used:
 * Neutral culture: A culture that has a specified language, but not a region. (e.g. "en", "es")
 * Specific culture: A culture that has a specified language and region. (e.g. "en-US", "en-GB", "es-CL")
 
-#Detect user´s language
+##Detect user's language
 
-On each HTTP request, there is a header field called Accept-Language which determines which languages the user’s browser supports:
+On each HTTP request, there is a header field called Accept-Language which determines which languages the user's browser supports:
         Accept-Language: en-us,en;q=0.5
-This means that my browser prefers English (United States), but it can accept other types of English. The "q" parameter indicates an estimate of the user’s preference for that language. You can control the list of languages using your web browser.
+This means that my browser prefers English (United States), but it can accept other types of English. The "q" parameter indicates an estimate of the user's preference for that language. You can control the list of languages using your web browser.
 
-#Multiple languages in web API
+##Multiple languages in web API
 
-To add this feature to a web API service, a new MessageHandler can be created. The message handler validates the request header for localized languages
+To add this feature to a web API service, a new MessageHandler can be created. The message handler validates the request header for localized languages:
 
 ```c#
 using System;
@@ -104,7 +104,7 @@ namespace CoursesAPI
 }
 ```
 
-The LanguageMessageHandler class is then added to the global config for the Web API
+The LanguageMessageHandler class is then added to the global config for the Web API:
 
 ```c#
 using System.Web.Http;
@@ -123,7 +123,7 @@ namespace WebAPILocalization
 ```
 
 The next step is to add the translations to Resource files in the application. 
-This can be done in various ways. The code above supports fr-FR, es-CL and the default language en-GB. **Resource files don’t have to be used, translations could be in a database.**
+This can be done in various ways. The code above supports fr-FR, es-CL and the default language en-GB. **Resource files don't have to be used, translations could be in a database.**
 
 
 The Model class LanguageViewModel used the translations for its validation. If a required validation exception occurs, the validation message will be displayed in the localized culture.
@@ -150,7 +150,7 @@ namespace CoursesAPI.Models
 }
 ```
 
-To test the implemented cultures we could write the following method in our Web API.
+To test the implemented cultures we could write the following method in our Web API:
 
 ```c#
 [HttpGet]
@@ -166,12 +166,12 @@ public IEnumerable<LanguageViewModel> Get()
     return new[] { languageViewModel };
 }
 ```
-The action controller does not required any specific language methods. The get works for all cultures and the test result of a Get should return the correct string for a given localization.
+The action controller does not required any specific language methods. The Get works for all cultures and the test result of a Get should return the correct string for a given localization.
 For example, if you set the prefered language of your browser to fr-FR of french-France, a Get test response in JSON should look like this: 
 [{"Name":"Name fr-FR","Description":"Description fr-FR","Timestamp":"2014-09-15T14:06:38.3202911Z"}]
 
 
-To test translations for validation we could can create a action controller that uses the ModelState to validate the create object request in the Post method. If the Model is invalid, a HttpError object is created from the ModelState. The BadRequest(ModelState) provided by the framework cannot be used, because this method results in non-localized strings.
+To test translations for validation we could create a action controller that uses the ModelState to validate the create object request in the Post method. If the Model is invalid, a HttpError object is created from the ModelState. The BadRequest(ModelState) provided by the framework cannot be used, because this method results in non-localized strings.
 
 ```c#
 [HttpPost]
@@ -220,18 +220,18 @@ A Post test response in JSON for fr-FR should then look like this:
 
 
 
-**Related link and material**
+**Related links and material**
 * [Web Api Localization](http://damienbod.wordpress.com/2014/03/20/web-api-localization/)
 * [ASP.NET Internationalization](http://www.asp.net/mvc/overview/internationalization)
 * [HTTP Message Handlers](http://www.asp.net/web-api/overview/advanced/http-message-handlers)
 
 
-##Validation
+#Validation
 
-#Data Annotations
+##Data Annotations
 
 As we have already demostrated above, our LanguageViewModel class uses data annotation for the validation of our model class.
-Data anonnatation method is a technique that is very much used in model validation in ASP.NET MVC
+Data annotation method is a technique that is very much used in model validation in ASP.NET MVC
 
 In ASP.NET Web API, you can use attributes from the [System.ComponentModel.DataAnnotations](http://msdn.microsoft.com/en-us/library/system.componentmodel.dataannotations.aspx) namespace to set validation rules for properties on your model. Consider the LanguageViewModel model class we used before:
 
@@ -281,11 +281,11 @@ namespace CoursesAPI.Models
 Model validation does not guarantee that client data is safe. Additional validation might be needed in other layers of the application. (For example, the data layer might enforce foreign key constraints.)
 
 
-#Moving validation to service layer
+##Moving validation to the service layer
 
-As we have seen so far it is common to do the validation in the controller action it self, but what if we wanted to separate this process and perform the validation in a service layer. 
+As we have seen so far it is common to do the validation in the controller action itself, but what if we wanted to separate this process and perform the validation in a service layer. 
 
-The first thing to do is to create a class with a function that validated a model of any type
+The first thing to do is to create a class with a function that validated a model of any type:
 
 ```c#
 using CoursesAPI.Services.Exceptions;
@@ -322,7 +322,7 @@ namespace CoursesAPI.Services.Helpers
 }
 ```
 
-This would then allow us to have a method in our service for creating a LanguageViewModel instance like this
+This would then allow us to have a method in our service for creating a LanguageViewModel instance like this:
 
 ```c#
 ...
@@ -337,7 +337,7 @@ This would then allow us to have a method in our service for creating a Language
         }
 ...
 ```
-and then our controller action will look like this, which be the way is a lot cleaner
+and then our controller action will look like this, which by the way is a lot cleaner:
 
 ```c#
         [HttpPost]
@@ -350,7 +350,7 @@ and then our controller action will look like this, which be the way is a lot cl
 ```
 
 
-#Handling Validation Errors
+##Handling Validation Errors
 
 Web API does not automatically return an error to the client when validation fails. It is up to the controller action to check the model state and respond appropriately.
 
@@ -439,10 +439,10 @@ public static class WebApiConfig
 }            
 ```
 
-The mein purpose of all this is to find a way to handle all types of messages in a standard and equal way. The code above always returns a response in a name-value pair format which should make it a lot easier for any client to work with.
+The main purpose of all this is to find a way to handle all types of messages in a standard and equal way. The code above always returns a response in a name-value pair format which should make it a lot easier for any client to work with.
 
 
-**Related link and more material**
+**Related links and more material**
 * ["Under-Posting" and "Over-Posting"](http://www.asp.net/web-api/overview/formats-and-model-binding/model-validation-in-aspnet-web-api)
 * [Model Validation](http://www.asp.net/web-api/overview/formats-and-model-binding/model-validation-in-aspnet-web-api)
 * [Model Validation in ASP.NET Web API](http://www.codeproject.com/Articles/741551/Model-Validation-in-ASP-NET-Web-API)
@@ -450,9 +450,9 @@ The mein purpose of all this is to find a way to handle all types of messages in
 * [WEB API 2 USING ACTIONFILTERATTRIBUTE, OVERRIDEACTIONFILTERSATTRIBUTE AND IOC INJECTION](http://damienbod.wordpress.com/2014/01/04/web-api-2-using-actionfilterattribute-overrideactionfiltersattribute-and-ioc-injection/)
 
 
-##Exception Handling
+#Exception Handling
 
-#HttpResponseException
+##HttpResponseException
 
 What happens if a Web API controller throws an uncaught exception? By default, most exceptions are translated into an HTTP response with status code 500, Internal Server Error.
 
@@ -494,7 +494,7 @@ public LanguageViewModel Get(int id)
 }
 ```
 
-#Exception Filters
+##Exception Filters
 
 Like described earlier in this document you can customize how Web API handles exceptions by writing an exception filter. An exception filter is executed when a controller method throws any unhandled exception that is not an HttpResponseException exception. The HttpResponseException type is a special case, because it is designed specifically for returning an HTTP response.
 
@@ -585,9 +585,9 @@ config.Filters.Add(new AppExceptionFilter());
 This allows the methods or other layers to contain no exception logic, this is all in the exception filter attribute class.
 
 
-#Logging unhandled exceptions
+##Logging unhandled exceptions
 
-Today there’s no easy way in Web API to log or handle errors globally. Some unhandled exceptions can be processed via exception filters, but there are a number of cases that exception filters can’t handle. For example:
+Today there's no easy way in Web API to log or handle errors globally. Some unhandled exceptions can be processed via exception filters, but there are a number of cases that exception filters can't handle. For example:
 
 * Exceptions thrown from controller constructors.
 * Exceptions thrown from message handlers.
@@ -622,7 +622,7 @@ namespace CoursesAPI.Loggers
 }
 ```
 
-The implementation above is very simple but if you wanted to use an external service like for example [Raygun](https://raygun.io/) you could do the following.
+The implementation above is very simple but if you wanted to use an external service like for example [Raygun](https://raygun.io/) you could do the following:
 
 ```c#
 using Mindscape.Raygun4Net;
@@ -695,11 +695,11 @@ namespace CoursesAPI
 }
 ```
 
-#Global IExceptionHandler
+##Global IExceptionHandler
 
 The IExceptionHandler handles all unhandled exceptions from all controllers. This is the last in the list. If an exception occurs, the IExceptionLogger will be called first, then the controller ExceptionFilters and if still unhandled, the IExceptionHandler implementation.
 
-Here is an example.
+Here is an example:
 
 ```c#
 using System.Net;
@@ -750,29 +750,28 @@ Now that we have seen all the possible implementations for error handling the fo
 
 * Exception loggers are the solution to seeing all unhandled exception caught by Web API.
 * Exception handlers are the solution for customizing all possible responses to unhandled exceptions caught by Web API.
-* Exception filters are the easiest solution for processing the subset unhandled exceptions related to a specific action or controller. 
+* Exception filters are the easiest solution for processing the subset of unhandled exceptions related to a specific action or controller. 
 
 
 
-**Related link and more material**
+**Related links and more material**
 * [EXPLORING WEB API EXCEPTION HANDLING](http://damienbod.wordpress.com/2014/02/12/exploring-web-api-exception-handling/)
 * [Error Handling in ASP.NET WebAPI](http://blogs.msdn.com/b/youssefm/archive/2012/06/28/error-handling-in-asp-net-webapi.aspx)
 * [Global Error Handling](http://weblogs.asp.net/jongalloway//looking-at-asp-net-mvc-5-1-and-web-api-2-1-part-4-web-api-help-pages-bson-and-global-error-handling)
 * [Web API Global Error Handling](http://www.asp.net/web-api/overview/testing-and-debugging/web-api-global-error-handling)
 * [ASP.NET Web API exception logging with Raygun.io](http://www.strathweb.com/2014/03/asp-net-web-api-exception-logging-raygun-io/)
 
-
-##Tracing
+#Tracing
 
 When we are trying to debug a application, there is no substitute for a good set of trace logs. 
 You can use this feature to trace what the Web API framework does before and after it invokes your controller. You can also use it to trace your own code.
 
 
-#Default Tracing
+##Default Tracing
 
-To enable tracing using System.Diagnostics we will need need to install [Microsoft.AspNet.WebApi.Tracing](http://www.nuget.org/packages/Microsoft.AspNet.WebApi.Tracing) which will install the latest Web API tracing package.
+To enable tracing using System.Diagnostics we will need to install [Microsoft.AspNet.WebApi.Tracing](http://www.nuget.org/packages/Microsoft.AspNet.WebApi.Tracing) which will install the latest Web API tracing package.
 
-Now, to enable dafault tracing add the follwing code to the config in the WebApiConfig class.
+Now, to enable dafault tracing add the follwing code to the config in the WebApiConfig class:
 
 
 ```c#
@@ -790,14 +789,14 @@ This code adds the [SystemDiagnosticsTraceWriter](http://msdn.microsoft.com/en-u
 
 If you run your application in the debugger and issue a request, the trace statements are written to the Output window in Visual Studio.
 
-You may noticed in the code example above that the SystemDiagnosticsTraceWriter has two properties that allow you to control the settings.
+You may noticed in the code example above that the SystemDiagnosticsTraceWriter has two properties that allow you to control the settings:
 
 * IsVerbose: If false, each trace contains minimal information. If true, traces include more information.
 * MinimumLevel: Sets the minimum trace level. Trace levels, in order, are Debug, Info, Warn, Error, and Fatal.
 
-#Add traces to your code
+##Add traces to your code
 
-You can also use the trace writter to trace your own code, like this.
+You can also use the trace writer to trace your own code, like this:
 
 ```c#
 [HttpGet]
@@ -815,7 +814,7 @@ public IEnumerable<LanguageViewModel> Get()
 }
 ```
 
-#Creating Custom Trace Writer
+##Creating Custom Trace Writer
 
 Instead of using the SystemDiagnosticsTraceWriter class as the trace writer you can also create your own trace writer. To do so you need to create a class that implements the ITraceWriter interface and then implement its Trace() method. The following code shows how this is done:
 
@@ -852,7 +851,7 @@ namespace CoursesAPI.Tracers
 }
 ```
 
-To enable tracing, you must configure Web API to use your ITraceWriter implementation. You can do this by adding the following code the Register method in the WebApiConfig class.
+To enable tracing, you must configure Web API to use your ITraceWriter implementation. You can do this by adding the following code to the Register method in the WebApiConfig class.
 
 ```c#
 public static void Register(HttpConfiguration config)
