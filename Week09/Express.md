@@ -80,7 +80,7 @@ mongoose.model('Todo', TodoSchema);
 
 A fairly simple Schema that uses three different data types, you can check out other datatypes that mongoose offers [here](http://mongoosejs.com/docs/schematypes.html).
 
-So we got our Schema defined now we need to add some operations to our Schema. Because this is a RESTful API we need to define CRUD methods. We add these methods in a seperate file under the controllers folder.
+So we got our Schema defined now we need to add some operations to our Schema. Because this is a RESTful API we need to define CRUD methods. We add these methods in a separate file under the controllers folder.
 
 ```javascript
 var mongoose = require('mongoose'),
