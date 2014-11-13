@@ -1,14 +1,78 @@
 #MongoDB
 
-MongoDB is a NoSQL database that uses a document-oriented data model.  MongoDB does not use tables and rows as relational 
-databases do but instead all data is stored in documents and collections.  MongoDB is therefore schema free.   
-Data is stored on BSON format which is a binary-encoded serialization of JSON-like documents.  
-These objects are added to a collection.  Collections are similar to tables in a relational database. 
+NoSQL databases have received a lot of attention the past few years due to an exponential growth in storing and accessing data. One of the most used and popular NoSQL servers MongoDB is especially popular with web programmers. But why is that ?  Lets list some of the more appealing MongoDB features.
 
-MongoDB is a fast and scalable database, it is good for many things but it is no recommended to use this as a database for 
-applications that store sensitive data.    
+Data structure
+> MongoDB is a document driven database or as some call it a “document store” with document stores you are not confined by data schemas, i.e. you can put different values in each document stored in the same collection. The main benefit of this structure is that you can store the data in the database almost exactly as it is represented on the media device "web page\app.."
 
-It is easy to run many instances of MongoDB, if that is done the instances replicate the data between them.   
+Performance
+> MongoDB inserts\reads can on some areas perform substantially faster than relational databases.
+
+Scalability
+> Linear scalability its easy to add more servers to your server farm just by adding a new shard to your database and MongoDB takes care of setting up and integrating the shard to the farm.
+
+How ever MongoDB is not the *silver bullet* of databases. Lets take a look at MongoDB cons.
+
+Data integrity
+> With the schema freedom provided by MongoDB it is more in the hand of the programmer to insure  data integrity.
+
+> Tho MongoDB states that it is perfectly safe to store sensitive data “bank statements and such” I would highly recommend against it and leave that task to the schema\relational databases.
+
+Bloated database
+> You could have a lot of recurring data. i.e. when you don’t have relationships you tend to just store the same data over and over again.
+
+Additional reading material regarding MongoDB haters 
+[Sarah Mei](http://www.sarahmei.com/blog/2013/11/11/why-you-should-never-use-mongodb/)
+
+
+##Data models.
+As stated previously data models in MongoDB have flexible schemas called Collections which are similar to tables in SQL relational databases. Collections stores our “collection” of documents in a binary json string called BISON.
+
+**Example of a document.
+```
+{
+	name: ‘Sjurt Lobain’,
+	age: 26,
+	groups: [ ‘27Club’, ‘Svetlana’, ‘KidsDontDoDrugs’ ]
+}
+```
+
+and in the same collection this would be perfectly acceptable but would probably not be an good idea for the database integrity.
+```
+{
+	name: B1337BS,
+	song: ’What’s my age again’,
+	trivia: ’All these small things late night work sucks.. and so on’
+}
+```
+
+##Indexes
+Indexes are special data structures that store a small portion of the collection’s data set in an easy to traverse form. The index stores the value of a specific field or set of fields, ordered by the value of the field.
+
+Fundamentally, indexes in MongoDB are similar to indexes in other database systems. MongoDB defines indexes at the collection level and supports indexes on any field or sub-field of the documents in a MongoDB collection.
+
+All MongoDB collections have an index on the _id field that exists by default. If applications do not specify a value for _id the driver or the MongoDB will create an _id field with an ObjectId value.
+
+The _id index is unique, and prevents clients from inserting two documents with the same value for the _id field.
+
+##Replication
+Replication is a way to increase data availability and provides a redundancy plan for server failure. In a MongoDB replica set the primary node accepts all write operations from clients and replicates it to the secondary nodes. For each replica set you can only have one primary node.
+
+Additional reading material about [replication] (http://docs.mongodb.org/manual/core/replication-introduction/)
+
+##Sharding
+
+Sharding is a method for storing data across multiple machines. MongoDB uses sharding to support deployments with very large data sets and high throughput operations. 
+To enable a sharding service in MongoDB you need to set up a shardered cluster shard cluster **requires three components.**
+ 
+[Shards](http://docs.mongodb.org/manual/reference/glossary/#term-shard) store the data. To provide high availability and data consistency, in a production sharded cluster, each shard is a replica set
+
+[Query routers](http://docs.mongodb.org/manual/reference/glossary/#term-mongos) or mongos instances, interface with client applications and direct operations to the appropriate shard or shards. The query router processes and targets operations to shards and then returns results to the clients. A sharded cluster can contain more than one query router to divide the client request load. A client sends requests to one query router. Most sharded clusters have many query router
+
+[Config server](http://docs.mongodb.org/manual/reference/glossary/#term-config-server) Store the cluster’s metadata. This data contains a mapping of the cluster’s data set to the shards. The query router uses this metadata to target operations to specific shards. Production sharded clusters have exactly 3 config servers.
+
+Additional reading material about [Sharding] (http://docs.mongodb.org/manual/core/sharding-introduction/)
+ 
 
 MongoDB does not support traditional sql query language.   Instead it offers its own query language and it is easy 
 to find good information about that on the official MongoDB website.
