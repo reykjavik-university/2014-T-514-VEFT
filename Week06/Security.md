@@ -1,7 +1,6 @@
 
 ***NOTE: this document is still a work in progress as it summarises some of the the main topics in discussion, it also quotes on references and articles***
 
-
 # Security
 
 ## OAuth
@@ -31,9 +30,9 @@ because of this he is [no longer involved](http://hueniverse.com/2012/07/26/oaut
 
 Building an application in .NET which support OAuth is relatively easy.
 
-Microsoft´s [ASP.NET Identity](http://www.asp.net/identity/overview/getting-started/introduction-to-aspnet-identity) system is designed to replace the previous ASP.NET Membership and Simple Membership systems. It includes profile support, OAuth integration, works with [OWIN](http://www.asp.net/aspnet/overview/owin-and-katana), and is included with the ASP.NET templates shipped with Visual Studio 2013.
+Microsoft's [ASP.NET Identity](http://www.asp.net/identity/overview/getting-started/introduction-to-aspnet-identity) system is designed to replace the previous ASP.NET Membership and Simple Membership systems. It includes profile support, OAuth integration, works with [OWIN](http://www.asp.net/aspnet/overview/owin-and-katana), and is included with the ASP.NET templates shipped with Visual Studio 2013.
 
-For example, when building a MVC 5 Application the support for enabling users to log in using OAuth 2.0 with credentials from an external authentication provider, such as Facebook, Twitter or Google is already supported out of the box. [This totutial explains how](http://www.asp.net/mvc/tutorials/mvc-5/create-an-aspnet-mvc-5-app-with-facebook-and-google-oauth2-and-openid-sign-on)
+For example, when building a MVC 5 Application the support for enabling users to log in using OAuth 2.0 with credentials from an external authentication provider, such as Facebook, Twitter or Google is already supported out of the box. [This tutorial explains how](http://www.asp.net/mvc/tutorials/mvc-5/create-an-aspnet-mvc-5-app-with-facebook-and-google-oauth2-and-openid-sign-on)
 
 Futher more, this tutorial exaplains how to create your own [OAuth 2.0 Authorization Server using OWIN OAuth middleware](http://www.asp.net/aspnet/overview/owin-and-katana/owin-oauth-20-authorization-server)
 
@@ -47,7 +46,7 @@ Futher more, this tutorial exaplains how to create your own [OAuth 2.0 Authoriza
 
 OpenID Connect 1.0 is a simple identity layer on top of the OAuth 2.0 protocol. It enables Clients to verify the identity of the End-User based on the authentication performed by an Authorization Server, as well as to obtain basic profile information about the End-User in an interoperable and REST-like manner.
 
-OpenID Connect is an interoperable authentication protocol based on the OAuth 2.0 family of specifications. It uses straightforward REST/JSON message flows with a design goal of “making simple things simple and complicated things possible”. It’s uniquely easy for developers to integrate, compared to any preceding Identity protocol.
+OpenID Connect is an interoperable authentication protocol based on the OAuth 2.0 family of specifications. It uses straightforward REST/JSON message flows with a design goal of “making simple things simple and complicated things possible”. It's uniquely easy for developers to integrate, compared to any preceding Identity protocol.
 
 OpenID Connect lets developers authenticate their users across websites and apps without having to own and manage password files. For the app builder, it provides a secure verifiable, answer to the question: “What is the identity of the person currently using the browser or native app that is connected to me?”
 
@@ -57,7 +56,7 @@ OpenID Connect allows for clients of all types, including browser-based JavaScri
 
 ***What OpenID Connect does is basically add authentication on top of OAuth.***
 
-One could say that the main difference between these protocols is that OAuth defined access tokens, these tokens are then used to access providers, for example get some information from facebook/google.On the other hand OpenID Connect defined identity tokens which are used to identify the user, for example to access an application.
+One could say that the main difference between these protocols is that OAuth defined access tokens, these tokens are then used to access providers, for example get some information from facebook/google. On the other hand OpenID Connect defined identity tokens which are used to identify the user, for example to access an application.
 
 The OpenID Connect protocol, in abstract, follows the following steps.
 
@@ -71,11 +70,11 @@ The OpenID Connect protocol, in abstract, follows the following steps.
 
 Also, [this video](http://vimeo.com/97344501), which is a talk by Dominick Baier held at the 2014 NDC explains the differences between OpenID Connect & OAuth in an interest way. ***You are encouraged to watch it!***
 
-OAuth 2.0, is a framework, specified by the IETF in RFCs 6749 and 6750 (published in 2012) designed to support the development of authentication and authorization protocols. It provides a variety of standardized message flows based on JSON and HTTP; OpenID Connect uses these to provide Identity services.
+OAuth 2.0, is a framework, specified by the IETF in RFCs 6749 and 6750 (published in 2012) designed to support the development of authentication and authorization protocols. It provides a variety of standardized message flows based on JSON and HTTP, OpenID Connect uses these to provide Identity services.
 
 There are several [libraries](http://openid.net/developers/libraries/) available in different languages that implement OpenID Connect and related specifications.
 
-One of these libraries is the [IdentityServer v3](https://github.com/thinktecture/Thinktecture.IdentityServer.v3) which is demostrated in the [talk by Dominick Baier](http://vimeo.com/97344501)
+One of these libraries is the [IdentityServer v3](https://github.com/thinktecture/Thinktecture.IdentityServer.v3) which is demonstrated in the [talk by Dominick Baier](http://vimeo.com/97344501)
 
 IdentityServer v3 is a .NET-based open source implementation of an OpenID Connect and OAuth2 security token service.
 
@@ -83,7 +82,7 @@ IdentityServer v3 is a .NET-based open source implementation of an OpenID Connec
 
 ####Flows
 
-The OpenID Connect authentication process consists by requiring the user to authenticate him/her self through a OpenID provider. This process then returns the information about the user in the form of a id token, which contains scopes and claims, as well as other useful information about the user being authenticated.
+The OpenID Connect authentication process consists by requiring the user to authenticate him/her self through a OpenID provider. This process then returns the information about the user in the form of an id token, which contains scopes and claims, as well as other useful information about the user being authenticated.
 
 The way in which this process is conducted is referred as a flow. The main flows are:
 
@@ -97,8 +96,8 @@ This flow can be specified throught the 'response_type' parameters in the author
 
 The basic steps of this flow are the following:
 
-1. The client send an authentication request to the OpenID provider
-2. The OpenID provider authenticates the user(of behalf of the client) and responds with an authorization code to the client
+1. The client sends an authentication request to the OpenID provider.
+2. The OpenID provider authenticates the user (on behalf of the client) and responds with an authorization code to the client.
 3. The client requests an id token with the authorization code.
 3. The client validates the token and retrives the user information.
 
@@ -106,43 +105,41 @@ The basic steps of this flow are the following:
 
 The basic steps of this flow are the following:
 
-1. The client send an authentication request to the OpenID provider
-2. The OpenID provider authenticates the user(of behalf of the client) and redirects him/her to the client with an id token.
-3. The client validates the token and retrives the user information.
+1. The client sends an authentication request to the OpenID provider.
+2. The OpenID provider authenticates the user (on behalf of the client) and redirects him/her to the client with an id token.
+3. The client validates the token and retrieves the user information.
 
 #####Hybrid Flow
 
-This flow is basically a mix of the other two, which means that in some cases the authorization process is return to the client with a code and sometimes with a id token directly.
+This flow is basically a mix of the other two, which means that in some cases the authorization process is return to the client with a code and sometimes with an id token directly.
 
 
 ####Request Parameters
 
 Some of the request parameters or main ones are: 
 
-* client_id       : This is the client identifier
-* response_type   : this is the reponse type. Like 'id-token' or token
-* scope           : This represent the access or information request. f.e. openid, profile, email, read or write 
-* redirect_uri    : This is the location for where the response will be send
-* response_mode   : This defines the Form Post Response Mode
+* client_id       : This is the client identifier.
+* response_type   : this is the reponse type. Like 'id-token' or token.
+* scope           : This represents the access or information request. F.e. openid, profile, email, read or write.
+* redirect_uri    : This is the location for where the response will be sent.
+* response_mode   : This defines the Form Post Response Mode.
 * state           : This is for maintaining a state between the client and provider.
-* nonce           : This used to associate a client session with an id token
-
+* nonce           : This is used to associate a client session with an id token.
 
 #### ID token
 
-As we talked about earlier the id token contains information about the authenticated user in the form of claim. id tokens as represented in a [JSON Web Token](http://jwt.io/) format. 
-Some of the claims contained within a id token are the following:
+As we talked about earlier the id token contains information about the authenticated user in the form of a claim. Id tokens as represented in a [JSON Web Token](http://jwt.io/) format. 
+Some of the claims contained within an id token are the following:
 
-* iss      : This represents the issuer of the response(url)
+* iss      : This represents the issuer of the response (url).
 * sub      : This is the subject identifier, a unique identifier that represents a user.
-* aud      : This is the audience which is a client identifier
-* exp      : This represents the expiration date of the id token
-* iat      : This represents the issue date
-* nonce    : Again, this used to associate a client session with an id token
-* at_hash  : This represents the hashed access token
+* aud      : This is the audience which is a client identifier.
+* exp      : This represents the expiration date of the id token.
+* iat      : This represents the issue date.
+* nonce    : Again, this is used to associate a client session with an id token.
+* at_hash  : This represents the hashed access token.
 
-
-####Scopes 
+####Scopes
 
 OpenID Connect defines the following scope values:
 
@@ -150,16 +147,15 @@ OpenID Connect defines the following scope values:
 * profile        : This represents a profile claim request
 * email          : This represents an email claim request
 * address        : This represents an address claim request
-* phone          : This represents an phone claim request
+* phone          : This represents a phone claim request
 * offline_access : This represents an OAuth 2.0 Refresh Token request
 
-It is ofcourse also possible to define custom scopes in order to achieve some functionality. 
+It is of course also possible to define custom scopes in order to achieve some functionality.
 
 ####Claims
 
 The OpenID Connect also defines several sets of claims.
-For more information on Claim [please refer to these specs](http://openid.net/specs/openid-connect-basic-1_0.html#StandardClaims)
-
+For more information on Claim [please refer to these specs](http://openid.net/specs/openid-connect-basic-1_0.html#StandardClaims).
 
 ***Links***
 * [OpenID Connect](http://openid.net/)
