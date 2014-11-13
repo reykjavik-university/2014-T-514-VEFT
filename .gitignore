@@ -178,3 +178,6 @@ FakesAssemblies/
 
 # Virtualenv
 .venv
+
+# Mac
+.DS_Store
