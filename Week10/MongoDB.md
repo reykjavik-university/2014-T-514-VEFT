@@ -118,13 +118,13 @@ Person.find(function (err, persons) {
 ```
 For more information about queries see [here](http://mongoosejs.com/docs/queries.html)
 
-## Validating in mongoose
+# Validating in mongoose
 
-Validation is defined in the schema
-Validation occurs when document attempts to be saved, after default values have been saved
-Validation is asynchronously recursive, when you call the save function validation is executed. If an error occurs your save function callback receives it.
+* Validation is defined in the schema
+* Validation occurs when document attempts to be saved, after default values have been saved
+* Validation is asynchronously recursive, when you call the save function validation is executed. If an error occurs your save function callback receives it.
 
-#Simple validation
+## Simple validation
 
 Simple validation is declared by passing a function to validate and error type to your SchemaType.
 
@@ -151,7 +151,7 @@ schema.path('name').validate(function (v) {
 }, 'my error type');
 ```
 
-#Regular expression
+## Regular expression
 
 You can also validate by using regular expression
 
@@ -162,7 +162,7 @@ var schema = new Schema({
 });
 ```
 
-#Asynchronous validation
+## Asynchronous validation
 
 You can define a validator function with two parameters like:
 ```
@@ -175,27 +175,29 @@ Then the function fn will be called with true or false depending on whether the 
 This allows for calling other models and querying data asynchronously from your validator.
 
 
-Mongoose also has some built in validators.
+## Built in validators.
 
-Strings:
-	enum: takes a list of allowed strings.
-	```
+* Strings:
+
+*enum: takes a list of allowed strings.*
+```
 	var Post = new Schema({
-    type: { type: String, enum: ['smuu', 'foo', 'bar'] }
-		})
-		```
+    		type: { type: String, enum: ['smuu', 'foo', 'bar'] }
+	})
+```
 
-Numbers:
-		min: minimum value
-		```
-		var Person = new Schema({
-    age: { type: Number, min: 10 }
-		})
-		```
+* Numbers:
 
-		max: maxmimum value
-		```
-		var Person = new Schema({
-    age: { type: Number, max: 42 }
-		})
-		```
+*min: minimum value*
+```
+	var Person = new Schema({
+    		age: { type: Number, min: 10 }
+	})
+```	
+
+*max: maxmimum value*
+```
+	var Person = new Schema({
+    		age: { type: Number, max: 42 }
+	})
+```
