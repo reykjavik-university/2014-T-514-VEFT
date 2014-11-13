@@ -1,39 +1,35 @@
 
 #Caching
 
-Speed! It is becoming more and more important to serve content to client as fast as possible. One method to aid this is caching. Caching does this by temporarly storing data so that future request to that same data can be served faster.
+Speed! It is becoming more and more important to serve content to client as fast as possible. One method to aid this is caching. Caching does this by temporarly storing data so that future requests to that same data can be served faster.
 
 ##Web API caching
 
-In this section we will look a different ways of caching data on Web API services. The are some libraries available for implementing client og server caching. Now a days the most common libraries are: 
+In this section we will look at different ways of caching data on Web API services. There are some libraries available for implementing client and server caching. Now a days the most common libraries are: 
 
 * [CacheCow](https://github.com/aliostad/CacheCow)
 * [ASP.NET Web API CacheOutput](https://github.com/filipw/AspNetWebApi-OutputCache)
 
 Of course you could also implement your own caching method.
 
-
 ###ETags
 
 Before we look at these two libraries it is important to understand how ETags work.
 
 Etag is basically a unique identifier for web caching validation. It is a unique key generated at the server. 
-This key represents a resource(URL), if the resource changes then a new Etag is issued for that resource
+This key represents a resource (URL), if the resource changes then a new Etag is issued for that resource.
 
-Lets say for example we issue a get request (http://.../api/courses/allpersons) to a web service, and lets assume that we have not made a request before. We will get a response with includes the resulting data as well as an Etag. Now if we issue the same request, by including the "If-None-Match" header with the value of the Etag, the server will then compare the header(Etag) with the resource requested and if they match, the cached content will be returned together with a 304 HTTP response(Not modified).
+Lets say for example we issue a get request (http://.../api/courses/allpersons) to a web service, and lets assume that we have not made a request before. We will get a response which includes the resulting data as well as an Etag. Now if we issue the same request, by including the "If-None-Match" header with the value of the Etag, the server will then compare the header (Etag) with the resource requested and if they match, the cached content will be returned together with a 304 HTTP response (Not modified).
 
-On the other hand if we wanted to issue a PUT/PATCH request we would have to include the "If-Match" header, this will result in the server returning a 412 HTTP response(Precondition Failed)) to the client if the Etag do not match, meaning that the data request has changed.
-
+On the other hand if we wanted to issue a PUT/PATCH request we would have to include the "If-Match" header, this will result in the server returning a 412 HTTP response (Precondition Failed) to the client if the Etag does not match, meaning that the data request has changed.
 
 ###CacheCow
 
 The CacheCow library implements HTTP caching on both client and server in ASP.NET Web API. It uses [message handlers](http://www.asp.net/web-api/overview/advanced/http-message-handlers) on both client and server to intercept request and response and apply caching logic and rules.
 
-CacheCow comes with an in-memory database what will be used on the server if nothing else is specified. If the API is to be use for anything else than debugging, testing or a website that you don't want be get popular, something like sql, redis or memcached is recommended.
+CacheCow comes with an in-memory database that will be used on the server if nothing else is specified. If the API is to be used for anything else than debugging, testing or a website that you don't want to get popular, something like sql, redis or memcached is recommended.
 
-First you need to install [this library](https://www.nuget.org/packages/CacheCow.Server/)
-
-and to start using it you have to add the following code the WebApiConfig class
+First you need to install [this library](https://www.nuget.org/packages/CacheCow.Server/) and to start using it you have to add the following code to the WebApiConfig class
 
 ```c#
 ...
@@ -48,9 +44,9 @@ public static void Register(HttpConfiguration config)
 
 Now as an example if we issue the get request mentioned earlier we will get this:
 
-***Status Code:200 OK***
+***Status Code: 200 OK***
 
-***Request Header***
+***Request Headers***
 * Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
 * Accept-Encoding:gzip,deflate,sdch
 * Accept-Language:en-US,en;q=0.8,is;q=0.6
@@ -75,7 +71,7 @@ Now as an example if we issue the get request mentioned earlier we will get this
 
 But the second request:
 
-***Status Code:304 Not Modified***
+***Status Code: 304 Not Modified***
 
 ***Request Headers***
 * Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
@@ -101,7 +97,7 @@ But the second request:
 * X-SourceFiles:...
 
 
-Here we notice that that the first request returned a status code 200 with an Etag, then when we issued a second request with the "If-None-Match" header with the Etag value and we got a status code 304, thus cached contents where issued.
+Here we notice that the first request returned a status code 200 with an Etag, then when we issued a second request with the "If-None-Match" header with the Etag value and we got a status code 304, thus cached contents where issued.
 
 As mentioned on their [wiki](https://github.com/aliostad/CacheCow/wiki), some features include:
 
@@ -114,27 +110,26 @@ As mentioned on their [wiki](https://github.com/aliostad/CacheCow/wiki), some fe
 
 **CacheCow.Client features**
 
-* Caching GET responses according to their caching headers
-* Verifying cached items for their staleness
-* Validating cached items if must-revalidate parameter of Cache-Control header is set to true. It will use ETag or Expires whichever exists
-* Making conditional PUT for resources that are cached based on their ETag or expires header, whichever exists
-
+* Caching GET responses according to their caching headers.
+* Verifying cached items for their staleness.
+* Validating cached items if must-revalidate parameter of Cache-Control header is set to true. It will use ETag or Expires whichever exists.
+* Making conditional PUT for resources that are cached based on their ETag or expires header, whichever exists.
 
 ###ASP.NET Web API CacheOutput
 
-This library is a litle bit different from CacheCow, it uses attributes to control caching on actions.
+This library is a little bit different from CacheCow, it uses attributes to control caching on actions.
 
 To use it install [this library](https://www.nuget.org/packages/Strathweb.CacheOutput.WebApi2/)
 
-As mentioned on [there documentation](https://github.com/filipw/AspNetWebApi-OutputCache), some of the properties you can specifie are:
+As mentioned in [there documentation](https://github.com/filipw/AspNetWebApi-OutputCache), some of the properties you can specify are:
 
-* *ClientTimeSpan* (corresponds to CacheControl MaxAge HTTP header)
-* *MustRevalidate* (corresponds to MustRevalidate HTTP header - indicates whether the origin server requires revalidation of a cache entry on any subsequent use when the cache entry becomes stale)
-* *ExcludeQueryStringFromCacheKey* (do not vary cache by querystring values)
-* *ServerTimeSpan* (time how long the response should be cached on the server side)
-* *AnonymousOnly* (cache enabled only for requests when Thread.CurrentPrincipal is not set)
+* *ClientTimeSpan* (corresponds to CacheControl MaxAge HTTP header).
+* *MustRevalidate* (corresponds to MustRevalidate HTTP header - indicates whether the origin server requires revalidation of a cache entry on any subsequent use when the cache entry becomes stale).
+* *ExcludeQueryStringFromCacheKey* (do not vary cache by querystring values).
+* *ServerTimeSpan* (time how long the response should be cached on the server side).
+* *AnonymousOnly* (cache enabled only for requests when Thread.CurrentPrincipal is not set).
 
-Lets say that we would like to cache the following action for 30 seconds on both client and server the code would look like this :
+Lets say that we would like to cache the following action for 30 seconds on both client and server, the code would look like this:
 
 ```c#
 [CacheOutput(ClientTimeSpan = 30, ServerTimeSpan = 30)]
@@ -145,8 +140,8 @@ public List<Person> GetAllPersons()
 }
 ```
 
-CacheOutput offer several options for configuring and appliying cache to your API service. 
-Some of these include the possibility to implement you own custom server side cache mechanism. You can also invalidate cache through attributes at controller or action level as well manually. 
+CacheOutput offer several options for configuring and applying cache to your API service. 
+Some of these include the possibility to implement your own custom server side cache mechanism. You can also invalidate cache through attributes at controller or action level as well manually. 
 
 For example decorating a controller with [AutoInvalidateCacheOutput] attribute will automatically flush all cached GET data from this controller after a successfull POST/PUT/DELETE request.
 
@@ -154,7 +149,7 @@ For example decorating a controller with [AutoInvalidateCacheOutput] attribute w
 ###Custom Server side cache example
 
 As mentioned in the begining you could also implement your own caching method. 
-A very simple implementation using the defaul cache memory could be like this utility class
+A very simple implementation using the default cache memory could be like this utility class
 
 ```c#
 public class Utilities
@@ -183,7 +178,7 @@ public class Utilities
 }
 ```
 
-The if you wanted for example to cache a action that return your info one could this:
+Then if you wanted for example to cache an action that returns your info, one could this:
 
 ```c#
 [Route("myperson")]
@@ -209,13 +204,3 @@ public Person GetMyInfo()
 * [CacheCow](https://github.com/aliostad/CacheCow)
 * [Building ASP.Net Web API RESTful Service](http://bitoftech.net/2014/02/08/asp-net-web-api-resource-caching-etag-cachecow/)
 * [Exploring Web API 2 Caching](http://damienbod.wordpress.com/2014/05/18/exploring-web-api-2-caching/)
-
-
-
-
-
-
-
-
-
-
