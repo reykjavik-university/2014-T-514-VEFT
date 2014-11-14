@@ -2,11 +2,11 @@
 
 Hverjir eru kostirnir við vefþjónustur?
 1. Þær eru cross platform, þ.e. það geta margar tengudir af clientum tengst þeim
-2. Sá sem á gögnin getur exposað þeim og aðrir sem kunna eða finna sniðuga lausn til að nýta gögnin geta gert það.  
+2. Sá sem á gögnin getur exposað þeim og aðrir sem kunna eða finna sniðuga lausn til að nýta gögnin geta gert það.
 3. Mass up consept, taka tvö eða fleiri API og sameina þau, búa til eitthvað sniðugt
 4. Allri buisness lógík þarf bara að viðhalda á einum stað
 5. Clientin getur verið mjög léttur og þarf bara að rendera eitt HTML
-6. API eða vefþjónustur get svo exposað gögnum og allir (margir) get nýtt sér það 
+6. API eða vefþjónustur get svo exposað gögnum og allir (margir) get nýtt sér það
 
 Hverjir geta verið ókostirnir við vefþjónustur?
 > Getur valdið því að þegar smá breytingar verða á html síðu að þá verði client að reloda henni að fullu frá þjónustunni
