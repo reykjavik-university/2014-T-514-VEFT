@@ -54,6 +54,19 @@ Hvernig er best að útgáfustýra API-um
 * Clienter bæti vðið custom http header við request sem segir að þeir vilja fá version x, erfitt að prófa með curl eða vafra
 * Content type, bæta þessu við í Accept http headerinn 
 
+Hvað heitir nýja web apið sem Microsoft er að vinna að núna 
+* ASP.NET vNext
+* Open source og er á GtiHub
+* Sameinar Web Forms, MVC, Web API í eina sæng, eða réttara sagt verið er að endurskrifa þetta
+* Getur keyrt á öllum stýrikerfum
 
+Hvernig er arkitektúr Web API 
+* Allir controller klasar verða að erfa frá ApiController 
+* ValuController sér um að mappa Urlin í kóðanum, ef föll í controllert byjra á Get, Put, Post er gengið út frá því að þau höndli þessi atburði, það er líka hægt að skilgreina með attribute fyrir ofan fallið hvaða verb það höndlar [HttpGet] etc
 
+Hvernig er það stillt hvort controller skili JSON eða XML t.d. 
+* Accept Http Hedar inniheldur Mime type sem segir til um þetta, application/json, applicatoin/xml
 
+Hvað er CORS (Cross-Origin Resource Sharing)?
+* Web apar setja Access-Control-Allow-Origin" HTTP header í response til að tilgreina hvað þeir styðja, þ.e. þa er hægt að tilgreina hvaða domain mega kalla í apan, hvaða aðgerðir eru í boði etc. 
+* Clienter senda fyrst HTTP Options request til að fá úr því skorið hvað má
