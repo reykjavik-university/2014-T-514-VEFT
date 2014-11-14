@@ -33,23 +33,23 @@ Open up your favorite editor and copy these line in and save as testDaysTillChri
 
 ```javascript
 			function daysTC(){
-			var oneMinute = 60 * 1000;
-			var oneHour = oneMinute * 60;
-			var oneDay = oneHour * 24;
-			var today = new Date();
-			var nextXmas = new Date();
-			nextXmas.setMonth(11);
-			nextXmas.setDate(24);
-			if (today.getMonth() === 11 && today.getDate() > 24) {
-				nextXmas.setFullYear(nextXmas.getFullYear() + 1);
-			}
-			var diff = nextXmas.getTime() - today.getTime();
-			diff = Math.floor(diff/oneDay);
-			console.log("Days til XMAS:" + diff);
-			return diff;
-};
+				var oneMinute = 60 * 1000;
+				var oneHour = oneMinute * 60;
+				var oneDay = oneHour * 24;
+				var today = new Date();
+				var nextXmas = new Date();
+				nextXmas.setMonth(11);
+				nextXmas.setDate(24);
+				if (today.getMonth() === 11 && today.getDate() > 24) {
+					nextXmas.setFullYear(nextXmas.getFullYear() + 1);
+				}
+				var diff = nextXmas.getTime() - today.getTime();
+				diff = Math.floor(diff/oneDay);
+				console.log("Days til XMAS:" + diff);
+				return diff;
+			};
 
-module.exports = {'daysTillChristmas' : daysTC()};
+			module.exports = {'daysTillChristmas' : daysTC()};
 ```
 The module.exports is so you can get access to the function 
 
@@ -128,6 +128,6 @@ Days til XMAS:40
   1 passing
 ```
 
-Congratz you just passed your first test! This is not recommended for TDD but good job!
+Congratulations you just passed your first test! This is not recommended for TDD but good job!
 
 
