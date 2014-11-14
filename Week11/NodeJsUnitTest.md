@@ -26,6 +26,8 @@ You should see something like this:
 	├── mkdirp@0.5.0 (minimist@0.0.8)
 	└── glob@3.2.3 (inherits@2.0.1, graceful-fs@2.0.3, minimatch@0.2.14)
 
+
+## The node JS function we want to test.
 The next step is to create a small program to test. You can place the program wherever you want just make sure to note down the location for later.
 Open up your favorite editor and copy these line in and save as testDaysTillChristmas.js
 
@@ -51,11 +53,17 @@ module.exports = {'daysTillChristmas' : daysTC()};
 ```
 The module.exports is so you can get access to the function 
 
-Wave the code and get the location of code by using the command $pwd.
+Save the file and get the location of code by using the command 
+```
+$pwd.
+```
+
+##Our first Mocha test
 
 Navigate to the location where you would like your test to be.
-
+```
 $mkdir test
+```
 You need to create the test with your favorite editor, I prefer vim so ill use it in this example.
 
 ```
@@ -74,24 +82,27 @@ $vim test/test.js
 				});
 			});
 ```
-__REMEMBER__ to change the name of the myCode to the location of the code we wront earlier.
+__REMEMBER__ to change the name of the myCode to the location of the code we wrote earlier.
 
 By looking at this code it might not be clear what we are doing at first.
 We need assert so we require that is included and also our code so we have access to our function.
 
-The first describe gives lets us name the tests, within this you can desribe another couple of tests.
-The second describe is this test case a name, could be testing multiple functions from the christmas.js here.
+[Assert](http://nodejs.org/api/assert.html) has several methods to help checking that the method we were
+testing had the intended consequences. I recommend checking the documentation for more assert commands.
+
+The first describe lets us name the test suite, within this you can describe another couple of tests.
+The second describe is the name of the specific test case. You could add a couple of test such as check if positive or something alike.
 
 We then assert that the function returns the same number of days as we expect. If that fails the test fails.
 
-When writing the Assert section, we can use the [Assert](http://nodejs.org/api/assert.html) 
-It has several methods to help checking that the method we were
-testing had the intended consequences.
 
-As you can see by the code we are expecting 40 days you might need to fix the code a little bit. You can get the current number of days by running the days function by node testDaysTillChristmas.js like so
+As you can see by the code we are expecting 40 days, you most likely need to fix the code a little bit. You can get the current number of days by running the days function like so
 ```
 $node testDaysTillChristmas.js
 ```
+You could also run the test and see what value we get from the assert.
+
+## Running Mocha
 
 Now the next step is to test the code.
 We can test the code by using the following command in the folder where the test is located
