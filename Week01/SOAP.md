@@ -14,6 +14,10 @@ SOAP was Created to communicate between applications over HTTP. This is a very s
 
 With this form of communication the operating system your application is running on or the programing language it is written in is no longer apart of the equation. That is, no longer a constraint on your system design. 
 
+## Why not.
+
+There is this thing called REST.
+
 ## REST vs SOAP
 
 It is becoming quite apparent that the RESTful Json APIs are becoming more popular than the SOAP ones. One of the biggest advantages REST has over SOAP is its usage of standard http. 
