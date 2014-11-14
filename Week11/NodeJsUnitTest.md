@@ -1,10 +1,10 @@
 #Unit Testing
 
-One of the main reason why we've designed our code the way we've done, is to be able to unit test all our business logic. The business logic is certainly not the only code that needs to be tested, but it can be argued that it is the most important code to write unit tests for.
+Just like in week 3 we need to be able to unit test our business logic for Node js. The business logic is certainly not the only code that needs to be tested, but it can be argued that it is the most important code to write unit tests for.
 
 Other parts of the code could be tested using integration tests, and having both is probably a good idea.
 
-For testing Node js you will need Mocha
+If we want to unit test Node Js we will need Mocha.
 
 ## How to install Mocha
 You can get it by opening the terminal and typing in
