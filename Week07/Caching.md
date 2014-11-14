@@ -201,6 +201,7 @@ public Person GetMyInfo()
 
 ***Related material***
 * [AspNetWebApi-OutputCache]()
+* [AspNetWebApi-OutputCache.V2 Demo](https://github.com/filipw/apress-recipes-webapi/tree/master/Chapter%2005/5-7/Apress.Recipes.WebApi)
 * [CacheCow](https://github.com/aliostad/CacheCow)
 * [Building ASP.Net Web API RESTful Service](http://bitoftech.net/2014/02/08/asp-net-web-api-resource-caching-etag-cachecow/)
 * [Exploring Web API 2 Caching](http://damienbod.wordpress.com/2014/05/18/exploring-web-api-2-caching/)
