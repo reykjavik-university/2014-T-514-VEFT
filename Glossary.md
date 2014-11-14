@@ -1,5 +1,5 @@
 #Web services
-
+´
 Hverjir eru kostirnir við vefþjónustur?
 * Þær eru cross platform, þ.e. það geta margar tengudir af clientum tengst þeim
 * Sá sem á gögnin getur exposað þeim og aðrir sem kunna eða finna sniðuga lausn til að nýta gögnin geta gert það.
@@ -7,7 +7,7 @@ Hverjir eru kostirnir við vefþjónustur?
 * Allri buisness lógík þarf bara að viðhalda á einum stað
 * Clientin getur verið mjög léttur og þarf bara að rendera eitt HTML
 * API eða vefþjónustur get svo exposað gögnum og allir (margir) get nýtt sér það
-
+´
 Hverjir geta verið ókostirnir við vefþjónustur?
 * Getur valdið því að þegar smá breytingar verða á html síðu að þá verði client að reloda henni að fullu frá þjónustunni
 * Ef clientin er ekki vefur þá getur hann þurft að parsa HTML-ið til að ná í gögnin, það býður villum heim þar sem HTML getur breyst og þá virkar kannski ekki parsing lengur. 
