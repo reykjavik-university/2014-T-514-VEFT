@@ -40,8 +40,8 @@ This code will illustrate how Angular is capable of binding values to elements
 The Angular frameworks helps developers make well structured front-end web applications that are both easily maintainable and testable.
 
 Angular makes little work to be done by the programer in the MVC department, the programer just splits his app into components and Angular takes care of the rest by connecting them together, this will result in less code which is always nice.
-A
-ngular inspires RESTful thinking when constructing web APIs which result in loosely coupled code and reusable services.
+
+Angular inspires RESTful thinking when constructing web APIs which result in loosely coupled code and reusable services.
 
 ## Helpful resources
 
