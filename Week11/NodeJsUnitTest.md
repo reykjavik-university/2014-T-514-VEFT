@@ -55,7 +55,7 @@ The module.exports is so you can get access to the function
 
 Save the file and get the location of code by using the command 
 ```
-$pwd.
+$pwd
 ```
 
 ##Our first Mocha test
