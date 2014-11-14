@@ -12,7 +12,7 @@ You can get it by opening the terminal and typing in
 $npm install -g mocha
 ```
 
-You should see something like this:
+You should see something like this if it succeeded:
 
 	/usr/local/bin/mocha -> /usr/local/lib/node_modules/mocha/bin/mocha
 	/usr/local/bin/_mocha -> /usr/local/lib/node_modules/mocha/bin/_mocha
@@ -27,9 +27,9 @@ You should see something like this:
 	└── glob@3.2.3 (inherits@2.0.1, graceful-fs@2.0.3, minimatch@0.2.14)
 
 
-## The node JS function we want to test.
+## The node JS function under test.
 The next step is to create a small program to test. You can place the program wherever you want just make sure to note down the location for later.
-Open up your favorite editor and copy these line in and save as testDaysTillChristmas.js
+Open up your favorite editor and copy these line in and save as christmas.js
 
 ```javascript
 			function daysTC(){
@@ -51,7 +51,7 @@ Open up your favorite editor and copy these line in and save as testDaysTillChri
 
 			module.exports = {'daysTillChristmas' : daysTC()};
 ```
-The module.exports is so you can get access to the function 
+The module.exports is so you can get access to the function in your test.
 
 Save the file and get the location of code by using the command 
 ```
@@ -72,12 +72,17 @@ $vim test/test.js
 
 ```javascript
 			var assert = require("assert")
-			var myCode = require('/Users/Thorri/Desktop/test/christmas.js')
+			var myCode = require('/PwdLocationOfFile/christmas.js')
 			
-			describe('#testForChristmasJs', function(){
-				describe('daysTillChristmasTest', function(){
-					it('Should return 39 on the day 14 of november 2014', function(){
+			describe('#test', function(){
+				describe('daysTillChristmasTest', function(){ 
+					it('Should return 40 on the day 14th of november 2014', function(){
 						assert.equal(myCode.daysTillChristmas,40);
+					});
+				});
+				describe('checkIfNegative', function(){
+					it('Should return true if the number is not negative', function(){
+						assert(myCode.daysTillChristmas>=0);
 					});
 				});
 			});
@@ -120,12 +125,15 @@ You should then get an ouput that says something like
 ```
 Days til XMAS:40
 
-  #testForChristmasJs
+
+  #test
     daysTillChristmasTest
-      ✓ Should return 40 days on the 14th of November 2014
+      ✓ Should return 40 on the day 14th of november 2014
+    checkIfNegative
+      ✓ Should return true if the number is not negative
 
 
-  1 passing
+  2 passing
 ```
 
 Congratulations you just passed your first test! This is not recommended for TDD but good job!
