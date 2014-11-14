@@ -1,5 +1,5 @@
 >Before we begin I want it to be noted that I work on OSX. So the following examples have not been tested on __linux__. All parts that are specially about __linux__ are written to the best of my knowledge. For example how to download node.js on linux. It would be good if someone using linux would confirm that the following (download and examples) work on linux. 
-Also I assume that you are familiar with javascript. If you are not I recommend that you take some tutorials in javascript and get familiar with it before you start here. For example on [w3shcools.com](http://www.w3schools.com/js/). Thank you very much.
+Also I assume that you are familiar with javascript. If you are not I recommend that you take some tutorials in javascript and get familiar with it before you start here. For example on [codeacademy.com](http://www.codecademy.com/learn). Thank you very much.
 
 # Node.js
 
