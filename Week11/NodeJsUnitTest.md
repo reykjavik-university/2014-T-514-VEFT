@@ -7,7 +7,7 @@ Other parts of the code could be tested using integration tests, and having both
 For testing Node js you will need Mocha
 
 ## How to install Mocha
-You can get it on by opening the terminal and typing in
+You can get it by opening the terminal and typing in
 ```
 $npm install -g mocha
 ```
