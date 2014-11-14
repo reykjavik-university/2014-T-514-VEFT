@@ -1,5 +1,5 @@
 #Web services
-´
+
 Hverjir eru kostirnir við vefþjónustur?
 * Þær eru cross platform, þ.e. það geta margar tengudir af clientum tengst þeim
 * Sá sem á gögnin getur exposað þeim og aðrir sem kunna eða finna sniðuga lausn til að nýta gögnin geta gert það.
@@ -7,7 +7,7 @@ Hverjir eru kostirnir við vefþjónustur?
 * Allri buisness lógík þarf bara að viðhalda á einum stað
 * Clientin getur verið mjög léttur og þarf bara að rendera eitt HTML
 * API eða vefþjónustur get svo exposað gögnum og allir (margir) get nýtt sér það
-´
+
 Hverjir geta verið ókostirnir við vefþjónustur?
 * Getur valdið því að þegar smá breytingar verða á html síðu að þá verði client að reloda henni að fullu frá þjónustunni
 * Ef clientin er ekki vefur þá getur hann þurft að parsa HTML-ið til að ná í gögnin, það býður villum heim þar sem HTML getur breyst og þá virkar kannski ekki parsing lengur. 
@@ -17,8 +17,9 @@ Nefnið 3 algengar gerðir af vefþjónustum og lýsið arkitektúr þeirra stut
 * SOAP 
 * WCF
 
-Teljið upp nokkur HTTP verbs
+Teljið upp nokkur HTTP verbs og hvaða tilgangi þau þjóna
 * GET (sækir gögn), POST (býr til nýja gögn), PATCH (uppfærir gögn, t.d. eitt svæði í töflu), PUT (uppfærir gögn í heild sinni), DELETE (eyðir eða setur delete flagg á true)
+* HTTP verb tilgreina hvaða aðgerð á að framkvæma
 
 Lýsið hefbundinni REST þjónustu í dag
 * REST er HTTP þjónusta, sækir gögn og skilar JSON, það er lang algengasta útfærsluaðferð á REST í dag.  En REST þjónusta skv. skilgreiningu þarf ekki að nota HTTP.  Með REST er fólk að uppgvöta hvernig HTTP á að virka, þar sem verbin eru notuð mikið í REST þjónustum. 
@@ -47,6 +48,11 @@ Hvernig er hægt að skilgreina hversu mikið þjónusta er REST þjónusta
 * Level 2, búið að bæta við HTTP verb, Post, Get etc. 
 * Level 3, eitt rótar-url, notendur verða að kalla á þjónustuna til að komast að því hvað er hægt að gera, hér er möguleiki að hafa url sem er óhakkanleg (HATEOAS)
 * Flestar vefþjónustur eru á level 2 í dag
+
+Hvernig er best að útgáfustýra API-um
+* Setja útgáfuna í urlið /api/v1/...  mikið notað
+* Clienter bæti vðið custom http header við request sem segir að þeir vilja fá version x, erfitt að prófa með curl eða vafra
+* Content type, bæta þessu við í Accept http headerinn 
 
 
 
