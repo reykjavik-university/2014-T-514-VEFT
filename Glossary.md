@@ -54,6 +54,7 @@ Hvernig er best að útgáfustýra API-um
 * Clienter bæti vðið custom http header við request sem segir að þeir vilja fá version x, erfitt að prófa með curl eða vafra
 * Content type, bæta þessu við í Accept http headerinn 
 
+#ASP.NET Web API
 Hvað heitir nýja web apið sem Microsoft er að vinna að núna 
 * ASP.NET vNext
 * Open source og er á GtiHub
@@ -68,5 +69,10 @@ Hvernig er það stillt hvort controller skili JSON eða XML t.d.
 * Accept Http Hedar inniheldur Mime type sem segir til um þetta, application/json, applicatoin/xml
 
 Hvað er CORS (Cross-Origin Resource Sharing)?
-* Web apar setja Access-Control-Allow-Origin" HTTP header í response til að tilgreina hvað þeir styðja, þ.e. þa er hægt að tilgreina hvaða domain mega kalla í apan, hvaða aðgerðir eru í boði etc. 
-* Clienter senda fyrst HTTP Options request til að fá úr því skorið hvað má
+* Web apar setja Access-Control-Allow-Origin" HTTP header í response til að tilgreina hvað þeir styðja, þ.e. þa er hægt að tilgreina hvaða domain mega kalla í apan, hvaða aðgerðir eru í boði etc. By default þá gengur ekki að kalla í Apa sem er á öðru domain en maður sjálfur. 
+* Vafrar (Chorme, Firefox etc.) senda fyrst HTTP Options request til að vita hvað þeir mega gera, fá til baka "Access-Control-Allow-Origin" HTTP header sem tilgreinir hvort þeir mega kalla í Apan og hvaða aðgerðir má nota.   
+* var cors = new EnableCorsAttribute("*", "*", "*");  --origin, header and methods 
+
+#Routing
+
+
