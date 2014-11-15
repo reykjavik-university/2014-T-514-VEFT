@@ -140,3 +140,10 @@ Hvaða föll má nota til að ná í eina röð í færslur eða query objecti
 * Single(), skilar fyrstu röð, kastar villu ef engin gögn eða fleiri en ein röð uppfylla leitarskilyrði
 * SingleOrDefult(), skilar fyrstu röð eða null ef engin gögn, kastar villu ef engin gögn eða ef það eru fleiri ein ein röð sem uppfylla leitarskilyrði
 
+Hvernig join-ar maður tvær töflur í linq
+* með equals, join ct in _courseTemplates.All() on ci.CourseID equals ct.ID
+
+Hvenær er sniðugt að nota extension methods?
+* Þegar það þarf að select of sömu fyrirspurn, eins og t.d. eftir id í eina töflu, public static TeacherDTO GetTeacherByID(this IRepository<Teacher> repo, int id ) {select ,,,,  return result.ToList()}
+
+
