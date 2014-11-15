@@ -87,5 +87,10 @@ Hvernig má senda paramert í api call
 Hvernig má bæta við query parameter í api call
 * það er gert með spurningamerki /api/v1/12345/grades?semester=20133, þá verður fallið að taka inn parameter sem hetiri semester og hann getur verið optional eða ekki
 
+Hvernig er best að senda model eða entity gögn þegar kallað er í Post, Put eða Patch 
+* Það er hægt að senda það með sem primative gildi í http header og verður þá að passa að merkja það með [From Body] attribute. 
+* Einnig er hægt að senda með json klasa sem er þá mappað beint í dto klasa, og er þetta besta aðferðin til að senda gögn þar sem auðveldlega er hægt að bæta við gildum seinna meir án þess að bæta við parametrum í controllerin. 
 
+Hvernig er best að skjala APA
+* 
 
