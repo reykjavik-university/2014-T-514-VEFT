@@ -130,4 +130,5 @@ Hvaða 3 tegundir af dependency injection eru til?
 Hvað er NINJET?
 * Framework sem sér um DI fyrir okkur, klasar eru búnir til með Kernel.Get<ServiceClass>().   NINJET finnur út hvaða dependency þarf til að búa til instancið og skilar því svo.
 
+##Linq
 
