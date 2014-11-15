@@ -117,3 +117,17 @@ Lýsið hvað repository gerir
 * Mappar gagnagrunnstöflur í kóða
 * todo
 
+##Dependency Injection
+Hvað er dependency injection
+* Það er að gefa objecti sínar instance breytur
+* Þegar DI er notað þá er forritari neyddur til að nota Interface, Interface gera kóðan testanlegri þar sem auðveldara er að injecta dependencyum inn í hann 
+
+Hvaða 3 tegundir af dependency injection eru til?
+* Construction injection, skaffa instance breytur með því að senda þær í smiðinn
+* Setter injection, gert með því að búa til föll sem gilda instance breytur
+* Property injection, gera instance breytuna að property í klasanum 
+
+Hvað er NINJET?
+* Framework sem sér um DI fyrir okkur, klasar eru búnir til með Kernel.Get<ServiceClass>().   NINJET finnur út hvaða dependency þarf til að búa til instancið og skilar því svo.
+
+
