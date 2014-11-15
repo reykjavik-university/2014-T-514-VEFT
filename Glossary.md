@@ -93,6 +93,7 @@ Hvernig er best að senda model eða entity gögn þegar kallað er í Post, Put
 
 Hvernig er best að skjala APA
 * Það er nauðsynlegt að hafa skjölun fyrir conrollera og allar public aðgerðir í þeim, model klasa sem er notaðir til að taka við gögnum eða skila í gegnum vefþjóustuna.   Hafa xml skjölun fyrir ofan föll. 
+* Það eru til nokkur hjálpartól þarna úti sem generate skjölun fyrir okkur
 
 Hvaða machine redable skjölun er hægt að búa til fyrir vefþjónustur 
 * WSDL (Web Services Description Language), SOAP og WCF þjónustum má lýsa með svona skjölun, það er svo hægt að generate forritsbúta út frá þessari skjölun sem auðveldar svo að forrita á móti þjónustunni. 
@@ -106,5 +107,13 @@ Hvernig er best að hafa högun, uppbyggingu á web service API projecti
 * Test Project, inniheldur öll unit test 
 * Entities Project, inniheldur gagnamódelið og tengingar við gagnagrunn
 
+##Unit of Work
+Lýsið hvað unit of work gerir
+* Skilar repositroy fyrir töflu og sér um að commita breytingar í gagnagrunn
+* Notar IRepository til að ná í töflur í gagnagrunni, eitt repository mappar eina töflu
+* todo 
 
+Lýsið hvað repository gerir
+* Mappar gagnagrunnstöflur í kóða
+* todo
 
