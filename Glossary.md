@@ -1,4 +1,4 @@
-#Web services
+##Web services
 
 Hverjir eru kostirnir við vefþjónustur?
 * Þær eru cross platform, þ.e. það geta margar tengudir af clientum tengst þeim
@@ -54,7 +54,7 @@ Hvernig er best að útgáfustýra API-um
 * Clienter bæti vðið custom http header við request sem segir að þeir vilja fá version x, erfitt að prófa með curl eða vafra
 * Content type, bæta þessu við í Accept http headerinn 
 
-#ASP.NET Web API
+##ASP.NET Web API
 Hvað heitir nýja web apið sem Microsoft er að vinna að núna 
 * ASP.NET vNext
 * Open source og er á GtiHub
@@ -73,6 +73,6 @@ Hvað er CORS (Cross-Origin Resource Sharing)?
 * Vafrar (Chorme, Firefox etc.) senda fyrst HTTP Options request til að vita hvað þeir mega gera, fá til baka "Access-Control-Allow-Origin" HTTP header sem tilgreinir hvort þeir mega kalla í Apan og hvaða aðgerðir má nota.   
 * var cors = new EnableCorsAttribute("*", "*", "*");  --origin, header and methods 
 
-#Routing
+##Routing
 
 
