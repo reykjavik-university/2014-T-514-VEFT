@@ -131,4 +131,12 @@ Hvað er NINJET?
 * Framework sem sér um DI fyrir okkur, klasar eru búnir til með Kernel.Get<ServiceClass>().   NINJET finnur út hvaða dependency þarf til að búa til instancið og skilar því svo.
 
 ##Linq
+Hvað þarf til svo að þessi fyrirspurn skili okkur gögnum, var result = _courses.All().Where(c => c.Semester == "20143").OrderBy(c => c.Name);
+* Það þarf að kalla á ToList(), result hér er bara query object (IEnumerable) ekki gögnin sjálf
+
+Hvaða föll má nota til að ná í eina röð í færslur eða query objecti
+* First(), skilar fyrstu röð, kastar villur ef engin gögn eru til staðar
+* FirstOrDefault(), skilar fyrstu röð eða null ef engin gögn eru til staðar
+* Single(), skilar fyrstu röð, kastar villu ef engin gögn eða fleiri en ein röð uppfylla leitarskilyrði
+* SingleOrDefult(), skilar fyrstu röð eða null ef engin gögn, kastar villu ef engin gögn eða ef það eru fleiri ein ein röð sem uppfylla leitarskilyrði
 
