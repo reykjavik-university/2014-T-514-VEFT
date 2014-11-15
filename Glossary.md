@@ -75,4 +75,11 @@ Hvað er CORS (Cross-Origin Resource Sharing)?
 
 ##Routing
 
+Lýsið default routing í ASP.NET Web API
+* URL eiga að stemma við ControllerName/ActionName 
+
+Lýsið attribute routing
+* Route prefix er skilgreint fyrir ofan controller klasan [RoutePrefix("api/v1/my")], síðan er hver aðgerð í klasanum tengd við ákveðna http verb aðgerð, [Route("grades")] etc.  Það er líka mögulegt að láta aðgerðirnar heita Get.., Post.. osfrv. 
+
+
 
