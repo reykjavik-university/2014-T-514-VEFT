@@ -81,5 +81,11 @@ Lýsið default routing í ASP.NET Web API
 Lýsið attribute routing
 * Route prefix er skilgreint fyrir ofan controller klasan [RoutePrefix("api/v1/my")], síðan er hver aðgerð í klasanum tengd við ákveðna http verb aðgerð, [Route("grades")] etc.  Það er líka mögulegt að láta aðgerðirnar heita Get.., Post.. osfrv. 
 
+Hvernig má senda paramert í api call 
+* Parametra má skilgreina í routing fyrir fall, [Route("grades/{id:int}")], síðan verður fallið sem hefur þessa routing skilgreiningu að taka inn parameter sem heitir nákvæmlega það sama
+
+Hvernig má bæta við query parameter í api call
+* það er gert með spurningamerki /api/v1/12345/grades?semester=20133, þá verður fallið að taka inn parameter sem hetiri semester og hann getur verið optional eða ekki
+
 
 
