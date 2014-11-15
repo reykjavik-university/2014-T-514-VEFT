@@ -98,5 +98,13 @@ Hvaða machine redable skjölun er hægt að búa til fyrir vefþjónustur
 * WSDL (Web Services Description Language), SOAP og WCF þjónustum má lýsa með svona skjölun, það er svo hægt að generate forritsbúta út frá þessari skjölun sem auðveldar svo að forrita á móti þjónustunni. 
 * WADL er svo til fyrir REST þjónustur, en það er mjög lítið notað
 
+##Web Service Architecture
+Hvernig er best að hafa högun, uppbyggingu á web service API projecti
+* Web Api Project, sér um http samskipti, kann ekki neina buisness lógík
+* Models Project, inniheldur DTO (gagnaklasa) og ViewModel (viðmóts-gagnaklasa) Web Api project skilar
+* Service Project, inniheldur alla buisness lógík
+* Test Project, inniheldur öll unit test 
+* Entities Project, inniheldur gagnamódelið og tengingar við gagnagrunn
+
 
 
