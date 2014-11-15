@@ -92,5 +92,11 @@ Hvernig er best að senda model eða entity gögn þegar kallað er í Post, Put
 * Einnig er hægt að senda með json klasa sem er þá mappað beint í dto klasa, og er þetta besta aðferðin til að senda gögn þar sem auðveldlega er hægt að bæta við gildum seinna meir án þess að bæta við parametrum í controllerin. 
 
 Hvernig er best að skjala APA
-* 
+* Það er nauðsynlegt að hafa skjölun fyrir conrollera og allar public aðgerðir í þeim, model klasa sem er notaðir til að taka við gögnum eða skila í gegnum vefþjóustuna.   Hafa xml skjölun fyrir ofan föll. 
+
+Hvaða machine redable skjölun er hægt að búa til fyrir vefþjónustur 
+* WSDL (Web Services Description Language), SOAP og WCF þjónustum má lýsa með svona skjölun, það er svo hægt að generate forritsbúta út frá þessari skjölun sem auðveldar svo að forrita á móti þjónustunni. 
+* WADL er svo til fyrir REST þjónustur, en það er mjög lítið notað
+
+
 
