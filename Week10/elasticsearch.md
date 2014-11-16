@@ -246,14 +246,14 @@ Let's create a query and search for entries that contain the work "scaffolding" 
 When executing this query:
 
     curl -XPOST http://localhost:9200/entries/_search -d '
-    quote>     {
-    quote>         "query":{
-    quote>             "query_string": {
-    quote>                 "query": "scaffolding",
-    quote>                 "default_field" : "data"
-    quote>             }
-    quote>         }
-    quote>     }'
+         {
+             "query":{
+                 "query_string": {
+                     "query": "scaffolding",
+                     "default_field" : "data"
+                 }
+             }
+         }'
     {"took":3,"timed_out":false,"_shards":{"total":5,"successful":5,"failed":0},"hits":{"total":1,"max_score":0.095891505,"hits":[{"_index":"entries","_type":"entry","_id":"2","_score":0.095891505,"_source":{
       "title": "Ruby on rails is just a bubble in bathtub",
       "data": "Yeah, Ruby on rails is awesome, but scaffolding is not!",
