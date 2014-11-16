@@ -373,3 +373,23 @@ The following code takes all executions in and looks at the properties key and t
 We take both the key and token properties and tell elastic search to store these single fields as two properties. First as the original string which we say is not analyzed, which means that if we now query the propertie key by key.original_key then we are asking elastic to filter out where each key is exactly as it was when it got saved (ex. ```second.py-cool_function```).
 
 On the other hand if we still want to be able to look it up in a clever way elastic has also saved the properties like it wants to. So if we query by key as before we'll get the key split up on dashes like the default mapping behavior wants to. You can read more about mapping [here](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html)
+
+
+### Interacting with Elasticsearch in Chrome:
+
+Crafting complex queries by hand can be hard because of the symbol heavy syntax and I found
+that using the Sense plugin for Chrome helped quite a bit, it's available at:
+https://chrome.google.com/webstore/detail/sense-beta/lhjgkmllcaadmopgmanpapmpjgmfcfig
+
+This is a simpler version of the console found in the Elasticsearch "Marvel" dashboard, which
+is a much bigger package to monitor your Elasticsearch instance.
+It's available at http://www.elasticsearch.org/overview/marvel/
+The Marvel dashboard is a server side component that you then access through the Elasticsearch
+server itself, whereas Sense is just a Chrome plugin and doesn't require any modification
+or access to the server.
+
+You simply point it at your Elasticsearch server and start executing queries against it,
+it has some nice features like bracket matching/completion, autocomplete and a list of
+supported verbs. It has a history of every query you've executed, and you can compare
+multiple queries at the same time.
+
