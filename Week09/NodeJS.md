@@ -191,7 +191,7 @@ Hello world!
 
 This program will run forever. Note that Node.js is single threaded, still we are getting seperate tasks running at the same time. It looks like we have two threads but we just have one. This is because of the interrupt I talked about here above.
 
-Lets think of this from a web service point a view. We have a web service that is single threaded and NOT asyncronous. And this web service gets a conneciton from a client, for example requesting some data from database. What will happen? If it's single threaded and NOT asyncronous the web service is occupied and is not able to do any other job. If we have more clients that want to connect to our single threaded web service they just have to wait until the one client that has the connection with our web service is done. Node.js can handle this scenario, even though it is single treaded. Because it is asyncronous. If we go through the same scenario with nodejs. The first client connects and asks for data from the database. Nodejs sends a request to the database and while it waits for the response from the database it handles other clients requests. When the database is finished getting the data and sends the response back to nodejs. Nodejs gets an interrupt signal, receives the data and gives it to the first client that connected and was asking for this data.
+Lets think of this from a web service point a view. We have a web service that is single threaded and NOT asynchronous. And this web service gets a conneciton from a client, for example requesting some data from database. What will happen? If it's single threaded and NOT asynchronous the web service is occupied and is not able to do any other job. If we have more clients that want to connect to our single threaded web service they just have to wait until the one client that has the connection with our web service is done. Node.js can handle this scenario, even though it is single threaded. Because it is asynchronous. If we go through the same scenario with nodejs. The first client connects and asks for data from the database. Nodejs sends a request to the database and while it waits for the response from the database it handles other clients requests. When the database is finished getting the data and sends the response back to nodejs. Nodejs gets an interrupt signal, receives the data and gives it to the first client that connected and was asking for this data.
 
 ## Echo server
 
@@ -215,9 +215,9 @@ We can bind this socket server by calling a function named `listen()`. Like this
 server.listen(6000)
 ``` 
 
-Each time the operating system gets a connection on port 5000 this function is called.
+Each time the operating system gets a connection on port 6000 this function is called.
 
-We can test this be adding some action to our code. Something that we want to be done when there is a connection on port 5000. For example writing a text to the terminal window. Maybe *incoming connection*
+We can test this by adding some action to our code. Something that we want to be done when there is a connection on port 6000. For example writing a text to the terminal window. E.g. "*incoming connection*"
 The whole code looks like this:
 
 ```javascript
@@ -232,7 +232,7 @@ server.listen(6000)
 
 Lets save this file as `socket.js` and run it with node (write `node socket.js` in terminal).
 
-Now we have the socket server up and running but we need to test it. We can use program like [telnet](http://en.wikipedia.org/wiki/Telnet) or [Netcat](http://en.wikipedia.org/wiki/Netcat). I am going to use Netcat. Open up a new Terminal window and execute the following command:
+Now we have the socket server up and running but we need to test it. We can use programs like [telnet](http://en.wikipedia.org/wiki/Telnet) or [Netcat](http://en.wikipedia.org/wiki/Netcat). I am going to use Netcat. Open up a new Terminal window and execute the following command:
 
 ```bash
 nc localhost 6000
@@ -317,7 +317,7 @@ var server = net.createServer(function(socket){
 server.listen(6000)
 ```
 
-At this point we have written a small socket server that sends all incoming messages (data) to all connected sockets. Now you should have a good idea about what node.js is, specially the single threaded and asyncronous part. It is very important to get good understanding of this part if you are going to write node.js programs. Node.js is mainly collections of libraries that are aimed to write network applications.
+At this point we have written a small socket server that sends all incoming messages (data) to all connected sockets. Now you should have a good idea about what node.js is, specially the single threaded and asynchronous part. It is very important to get good understanding of this part if you are going to write node.js programs. Node.js is mainly collections of libraries that are aimed to write network applications.
 
 Though we have been doing some coding in node.js none of them are web services. So lets look into web services in node.js.
 
@@ -340,7 +340,7 @@ As you probably notice this is very simular coding as we did earlier when we bui
 
 Lets go through what happens when there is a request at port 7000. Then the network package takes control and the HTTP package receives the request. Headers are parsed. We can read the request and we can write to the response that is sent back to the client.
 
-Congratulation you have written a HTTP server. It really does not do much. When he gets a request, he answers with status 200, and the body 'Hello World!'. Of course alot of code is in the **HTTP** library but by using it we have a very simple HTTP server.
+Congratulations, you have written a HTTP server. It really does not do much. When he gets a request, he answers with status 200, and the body 'Hello World!'. Of course alot of code is in the **HTTP** library but by using it we have a very simple HTTP server.
 
 Lets save the code and run it in node.js. (just as before `node filename`).
 
@@ -356,14 +356,14 @@ In both cases you should get the response `Hello World!`
 
 This works just as the socket server. We create a server. It takes in a callback and we answer the callback.
 
-Lets try sending multible requests at the same time. Todo that we use [ab](http://httpd.apache.org/docs/2.2/programs/ab.html).
+Lets try sending multiple requests at the same time. Todo that we use [ab](http://httpd.apache.org/docs/2.2/programs/ab.html).
 
 We still have our HTTP server running. Open up a terminal window and execute the following function
 
 	ab -n 100 -c 100 http://127.0.0.1:7000/
 
 >Note: There are two things I like to point out to you.
->1. You need to use `127.0.0.1` instead of `localhost`, this is some localhost proplem.
+>1. You need to use `127.0.0.1` instead of `localhost`, this is some localhost problem.
 >2. It is very important to have the `/` at the end. If you don't the `ab` command won't work.
 
 `-n 100` means that we will send 100 requests and `-c 100` means that they will be sent at the same time (parallel). And `http://127.0.0.1:7000` means that all the requests will be sent to localhost port 7000. The terminal window should show you this message.
@@ -407,9 +407,9 @@ Percentage of the requests served within a certain time (ms)
  100%     18 (longest request)
  ```
 
-This message has some information for us. Like how much time it took to send all the reqests `Time taken for tests:   0.024 seconds` and time per request `Time per request: 0.241 [ms]` and much more.
+This message has some information for us. Like how much time it took to send all the requests `Time taken for tests:   0.024 seconds` and time per request `Time per request: 0.241 [ms]` and much more.
 
-Lets add to your HTTP server a delay function. We can think of this delay as time it takes our HTTP server to get data from a database. In our example below we have added 2 sec. delay. See code below:
+Lets add a delay function to our HTTP server . We can think of this delay as the time it takes our HTTP server to get data from a database. In our example below we have added 2 sec. delay. See code below:
 
 ```javascript
 var http = require('http');
