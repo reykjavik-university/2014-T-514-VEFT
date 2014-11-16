@@ -208,14 +208,14 @@ BlockingConnection in Pika. There are many other classes that we can use within
 Pika to use this, but this one is simple and serves the purpose of this
 example.
 
-    conenction = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
     
 When this line is executed we have a open TCP connection to our RabbitMQ server
 that we can use.
 
 Next we open up a channel,
 
-    channel = conenction.channel()
+    channel = connection.channel()
 
 The concept of channels in RabbitMQ is for sharing multiple connection through
 a single TCP connection. You can think of a channel as a virtual connection
