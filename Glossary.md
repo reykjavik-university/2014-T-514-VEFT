@@ -144,6 +144,19 @@ Hvernig join-ar maður tvær töflur í linq
 * með equals, join ct in _courseTemplates.All() on ci.CourseID equals ct.ID
 
 Hvenær er sniðugt að nota extension methods?
-* Þegar það þarf að select of sömu fyrirspurn, eins og t.d. eftir id í eina töflu, public static TeacherDTO GetTeacherByID(this IRepository<Teacher> repo, int id ) {select ,,,,  return result.ToList()}
+* Þegar það þarf að select oft sömu fyrirspurn, eins og t.d. eftir id í eina töflu, public static TeacherDTO GetTeacherByID(this IRepository<Teacher> repo, int id ) {select ,,,,  return result.ToList()}
 
+Hvaða tengsl eru í boði í entity-um
+* one to one
+* one to many
+* many to many
 
+Hvernig er best að skilgreina tengsl í entity-um
+* Í entity klösum er hægt að vera með property sem geymir id á entity sem foreign lykill er í
+* Eða collection ef relation er many to many
+
+Hvaða loading options eru í boði fyrir tengd entity
+* Lazy loading.  Tengd entity eru sótt þegar það vantar gögn úr þeim.
+* Eager loading.  Tengd entity eru sótt um leið og entity-ið sem verið er að sækja er sótt.
+* Explicit loading.  Við tilgreinum nákvæmlega hvenær á að sækja tengd entity. 
+ 
