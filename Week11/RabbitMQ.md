@@ -276,7 +276,7 @@ queue.
     
 # Message acknowledgment
 
-The question of what happens if a task is killed or dies while still in progress. The code in the examples above removes the message from memory after delivery. In other words, when the worker thread has killed the message, and all messages that were pending to be processed, is lost and cannot be retrieved. 
+The question of what happens if a task is killed or dies while still in progress. The code in the examples above removes the message from memory after delivery. In other words, when the worker thread has killed the message and all messages that were pending to be processed, are lost and cannot be retrieved. 
 
 Tasks need to be preserved, so we need to devise a way to move messages to another worker when/if a thread dies
 
