@@ -329,7 +329,7 @@ Let's assume the data is in the following format when it gets posted to elastic 
 }
 ```
 
-The next thing we want to do is to make sure that our the propertie key will not be stored as ```second.py``` and ```cool_function``` but as a single piece ```second.py-cool_function```.
+The next thing we want to do is to make sure that our the property key will not be stored as ```second.py``` and ```cool_function``` but as a single piece ```second.py-cool_function```.
 
 In order to do that we could execute the following script.
 ```bash
