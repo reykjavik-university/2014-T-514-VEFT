@@ -159,4 +159,11 @@ Hvaða loading options eru í boði fyrir tengd entity
 * Lazy loading.  Tengd entity eru sótt þegar það vantar gögn úr þeim.
 * Eager loading.  Tengd entity eru sótt um leið og entity-ið sem verið er að sækja er sótt.
 * Explicit loading.  Við tilgreinum nákvæmlega hvenær á að sækja tengd entity. 
- 
+
+Hvað gerir AutoMapper
+* Hann sér um að mappa klösum, þ.e. mappa Entity klösum í Dto og vice versa
+
+Hvað er Fluent API og hvað gerir það
+* Þetta gerir okkur kleyft að mappa töflum í gagnagrunni yfir í entity klasa og breyta nöfnum á bæði töflunni og dálkum. Þetta er gott í þeim tilfellum þar sem við erum kannski með legacy grunn með nafnagiftum sem ekki passa við það sem við viljum hafa í dg. 
+
+
