@@ -179,9 +179,9 @@ producer.py
     
         # We create a connection to RabbitMQ using the AMQP Pika library.
         # We connect to a server running on localhost.
-        conenction = pika.BlockingConnection(
+        connection = pika.BlockingConnection(
             pika.ConnectionParameters('localhost'))
-        channel = conenction.channel()
+        channel = connection.channel()
     
         # Before we senda a message to RabbitMQ we verify that the queue exits.
         # This call is idempodent. The first time this function is called the
@@ -196,7 +196,7 @@ producer.py
                               routing_key='orders',
                               body=json.dumps(message))
         # We close the connection to RabbitMQ to flush the stream.
-        conenction.close()
+        connection.close()
         print 'message sent to RabbitMQ:', message
         print 'Sleeing for {} seconds'.format(random_sleep)
         time.sleep(random_sleep)
@@ -208,14 +208,14 @@ BlockingConnection in Pika. There are many other classes that we can use within
 Pika to use this, but this one is simple and serves the purpose of this
 example.
 
-    conenction = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
     
 When this line is executed we have a open TCP connection to our RabbitMQ server
 that we can use.
 
 Next we open up a channel,
 
-    channel = conenction.channel()
+    channel = connection.channel()
 
 The concept of channels in RabbitMQ is for sharing multiple connection through
 a single TCP connection. You can think of a channel as a virtual connection
@@ -254,9 +254,9 @@ queue.
 
     import pika
     
-    conenction = pika.BlockingConnection(
+    connection = pika.BlockingConnection(
         pika.ConnectionParameters('localhost'))
-    channel = conenction.channel()
+    channel = connection.channel()
     
     channel.queue_declare('orders')
     
