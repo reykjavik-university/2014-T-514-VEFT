@@ -132,6 +132,8 @@ Further information can be found on [mongoDB](http://www.mongodb.org)
 #Mongoose
 
 [Mongoose](http://mongoosejs.com/) is a framework that can be used in applications to connect to MongoDB.
+[MongoSkin](http://www.hacksparrow.com/mongoskin-tutorial-with-examples.html) Alternate lightweight framework to connect to MongoDB.
+
 ##Setup
 > npm install mongoose
 
