@@ -1,6 +1,6 @@
 ###Introduction
 Flask restful is an extension for Flask that adds support for quickly building a REST API's. 
-The Flask Restful Framwork is lightweight and works with exixsting libraries and encorages 
+The Flask Restful Framework is lightweight and works with existing libraries and encourages 
 best practices with minimal setup. 
 
 ###Installation
@@ -41,7 +41,7 @@ if __name__ == '__main__':
 ```
 
 ###Trying it out
-Trying out the API for the first time can be done with curl should return the name JohhnyRotten as shown below. 
+Trying out the API for the first time can be done with curl should return the name Johnny Rotten as shown below. 
 ```
 $ curl http://127.0.0.1:5000/api/name
 {"name": "JohnnyRotten"}
@@ -67,7 +67,7 @@ app.run(threaded=True)
 ```
 
 ###Deployment
-When the server is ready to be deployed to production it is nessesary to wrap it into apache by using the mod_wgsi.
+When the server is ready to be deployed to production it is necessary to wrap it into apache by using the mod_wgsi.
 Instructions for using flask under Apache can be found at:
 [http://flask.pocoo.org/docs/0.10/deploying/mod_wsgi/](http://flask.pocoo.org/docs/0.10/deploying/mod_wsgi/)
 
@@ -80,3 +80,4 @@ Flask documentation can be found at:
 
 Flask restful documentation can be found at:
 [http://flask-restful.readthedocs.org/en/latest/index.html](http://flask-restful.readthedocs.org/en/latest/index.html)
+
