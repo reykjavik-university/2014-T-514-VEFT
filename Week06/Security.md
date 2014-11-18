@@ -157,6 +157,13 @@ It is of course also possible to define custom scopes in order to achieve some f
 The OpenID Connect also defines several sets of claims.
 For more information on Claim [please refer to these specs](http://openid.net/specs/openid-connect-basic-1_0.html#StandardClaims).
 
+
+####Comparison between OAuth and OpenID
+
+This wiki link compares OAuth and OpenID and also has a simple picture which explains the differences in the processes.
+[OpenID vs pseudo-authentication using OAuth] (http://en.wikipedia.org/wiki/OAuth#OpenID_vs._pseudo-authentication_using_OAuth)
+
+
 ***Links***
 * [OpenID Connect](http://openid.net/)
 * [Core OpenID Connect functionality specification ](http://openid.net/specs/openid-connect-core-1_0.html)
