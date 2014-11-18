@@ -22,7 +22,9 @@ There is this thing called REST.
 
 It is becoming quite apparent that the RESTful Json APIs are becoming more popular than the SOAP ones. One of the biggest advantages REST has over SOAP is its usage of standard http. 
 
-REST uses many different data formats while SOAP only uses the boring old Xml. Rest also has better performance and scalability. 
+REST uses many different data formats while SOAP only uses the boring old Xml. RESTful services also has better performance and offer more scalability.
+
+Another disadvantage of SOAP based services worth mentioning, at least in the realm of ASP.NET, is that clients consuming those services are vulnerable to changes made in them. More specifically, ASP.NET web applications offer the ability to setup service endpoints which result in auto-generated wrappers being compiled using WSDL (discussed in the previous chapter). This means that developers have to know exactly when changes are made to the services and manually trigger updates of the WSDL and the generated wrappers. Failure to do so would result in errors that would often not get discoverd until runtime after deployment when consuming the changed service.
 
 At this rate it sounds a little one-sided argument but SOAP has a few advanteges over REST like WS-Security(identity through intermediaries), WS-AtomicTransaction (ACID compliant transactions) and WS-ReliableMessaging(successful/retry logic).
 
