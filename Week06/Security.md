@@ -162,4 +162,5 @@ For more information on Claim [please refer to these specs](http://openid.net/sp
 * [Core OpenID Connect functionality specification ](http://openid.net/specs/openid-connect-core-1_0.html)
 * [Thinktecture IdentityServer v3](https://github.com/thinktecture/Thinktecture.IdentityServer.v3)
 * [Thinktecture IdentityServer v3 Samples](https://github.com/thinktecture/Thinktecture.IdentityServer.v3.Samples)
+* [What is the difference between OpenID and OAuth?](https://stackoverflow.com/questions/1087031/whats-the-difference-between-openid-and-oauth)
 
