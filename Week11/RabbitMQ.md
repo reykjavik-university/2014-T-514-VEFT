@@ -295,7 +295,6 @@ Acknowledgement works well at RabbitMQ side, if an ack packet isn't recieved fro
 
 this simple code makes sure that a message is not lost on worker being killed, unacknowledged messages are redelivered
 
-For further information check:
 
 # Message durability
 
