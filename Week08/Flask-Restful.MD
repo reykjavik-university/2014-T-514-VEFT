@@ -16,6 +16,8 @@ This shows a very simple API using Flask Restful. This code should be sufficient
 ```python
 from flask import Flask
 from flask.ext import restful
+from flask import request
+import json
 
 app = Flask(__name__)
 api = restful.Api(app)
@@ -34,7 +36,7 @@ class NameAPI(restful.Resource):
     else:
       return 'Bad request', 404
 
-api.add_resource(NameAPI, '/api/name/')
+api.add_resource(NameAPI, '/api/name')
 
 if __name__ == '__main__':
   app.run(debug=True)
