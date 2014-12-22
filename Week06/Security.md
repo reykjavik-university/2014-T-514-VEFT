@@ -87,7 +87,7 @@ The OpenID Connect authentication process consists by requiring the user to auth
 The way in which this process is conducted is referred as a flow. The main flows are:
 
 * Code Flow
-* Implicit Flow
+* [Implicit Flow](http://stackoverflow.com/questions/13387698/why-is-there-an-authorization-code-flow-in-oauth2-when-implicit-flow-works-s)
 * Hybrid Flow
 
 This flow can be specified throught the 'response_type' parameters in the authorization request.
