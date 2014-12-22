@@ -373,3 +373,7 @@ The following code takes all executions in and looks at the properties key and t
 We take both the key and token properties and tell elastic search to store these single fields as two properties. First as the original string which we say is not analyzed, which means that if we now query the propertie key by key.original_key then we are asking elastic to filter out where each key is exactly as it was when it got saved (ex. ```second.py-cool_function```).
 
 On the other hand if we still want to be able to look it up in a clever way elastic has also saved the properties like it wants to. So if we query by key as before we'll get the key split up on dashes like the default mapping behavior wants to. You can read more about mapping [here](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html)
+
+
+# Using Elasticsearch with MongoDB
+A simple way of indexing a MongoDB database with elasticsearch is using the [mongoosastic](https://www.npmjs.org/package/mongoosastic) plugin. 
