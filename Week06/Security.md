@@ -169,4 +169,5 @@ This wiki link compares OAuth and OpenID and also has a simple picture which exp
 * [Core OpenID Connect functionality specification ](http://openid.net/specs/openid-connect-core-1_0.html)
 * [Thinktecture IdentityServer v3](https://github.com/thinktecture/Thinktecture.IdentityServer.v3)
 * [Thinktecture IdentityServer v3 Samples](https://github.com/thinktecture/Thinktecture.IdentityServer.v3.Samples)
+* [What is the difference between OpenID and OAuth?](https://stackoverflow.com/questions/1087031/whats-the-difference-between-openid-and-oauth)
 
