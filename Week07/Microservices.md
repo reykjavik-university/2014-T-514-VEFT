@@ -1,7 +1,7 @@
 # Microservices
 
 The term Microservices has been described by Martin Fowler: 
-(http://martinfowler.com/articles/microservices.html)[http://martinfowler.com/articles/microservices.html].
+[http://martinfowler.com/articles/microservices.html](http://martinfowler.com/articles/microservices.html).
 In this architecture, the application is built upon many small services, where each service is a single
 deployable unit, with its own database. Each service has its own (REST) API, and if service A requires data
 from service B, it will only use the public API to access that data. 
