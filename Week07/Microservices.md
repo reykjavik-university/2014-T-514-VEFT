@@ -14,7 +14,7 @@ This architecture has a number of advantages:
   on a number of machines.
   
 There are of course downsides as well, some of which are outlined in this article:
-(http://www.stackbuilders.com/news/the-hidden-costs-of-microservices)[http://www.stackbuilders.com/news/the-hidden-costs-of-microservices]
+[http://www.stackbuilders.com/news/the-hidden-costs-of-microservices](http://www.stackbuilders.com/news/the-hidden-costs-of-microservices)
 
 * If some operations need to be atomic, but cross more than one microservice, we can no longer use traditional
   transaction support provided by databases (since the operations span multiple individual databases).
