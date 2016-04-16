@@ -144,7 +144,7 @@ while-true loop. You can stop this loop by simply pressing `ctrl+c`.
 
 To communicate with RabbitMQ we need a library that knows how to speak the AMQP
 protocol. In this example we use a Python library named
-[Pika](https://pika.readthedocs.org/en/0.9.14/). To use Pika you must install
+[Pika](https://pika.readthedocs.org/en/0.9.14/) (hehhhheheh.) . To use Pika you must install
 it into your virtualenv
 
     pip install pika
